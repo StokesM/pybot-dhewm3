@@ -172,6 +172,16 @@ class cache:
         self.delpos (self.me ())
         return self._basic.stepvec (velforward, velright, dist)
 
+
+    # Matthew Stokes
+    #
+    #  reload_weapon - reload the current weapon
+    #                  It returns the amout of ammo left.
+
+    def reload_weapon (self):
+        return self._basic.reload_weapon ()
+
+
     #
     #  sync - wait for any event to occur.
     #         The event will signify the end of
@@ -288,3 +298,11 @@ class cache:
         if not self._dict.has_key ('info_player_start'):
             self._dict['info_player_start'] = self._basic.getPlayerStart ()
         return self._dict['info_player_start']
+
+
+    # Matthew Stokes
+    # change_weapon - change the weapon to weapon_no slot.
+    #               - return <= 0 if not available, amount of ammo otherwise.
+    def change_weapon(self, weapon_no):
+        self.delammo()
+        return self._basic.change_weapon(weapon_no)

@@ -135,6 +135,13 @@ def execBot (b, useExceptions = True):
         botMain (b)
 
 
+# Matthew Stokes
+
+def reload (b):
+    print "I am reloading"
+    ammo = b.reload_weapon ()
+    print ammo, "Ammo left"
+
 def botMain (b):
     global me
     print "success!  python doom marine is alive"
@@ -146,10 +153,14 @@ def botMain (b):
     you = findYou (b)
 
     while True:
-        moveTowards (you)
-        b.face (you)
-        # b.fire ()
+        #moveTowards (you)
+        #b.face (you)
+        b.change_weapon(3)
+        #b.fire ()
         time.sleep (3)
+        #b.fire()
+        time.sleep(5)
+        reload (b)
 
 
 
@@ -157,4 +168,4 @@ if len (sys.argv) > 1:
     doommarine = int (sys.argv[1])
 
 b = botlib.bot ("localhost", "python_doommarine %d" % (doommarine))
-execBot (b)
+execBot (b, False)

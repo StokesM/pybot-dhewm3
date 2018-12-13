@@ -132,6 +132,9 @@ idVec3 idPlayer::colorBarTable[ 5 ] = {
 };
 
 
+
+
+
 /*
 ==============
 idInventory::Clear
@@ -1235,7 +1238,6 @@ void idPlayer::select (int bitmask)
 {
   pulseCount.select (bitmask);
 }
-
 
 /*
 ==============
@@ -6762,7 +6764,7 @@ int idPlayer::Fire (bool firing)
       usercmd.buttons &= ~(BUTTON_ATTACK);
     }
   if (currentWeapon >= 0 && currentWeapon < MAX_WEAPONS)
-    return inventory.ammo[currentWeapon];
+    return inventory.ammo[currentWeapon + 1];
   return 0;
 }
 
@@ -9194,4 +9196,30 @@ void selectInfo::poll (pyBotClass *pybot)
 
   if (mask != 0 && (pybot != NULL))
     pybot->selectComplete (mask);
+}
+
+
+
+
+/*
+Matthew Stokes
+*/
+
+/*
+==============
+idPlayer::reload_weapon
+==============
+*/
+int idPlayer::reload_weapon(void) {
+	if (gameLocal.isClient) {
+		return -1;
+	}
+	if (spectating || gameLocal.inCinematic || influenceActive) {
+		return -1;
+	}
+	if ( weapon.GetEntity() && weapon.GetEntity()->IsLinked() ) {
+    weapon.GetEntity()->Reload ();
+    return inventory.ammo[currentWeapon + 1];
+  }
+  return -1;
 }

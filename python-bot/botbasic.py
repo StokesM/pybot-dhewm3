@@ -378,7 +378,7 @@ class basic:
     #                It returns the amount of ammo left.
     #
 
-    def startFiring (self):
+    def start_firing (self):
         if debug_protocol:
             print "requesting to fire weapon"
         self.s.send ("start_firing\n")
@@ -393,7 +393,7 @@ class basic:
     #                It returns the amount of ammo left.
     #
 
-    def stopFiring (self):
+    def stop_firing (self):
         if debug_protocol:
             print "requesting to stop firing weapon"
         self.s.send ("stop_firing\n")
@@ -408,7 +408,7 @@ class basic:
     #                 It returns the amount of ammo left.
     #
 
-    def reloadWeapon (self):
+    def reload_weapon (self):
         if debug_protocol:
             print "requesting to reload weapon"
         self.s.send ("reload_weapon\n")
@@ -428,7 +428,7 @@ class basic:
     #                 the bots inventory.
     #
 
-    def changeWeapon (self, n):
+    def change_weapon (self, n):
         if debug_protocol:
             print "requesting change weapon to", n
         s = "change_weapon %d\n" % (n)

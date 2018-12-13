@@ -130,7 +130,7 @@ class item
   int weapon (int new_weapon);
   int health (void);
   int angle (void);
-  void reload_weapon (void);
+  int reload_weapon (void);
   bool aim (idEntity *enemy);
   int turn (int angle, int angle_vel);
   idEntity *getIdEntity (void);
@@ -361,10 +361,9 @@ int item::start_firing (void)
 {
   switch (kind)
     {
-#if 0
     case item_monster:
-      return idai->StartFire ();  // --fixme-- is this correct?
-#endif
+      assert(false);  // --fixme-- is this correct?
+
     case item_player:
       return idplayer->Fire (true);
     }
@@ -381,10 +380,9 @@ int item::stop_firing (void)
 {
   switch (kind)
     {
-#if 0
     case item_monster:
-      return idai->StopFire ();  // --fixme-- is this correct?
-#endif
+      assert(false);  // --fixme-- is this correct?
+
     case item_player:
       return idplayer->Fire (false);
     }
@@ -446,9 +444,17 @@ int item::angle (void)
  *  reload_weapon
  */
 
-void item::reload_weapon (void)
+int item::reload_weapon (void)
 {
-
+  // Matthew Stokes
+  switch(kind)
+  {
+    case item_monster:
+      assert(false);
+    case item_player:
+      return idplayer->reload_weapon();
+  }
+  assert(false);
 }
 
 
@@ -747,6 +753,16 @@ void dict::select (int id, int mask)
 int dict::getHigh (void)
 {
   return high-1;
+}
+
+// Matthew Stokes
+
+/*
+ * reload_weapon - reloads your weapon and returns the ammo left.
+ */
+
+int dict::reload_weapon (int id) {
+  return entry[id]->reload_weapon();
 }
 
 
@@ -2109,7 +2125,7 @@ void pyBotClass::rpcReloadWeapon (void)
     gameLocal.Printf ("rpcReloadWeapon call by python\n");
 
   if (rpcId > 0)
-    ammo = dictionary->ammo (rpcId);   // --fixme-- this should call something else
+    ammo = dictionary->reload_weapon(rpcId); 
   else
     ammo = 0;
 

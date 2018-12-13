@@ -178,32 +178,6 @@ class bot:
     def reload_weapon(self):
         return self._cache.reload_weapon ()
 
-    # Matthew Stokes
-    #
-    # start_firing - begin firing your weapon
-    #                returns ammo left.
-
-    def start_firing(self):
-        return self._cache.start_firing()
-        
-    # Matthew Stokes
-    #
-    # stop_firing - stop firing your weapon
-    #                returns ammo left.
-
-    def start_firing(self):
-        return self._cache.stop_firing()
-
-
-    # Matthew Stokes
-    #
-    # fire - fire weapon
-    #        returns ammo left.
-
-    def fire(self):
-        self._cache.start_firing()
-        return self._cache.stop_firing()
-
     #
     #  sync - wait for any event to occur.
     #         The event will signify the end of
@@ -523,10 +497,3 @@ class bot:
 
     def reset (self):
         self._cache.reset ()
-
-    # Matthew Stokes
-    # Change weapon - chances weapon to weapon_no
-    #               - If weapon no is not in inventory
-    #               - return <= 0, else remaining ammo.
-    def change_weapon(self, weapon_no):
-        return self._cache.change_weapon(weapon_no)

@@ -593,6 +593,7 @@ public:
 	void doTurn (int angle);	// gaius
 	void select (int bitmask);  // gaius
 	int ChangeWeapon (int new_weapon); // gaius
+	int reload_weapon(void); // Matt
 	void SetSkinColor (int choice);  // gaius
 
 private:

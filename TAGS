@@ -1,0 +1,4126 @@
+
+neo/game/Actor.h,2964
+#define __GAME_ACTOR_H__30,1516
+class idAnimState 62,2418
+	bool					idleAnim;idAnimState::idleAnim64,2446
+	idStr					state;idAnimState::state65,2466
+	int						animBlendFrames;idAnimState::animBlendFrames66,2484
+	int						lastAnimBlendFrames;idAnimState::lastAnimBlendFrames67,2511
+	idActor *				self;idAnimState::self92,3307
+	idAnimator *			animator;idAnimState::animator93,3327
+	idThread *				thread;idAnimState::thread94,3353
+	int						channel;idAnimState::channel95,3376
+	bool					disabled;idAnimState::disabled96,3395
+class idAttachInfo 99,3419
+	idEntityPtr<idEntity>	ent;idAttachInfo::ent101,3448
+	int						channel;idAttachInfo::channel102,3476
+	jointModTransform_t		mod;::mod106,3516
+	jointHandle_t			from;::from107,3543
+	jointHandle_t			to;::to108,3566
+} copyJoints_t;109,3587
+class idActor 111,3604
+	int						team;idActor::team115,3687
+	int						rank;idActor::rank116,3703
+	idMat3					viewAxis;idActor::viewAxis117,3784
+	idLinkList<idActor>		enemyNode;idActor::enemyNode119,3835
+	idLinkList<idActor>		enemyList;idActor::enemyList120,3955
+	float					fovDot;idActor::fovDot215,7606
+	idVec3					eyeOffset;idActor::eyeOffset216,7649
+	idVec3					modelOffset;idActor::modelOffset217,7718
+	idAngles				deltaViewAngles;idActor::deltaViewAngles219,7802
+	int						pain_debounce_time;idActor::pain_debounce_time221,7879
+	int						pain_delay;idActor::pain_delay222,7946
+	int						pain_threshold;idActor::pain_threshold223,8005
+	idStrList				damageGroups;idActor::damageGroups225,8115
+	idList<float>			damageScale;idActor::damageScale226,8166
+	bool						use_combat_bbox;idActor::use_combat_bbox228,8231
+	idEntityPtr<idAFAttachment>	head;idActor::head229,8315
+	idList<copyJoints_t>		copyJoints;idActor::copyJoints230,8350
+	const function_t		*state;idActor::state233,8460
+	const function_t		*idealState;idActor::idealState234,8487
+	jointHandle_t			leftEyeJoint;idActor::leftEyeJoint237,8538
+	jointHandle_t			rightEyeJoint;idActor::rightEyeJoint238,8569
+	jointHandle_t			soundJoint;idActor::soundJoint239,8601
+	idIK_Walk				walkIK;idActor::walkIK241,8631
+	idStr					animPrefix;idActor::animPrefix243,8654
+	idStr					painAnim;idActor::painAnim244,8677
+	int						blink_anim;idActor::blink_anim247,8712
+	int						blink_time;idActor::blink_time248,8734
+	int						blink_min;idActor::blink_min249,8756
+	int						blink_max;idActor::blink_max250,8777
+	idThread *				scriptThread;idActor::scriptThread253,8820
+	idStr					waitState;idActor::waitState254,8849
+	idAnimState				headAnim;idActor::headAnim255,8871
+	idAnimState				torsoAnim;idActor::torsoAnim256,8897
+	idAnimState				legsAnim;idActor::legsAnim257,8924
+	bool					allowPain;idActor::allowPain259,8951
+	bool					allowEyeFocus;idActor::allowEyeFocus260,8972
+	bool					finalBoss;idActor::finalBoss261,8997
+	int						painTime;idActor::painTime263,9019
+	idList<idAttachInfo>	attachments;idActor::attachments265,9040
+
+neo/game/AFEntity.h,3949
+#define __GAME_AFENTITY_H__30,1519
+const int GIB_DELAY 47,1950
+class idMultiModelAF 49,2055
+	idPhysics_AF			physicsObj;idMultiModelAF::physicsObj60,2275
+	idList<idRenderModel *>	modelHandles;idMultiModelAF::modelHandles65,2373
+	idList<int>				modelDefHandles;idMultiModelAF::modelDefHandles66,2412
+class idChain 80,2690
+class idAFAttachment 99,3148
+	idEntity *				body;idAFAttachment::body135,4452
+	idClipModel *			combatModel;idAFAttachment::combatModel136,4473
+	int						idleAnim;idAFAttachment::idleAnim137,4545
+	jointHandle_t			attachJoint;idAFAttachment::attachJoint138,4565
+class idAFEntity_Base 150,4785
+	bool					IsActiveAF(idAFEntity_Base::IsActiveAF172,5669
+	const char *			GetAFName(idAFEntity_Base::GetAFName173,5730
+	idPhysics_AF *			GetAFPhysics(idAFEntity_Base::GetAFPhysics174,5795
+	idAF					af;idAFEntity_Base::af196,6488
+	idClipModel *			combatModel;idAFEntity_Base::combatModel197,6527
+	int						combatModelContents;idAFEntity_Base::combatModelContents198,6591
+	idVec3					spawnOrigin;idAFEntity_Base::spawnOrigin199,6622
+	idMat3					spawnAxis;idAFEntity_Base::spawnAxis200,6663
+	int						nextSoundTime;idAFEntity_Base::nextSoundTime201,6722
+class idAFEntity_Gibbable 217,7124
+	idRenderModel *			skeletonModel;idAFEntity_Gibbable::skeletonModel232,7696
+	int						skeletonModelDefHandle;idAFEntity_Gibbable::skeletonModelDefHandle233,7730
+	bool					gibbed;idAFEntity_Gibbable::gibbed234,7764
+class idAFEntity_Generic 250,8133
+	void					KeepRunningPhysics(idAFEntity_Generic::KeepRunningPhysics263,8460
+	bool					keepRunningPhysics;idAFEntity_Generic::keepRunningPhysics268,8588
+class idAFEntity_WithAttachedHead 280,8820
+	idEntityPtr<idAFAttachment>	head;idAFEntity_WithAttachedHead::head307,9537
+class idAFEntity_Vehicle 322,9865
+	idPlayer *				player;idAFEntity_Vehicle::player332,10074
+	jointHandle_t			eyesJoint;idAFEntity_Vehicle::eyesJoint333,10097
+	jointHandle_t			steeringWheelJoint;idAFEntity_Vehicle::steeringWheelJoint334,10125
+	float					wheelRadius;idAFEntity_Vehicle::wheelRadius335,10162
+	float					steerAngle;idAFEntity_Vehicle::steerAngle336,10186
+	float					steerSpeed;idAFEntity_Vehicle::steerSpeed337,10209
+	const idDeclParticle *	dustSmoke;idAFEntity_Vehicle::dustSmoke338,10232
+class idAFEntity_VehicleSimple 352,10501
+	idClipModel *			wheelModel;idAFEntity_VehicleSimple::wheelModel363,10769
+	idAFConstraint_Suspension *	suspension[idAFEntity_VehicleSimple::suspension364,10798
+	jointHandle_t			wheelJoints[idAFEntity_VehicleSimple::wheelJoints365,10842
+	float					wheelAngles[idAFEntity_VehicleSimple::wheelAngles366,10875
+class idAFEntity_VehicleFourWheels 378,11105
+	idAFBody *				wheels[idAFEntity_VehicleFourWheels::wheels388,11343
+	idAFConstraint_Hinge *	steering[idAFEntity_VehicleFourWheels::steering389,11369
+	jointHandle_t			wheelJoints[idAFEntity_VehicleFourWheels::wheelJoints390,11406
+	float					wheelAngles[idAFEntity_VehicleFourWheels::wheelAngles391,11439
+class idAFEntity_VehicleSixWheels 403,11668
+	idAFBody *				wheels[idAFEntity_VehicleSixWheels::wheels413,11901
+	idAFConstraint_Hinge *	steering[idAFEntity_VehicleSixWheels::steering414,11927
+	jointHandle_t			wheelJoints[idAFEntity_VehicleSixWheels::wheelJoints415,11964
+	float					wheelAngles[idAFEntity_VehicleSixWheels::wheelAngles416,11997
+class idAFEntity_SteamPipe 428,12219
+	int						steamBody;idAFEntity_SteamPipe::steamBody442,12559
+	float					steamForce;idAFEntity_SteamPipe::steamForce443,12580
+	float					steamUpForce;idAFEntity_SteamPipe::steamUpForce444,12603
+	idForce_Constant		force;idAFEntity_SteamPipe::force445,12628
+	renderEntity_t			steamRenderEntity;idAFEntity_SteamPipe::steamRenderEntity446,12654
+	qhandle_t				steamModelDefHandle;idAFEntity_SteamPipe::steamModelDefHandle447,12691
+class idAFEntity_ClawFourFingers 461,12969
+	idAFConstraint_Hinge *	fingers[idAFEntity_ClawFourFingers::fingers472,13257
+
+neo/game/AF.h,1455
+#define __GAME_AF_H__30,1513
+typedef struct jointConversion_s 48,1899
+	int						bodyId;49,1934
+	jointHandle_t			jointHandle;50,1973
+	AFJointModType_t		jointMod;51,2042
+	idVec3					jointBodyOrigin;52,2110
+	idMat3					jointBodyAxis;53,2175
+} jointConversion_t;54,2237
+typedef struct afTouch_s 56,2259
+	idEntity *				touchedEnt;57,2286
+	idClipModel *			touchedClipModel;58,2313
+	idAFBody *				touchedByBody;59,2348
+} afTouch_t;60,2378
+class idAF 62,2392
+	void					SetAnimator(idAF::SetAnimator70,2550
+	bool					IsLoaded(idAF::IsLoaded72,2662
+	const char *			GetName(idAF::GetName73,2732
+	bool					IsActive(idAF::IsActive81,3100
+	idPhysics_AF *			GetPhysics(idAF::GetPhysics84,3227
+	const idPhysics_AF *	GetPhysics(idAF::GetPhysics85,3288
+	idStr					name;idAF::name102,4006
+	idPhysics_AF			physicsObj;idAF::physicsObj103,4057
+	idEntity *				self;idAF::self104,4117
+	idAnimator *			animator;idAF::animator105,4176
+	int						modifiedAnim;idAF::modifiedAnim106,4226
+	idVec3					baseOrigin;idAF::baseOrigin107,4269
+	idMat3					baseAxis;idAF::baseAxis108,4352
+	idList<jointConversion_t>jointMods;idAF::jointMods109,4431
+	idList<int>				jointBody;idAF::jointBody110,4550
+	int						poseTime;idAF::poseTime111,4666
+	int						restStartTime;idAF::restStartTime112,4778
+	bool					isLoaded;idAF::isLoaded113,4848
+	bool					isActive;idAF::isActive114,4925
+	bool					hasBindConstraints;idAF::hasBindConstraints115,4999
+
+neo/game/BrittleFracture.h,2064
+#define __GAME_BRITTLEFRACTURE_H__30,1526
+typedef struct shard_s 46,1971
+	idClipModel *				clipModel;47,1996
+	idFixedWinding				winding;48,2025
+	idList<idFixedWinding *>	decals;49,2053
+	idList<bool>				edgeHasNeighbour;50,2087
+	idList<struct shard_s *>	neighbours;51,2122
+	idPhysics_RigidBody			physicsObj;52,2160
+	int							droppedTime;53,2195
+	bool						atEdge;54,2219
+	int							islandNum;55,2238
+} shard_t;56,2260
+class idBrittleFracture 59,2273
+		EVENT_PROJECT_DECAL idBrittleFracture::EVENT_PROJECT_DECAL83,3207
+		EVENT_PROJECT_DECAL = idEntity::EVENT_MAXEVENTS,idBrittleFracture::idEntity::EVENT_MAXEVENTS83,3207
+		EVENT_SHATTER,idBrittleFracture::EVENT_SHATTER84,3258
+		EVENT_MAXEVENTSidBrittleFracture::EVENT_MAXEVENTS85,3275
+	const idMaterial *			material;idBrittleFracture::material93,3451
+	const idMaterial *			decalMaterial;idBrittleFracture::decalMaterial94,3483
+	float						decalSize;idBrittleFracture::decalSize95,3520
+	float						maxShardArea;idBrittleFracture::maxShardArea96,3543
+	float						maxShatterRadius;idBrittleFracture::maxShatterRadius97,3569
+	float						minShatterRadius;idBrittleFracture::minShatterRadius98,3599
+	float						linearVelocityScale;idBrittleFracture::linearVelocityScale99,3629
+	float						angularVelocityScale;idBrittleFracture::angularVelocityScale100,3662
+	float						shardMass;idBrittleFracture::shardMass101,3696
+	float						density;idBrittleFracture::density102,3719
+	float						friction;idBrittleFracture::friction103,3740
+	float						bouncyness;idBrittleFracture::bouncyness104,3762
+	idStr						fxFracture;idBrittleFracture::fxFracture105,3786
+	idPhysics_StaticMulti		physicsObj;idBrittleFracture::physicsObj108,3821
+	idList<shard_t *>			shards;idBrittleFracture::shards109,3857
+	idBounds					bounds;idBrittleFracture::bounds110,3886
+	bool						disableFracture;idBrittleFracture::disableFracture111,3908
+	mutable int					lastRenderEntityUpdate;idBrittleFracture::lastRenderEntityUpdate114,3955
+	mutable bool				changed;idBrittleFracture::changed115,3996
+
+neo/game/Camera.h,879
+#define __GAME_CAMERA_H__30,1517
+class idCamera 44,1815
+	virtual void			Stop(idCamera::Stop51,2014
+class idCameraView 62,2233
+	float					fov;idCameraView::fov79,2784
+	idEntity				*attachedTo;idCameraView::attachedTo80,2800
+	idEntity				*attachedView;idCameraView::attachedView81,2826
+	idCQuat				q;::q95,3101
+	idVec3				t;::t96,3116
+	float				fov;::fov97,3130
+} cameraFrame_t;98,3145
+class idCameraAnim 100,3163
+	int						threadNum;idCameraAnim::threadNum115,3573
+	idVec3					offset;idCameraAnim::offset116,3594
+	int						frameRate;idCameraAnim::frameRate117,3614
+	int						starttime;idCameraAnim::starttime118,3635
+	int						cycle;idCameraAnim::cycle119,3656
+	idList<int>				cameraCuts;idCameraAnim::cameraCuts120,3673
+	idList<cameraFrame_t>	camera;idCameraAnim::camera121,3701
+	idEntityPtr<idEntity>	activator;idCameraAnim::activator122,3732
+
+neo/game/EndLevel.h,490
+#define __GAME_ENDLEVEL_H__30,1519
+class idTarget_EndLevel 34,1569
+	idStr	exitCommand;idTarget_EndLevel::exitCommand55,2145
+	idVec3	initialViewOrg;idTarget_EndLevel::initialViewOrg57,2166
+	idVec3	initialViewAngles;idTarget_EndLevel::initialViewAngles58,2190
+	idUserInterface	*gui;idTarget_EndLevel::gui61,2260
+	bool	buttonsReleased;idTarget_EndLevel::buttonsReleased63,2284
+	bool	readyToExit;idTarget_EndLevel::readyToExit66,2368
+	bool	noGui;idTarget_EndLevel::noGui67,2387
+
+neo/game/Entity.h,4527
+#define __GAME_ENTITY_H__30,1517
+static const int DELAY_DORMANT_TIME 50,1984
+	TH_ALL	74,2797
+	TH_THINK	75,2815
+	TH_PHYSICS	76,2867
+	TH_ANIMATE	77,2914
+	TH_UPDATEVISUALS	78,2966
+	TH_UPDATEPARTICLES	79,3014
+	SIG_TOUCH,87,3161
+	SIG_USE,88,3198
+	SIG_TRIGGER,89,3230
+	SIG_REMOVED,90,3270
+	SIG_DAMAGE,91,3322
+	SIG_BLOCKED,92,3360
+	SIG_MOVER_POS1,94,3399
+	SIG_MOVER_POS2,95,3455
+	SIG_MOVER_1TO2,96,3509
+	SIG_MOVER_2TO1,97,3567
+	NUM_SIGNALS99,3626
+} signalNum_t;100,3639
+#define MAX_SIGNAL_THREADS 104,3829
+struct signal_t 106,3919
+	int					threadnum;107,3937
+	const function_t	*function;function108,3957
+class signalList_t 111,3990
+	idList<signal_t> signal[signalList_t::signal113,4019
+class idEntity 117,4065
+	static const int		MAX_PVS_AREAS idEntity::MAX_PVS_AREAS119,4107
+	int						entityNumber;idEntity::entityNumber121,4146
+	int						entityDefNumber;idEntity::entityDefNumber122,4202
+	idLinkList<idEntity>	spawnNode;idEntity::spawnNode124,4265
+	idLinkList<idEntity>	activeNode;idEntity::activeNode125,4347
+	idLinkList<idEntity>	snapshotNode;idEntity::snapshotNode127,4430
+	int						snapshotSequence;idEntity::snapshotSequence128,4515
+	int						snapshotBits;idEntity::snapshotBits129,4580
+	idStr					name;idEntity::name131,4667
+	idDict					spawnArgs;idEntity::spawnArgs132,4706
+	idScriptObject			scriptObject;idEntity::scriptObject133,4787
+	int						thinkFlags;idEntity::thinkFlags135,4874
+	int						dormantStart;idEntity::dormantStart136,4913
+	bool					cinematic;idEntity::cinematic137,4996
+	renderView_t *			renderView;idEntity::renderView139,5086
+	idEntity *				cameraTarget;idEntity::cameraTarget140,5156
+	idList< idEntityPtr<idEntity> >	targets;idEntity::targets142,5233
+	int						health;idEntity::health144,5346
+	struct entityFlags_s idEntity::entityFlags_s146,5414
+		bool				notarget	idEntity::entityFlags_s::notarget147,5438
+		bool				noknockback	idEntity::entityFlags_s::noknockback148,5509
+		bool				takedamage	idEntity::entityFlags_s::takedamage149,5571
+		bool				hidden	idEntity::entityFlags_s::hidden150,5636
+		bool				bindOrientated	idEntity::entityFlags_s::bindOrientated151,5698
+		bool				solidForTeam	idEntity::entityFlags_s::solidForTeam152,5787
+		bool				forcePhysicsUpdate	idEntity::entityFlags_s::forcePhysicsUpdate153,5899
+		bool				selected	idEntity::entityFlags_s::selected154,6006
+		bool				neverDormant	idEntity::entityFlags_s::neverDormant155,6077
+		bool				isDormant	idEntity::entityFlags_s::isDormant156,6146
+		bool				hasAwakened	idEntity::entityFlags_s::hasAwakened157,6205
+		bool				networkSync	idEntity::entityFlags_s::networkSync158,6338
+	} fl;idEntity::fl159,6421
+		EVENT_STARTSOUNDSHADER,idEntity::EVENT_STARTSOUNDSHADER343,15605
+		EVENT_STOPSOUNDSHADER,idEntity::EVENT_STOPSOUNDSHADER344,15631
+		EVENT_MAXEVENTSidEntity::EVENT_MAXEVENTS345,15656
+	renderEntity_t			renderEntity;idEntity::renderEntity365,16553
+	int						modelDefHandle;idEntity::modelDefHandle366,16633
+	refSound_t				refSound;idEntity::refSound367,16699
+	idPhysics_Static		defaultPhysicsObj;idEntity::defaultPhysicsObj370,16785
+	idPhysics *				physics;idEntity::physics371,16853
+	idEntity *				bindMaster;idEntity::bindMaster372,16916
+	jointHandle_t			bindJoint;idEntity::bindJoint373,16984
+	int						bindBody;idEntity::bindBody374,17061
+	idEntity *				teamMaster;idEntity::teamMaster375,17118
+	idEntity *				teamChain;idEntity::teamChain376,17181
+	int						numPVSAreas;idEntity::numPVSAreas378,17245
+	int						PVSAreas[idEntity::PVSAreas379,17319
+	signalList_t *			signals;idEntity::signals381,17408
+	int						mpGUIState;idEntity::mpGUIState383,17436
+typedef struct damageEffect_s 478,21468
+	jointHandle_t			jointNum;damageEffect_s::jointNum479,21500
+	idVec3					localOrigin;damageEffect_s::localOrigin480,21527
+	idVec3					localNormal;damageEffect_s::localNormal481,21552
+	int						time;damageEffect_s::time482,21577
+	const idDeclParticle*	type;damageEffect_s::type483,21593
+	struct damageEffect_s *	next;damageEffect_s::next484,21622
+} damageEffect_t;485,21653
+class idAnimatedEntity 487,21672
+		EVENT_ADD_DAMAGE_EFFECT idAnimatedEntity::EVENT_ADD_DAMAGE_EFFECT516,22857
+		EVENT_ADD_DAMAGE_EFFECT = idEntity::EVENT_MAXEVENTS,idAnimatedEntity::idEntity::EVENT_MAXEVENTS516,22857
+		EVENT_MAXEVENTSidAnimatedEntity::EVENT_MAXEVENTS517,22912
+	idAnimator				animator;idAnimatedEntity::animator521,22946
+	damageEffect_t *		damageEffects;idAnimatedEntity::damageEffects522,22971
+
+neo/game/Fx.h,755
+#define __GAME_FX_H__30,1513
+	renderLight_t			renderLight;45,1797
+	qhandle_t				lightDefHandle;46,1864
+	renderEntity_t			renderEntity;47,1928
+	int						modelDefHandle;48,2005
+	float					delay;49,2068
+	int						particleSystem;50,2086
+	int						start;51,2112
+	bool					soundStarted;52,2129
+	bool					shakeStarted;53,2153
+	bool					decalDropped;54,2177
+	bool					launched;55,2201
+} idFXLocalAction;56,2221
+class idEntityFx 58,2241
+	int						started;idEntityFx::started94,3382
+	int						nextTriggerTime;idEntityFx::nextTriggerTime95,3401
+	const idDeclFX *		fxEffect;idEntityFx::fxEffect96,3428
+	idList<idFXLocalAction>	actions;idEntityFx::actions97,3523
+	idStr					systemName;idEntityFx::systemName98,3557
+class idTeleporter 101,3584
+
+neo/game/GameBase.h,1017
+#define	__GAMEBASE_H__30,1514
+#define SCRIPT_DEFAULTDEFS	33,1557
+#define SCRIPT_DEFAULT	34,1611
+#define SCRIPT_DEFAULTFUNC	35,1662
+#define LAGO_IMG_WIDTH	37,1703
+#define LAGO_IMG_HEIGHT	38,1731
+#define LAGO_WIDTH	39,1760
+#define LAGO_HEIGHT	40,1785
+#define LAGO_MATERIAL	41,1811
+#define LAGO_IMAGE	42,1860
+	#define ASYNC_WRITE_PVS 46,2043
+#define	GAME_VERSION	50,2148
+#define	MAX_CLIENTS	52,2185
+#define	GENTITYNUM_BITS	53,2211
+#define	MAX_GENTITIES	54,2240
+#define	ENTITYNUM_NONE	55,2285
+#define	ENTITYNUM_WORLD	56,2328
+#define	ENTITYNUM_MAX_NORMAL	57,2372
+#define MAX_GAME_MESSAGE_SIZE	59,2420
+#define MAX_ENTITY_STATE_SIZE	60,2455
+#define ENTITY_PVS_SIZE	61,2489
+#define	MASK_ALL	64,2557
+#define	MASK_SOLID	65,2582
+#define	MASK_MONSTERSOLID	66,2621
+#define	MASK_PLAYERSOLID	67,2700
+#define	MASK_DEADSOLID	68,2777
+#define	MASK_WATER	69,2839
+#define	MASK_OPAQUE	70,2878
+#define	MASK_SHOT_RENDERMODEL	71,2919
+#define	MASK_SHOT_BOUNDINGBOX	72,2987
+#define DEFAULT_GRAVITY_STRING	74,3049
+
+neo/game/GameEdit.h,1190
+#define __GAME_EDIT_H__30,1515
+class idCursor3D 47,1825
+	idForce_Drag			drag;idCursor3D::drag58,2037
+	idVec3					draggedPosition;idCursor3D::draggedPosition59,2059
+class idDragEntity 71,2325
+	idEntity *				GetSelected(idDragEntity::GetSelected79,2511
+	idEntityPtr<idEntity>	dragEnt;idDragEntity::dragEnt85,2695
+	jointHandle_t			joint;idDragEntity::joint86,2753
+	int						id;idDragEntity::id87,2803
+	idVec3					localEntityPoint;idDragEntity::localEntityPoint88,2849
+	idVec3					localPlayerPoint;idDragEntity::localPlayerPoint89,2912
+	idStr					bodyName;idDragEntity::bodyName90,2975
+	idCursor3D *			cursor;idDragEntity::cursor91,3032
+	idEntityPtr<idEntity>	selected;idDragEntity::selected92,3076
+typedef struct selectedTypeInfo_s 105,3368
+	idTypeInfo *typeInfo;selectedTypeInfo_s::typeInfo106,3404
+	idStr		textKey;selectedTypeInfo_s::textKey107,3427
+} selectedTypeInfo_t;108,3444
+class idEditEntities 110,3467
+	int						nextSelectTime;idEditEntities::nextSelectTime120,3887
+	idList<selectedTypeInfo_t> selectableEntityClasses;idEditEntities::selectableEntityClasses121,3913
+	idList<idEntity *>		selectedEntities;idEditEntities::selectedEntities122,3966
+
+neo/game/Game_local.h,11781
+#define	__GAME_LOCAL_H__30,1516
+#define private	50,2020
+#define protected	51,2044
+typedef struct entityState_s 99,3234
+	int						entityNumber;entityState_s::entityNumber100,3265
+	idBitMsg				state;entityState_s::state101,3289
+	byte					stateBuf[entityState_s::stateBuf102,3309
+	struct entityState_s *	next;entityState_s::next103,3352
+} entityState_t;104,3382
+typedef struct snapshot_s 106,3400
+	int						sequence;snapshot_s::sequence107,3428
+	entityState_t *			firstEntityState;snapshot_s::firstEntityState108,3448
+	int						pvs[snapshot_s::pvs109,3485
+	struct snapshot_s *		next;snapshot_s::next110,3517
+} snapshot_t;111,3545
+const int MAX_EVENT_PARAM_SIZE	113,3560
+typedef struct entityNetEvent_s 115,3600
+	int						spawnId;entityNetEvent_s::spawnId116,3634
+	int						event;entityNetEvent_s::event117,3653
+	int						time;entityNetEvent_s::time118,3670
+	int						paramsSize;entityNetEvent_s::paramsSize119,3686
+	byte					paramsBuf[entityNetEvent_s::paramsBuf120,3708
+	struct entityNetEvent_s	*next;entityNetEvent_s::next121,3751
+	struct entityNetEvent_s *prev;entityNetEvent_s::prev122,3783
+} entityNetEvent_t;123,3815
+	GAME_RELIABLE_MESSAGE_INIT_DECL_REMAP,::GAME_RELIABLE_MESSAGE_INIT_DECL_REMAP126,3843
+	GAME_RELIABLE_MESSAGE_REMAP_DECL,::GAME_RELIABLE_MESSAGE_REMAP_DECL127,3883
+	GAME_RELIABLE_MESSAGE_SPAWN_PLAYER,::GAME_RELIABLE_MESSAGE_SPAWN_PLAYER128,3918
+	GAME_RELIABLE_MESSAGE_DELETE_ENT,::GAME_RELIABLE_MESSAGE_DELETE_ENT129,3955
+	GAME_RELIABLE_MESSAGE_CHAT,::GAME_RELIABLE_MESSAGE_CHAT130,3990
+	GAME_RELIABLE_MESSAGE_TCHAT,::GAME_RELIABLE_MESSAGE_TCHAT131,4019
+	GAME_RELIABLE_MESSAGE_SOUND_EVENT,::GAME_RELIABLE_MESSAGE_SOUND_EVENT132,4049
+	GAME_RELIABLE_MESSAGE_SOUND_INDEX,::GAME_RELIABLE_MESSAGE_SOUND_INDEX133,4085
+	GAME_RELIABLE_MESSAGE_DB,::GAME_RELIABLE_MESSAGE_DB134,4121
+	GAME_RELIABLE_MESSAGE_KILL,::GAME_RELIABLE_MESSAGE_KILL135,4148
+	GAME_RELIABLE_MESSAGE_DROPWEAPON,::GAME_RELIABLE_MESSAGE_DROPWEAPON136,4177
+	GAME_RELIABLE_MESSAGE_RESTART,::GAME_RELIABLE_MESSAGE_RESTART137,4212
+	GAME_RELIABLE_MESSAGE_SERVERINFO,::GAME_RELIABLE_MESSAGE_SERVERINFO138,4244
+	GAME_RELIABLE_MESSAGE_TOURNEYLINE,::GAME_RELIABLE_MESSAGE_TOURNEYLINE139,4279
+	GAME_RELIABLE_MESSAGE_CALLVOTE,::GAME_RELIABLE_MESSAGE_CALLVOTE140,4315
+	GAME_RELIABLE_MESSAGE_CASTVOTE,::GAME_RELIABLE_MESSAGE_CASTVOTE141,4348
+	GAME_RELIABLE_MESSAGE_STARTVOTE,::GAME_RELIABLE_MESSAGE_STARTVOTE142,4381
+	GAME_RELIABLE_MESSAGE_UPDATEVOTE,::GAME_RELIABLE_MESSAGE_UPDATEVOTE143,4415
+	GAME_RELIABLE_MESSAGE_PORTALSTATES,::GAME_RELIABLE_MESSAGE_PORTALSTATES144,4450
+	GAME_RELIABLE_MESSAGE_PORTAL,::GAME_RELIABLE_MESSAGE_PORTAL145,4487
+	GAME_RELIABLE_MESSAGE_VCHAT,::GAME_RELIABLE_MESSAGE_VCHAT146,4518
+	GAME_RELIABLE_MESSAGE_STARTSTATE,::GAME_RELIABLE_MESSAGE_STARTSTATE147,4548
+	GAME_RELIABLE_MESSAGE_MENU,::GAME_RELIABLE_MESSAGE_MENU148,4583
+	GAME_RELIABLE_MESSAGE_WARMUPTIME,::GAME_RELIABLE_MESSAGE_WARMUPTIME149,4612
+	GAME_RELIABLE_MESSAGE_EVENT::GAME_RELIABLE_MESSAGE_EVENT150,4647
+	GAMESTATE_UNINITIALIZED,::GAMESTATE_UNINITIALIZED154,4695
+	GAMESTATE_NOMAP,::GAMESTATE_NOMAP155,4752
+	GAMESTATE_STARTUP,::GAMESTATE_STARTUP156,4790
+	GAMESTATE_ACTIVE,::GAMESTATE_ACTIVE157,4865
+	GAMESTATE_SHUTDOWN	::GAMESTATE_SHUTDOWN158,4906
+} gameState_t;159,4972
+	idEntity	*ent;::ent162,5005
+	int			dist;::dist163,5021
+} spawnSpot_t;164,5034
+class idEventQueue 168,5130
+		OUTOFORDER_IGNORE,idEventQueue::OUTOFORDER_IGNORE171,5175
+		OUTOFORDER_DROP,idEventQueue::OUTOFORDER_DROP172,5196
+		OUTOFORDER_SORTidEventQueue::OUTOFORDER_SORT173,5215
+	} outOfOrderBehaviour_t;idEventQueue::outOfOrderBehaviour_t174,5233
+							idEventQueue(idEventQueue::idEventQueue176,5260
+	entityNetEvent_t *		Start(idEventQueue::Start187,5591
+	entityNetEvent_t *					start;idEventQueue::start190,5654
+	entityNetEvent_t *					end;idEventQueue::end191,5685
+	idBlockAlloc<idEventQueue::idBlockAlloc192,5714
+	idBlockAlloc<entityNetEvent_t,32>	eventAllocator;idEventQueue::eventAllocator192,5714
+class idEntityPtr 198,5872
+	int						GetSpawnId(idEntityPtr::GetSpawnId209,6214
+	int						spawnId;idEntityPtr::spawnId218,6453
+class idGameLocal 223,6556
+	idDict					serverInfo;idGameLocal::serverInfo225,6600
+	int						numClients;idGameLocal::numClients226,6679
+	idDict					userInfo[idGameLocal::userInfo227,6743
+	usercmd_t				usercmds[idGameLocal::usercmds228,6806
+	idDict					persistentPlayerInfo[idGameLocal::persistentPlayerInfo229,6868
+	idEntity *				entities[idGameLocal::entities230,6915
+	int						spawnIds[idGameLocal::spawnIds231,6975
+	int						firstFreeIndex;idGameLocal::firstFreeIndex232,7035
+	int						num_entities;idGameLocal::num_entities233,7105
+	idHashIndex				entityHash;idGameLocal::entityHash234,7166
+	idWorldspawn *			world;idGameLocal::world235,7244
+	idLinkList<idEntity>	spawnedEntities;idGameLocal::spawnedEntities236,7289
+	idLinkList<idEntity>	activeEntities;idGameLocal::activeEntities237,7353
+	int						numEntitiesToDeactivate;idGameLocal::numEntitiesToDeactivate238,7446
+	bool					sortPushers;idGameLocal::sortPushers239,7540
+	bool					sortTeamMasters;idGameLocal::sortTeamMasters240,7641
+	idDict					persistentLevelInfo;idGameLocal::persistentLevelInfo241,7765
+	float					globalShaderParms[idGameLocal::globalShaderParms244,7948
+	idRandom				random;idGameLocal::random246,8006
+	idProgram				program;idGameLocal::program248,8084
+	idThread *				frameCommandThread;idGameLocal::frameCommandThread249,8152
+	idClip					clip;idGameLocal::clip251,8188
+	idPush					push;idGameLocal::push252,8233
+	idPVS					pvs;idGameLocal::pvs253,8276
+	idTestModel *			testmodel;idGameLocal::testmodel255,8322
+	idEntityFx *			testFx;idGameLocal::testFx256,8390
+	idStr					sessionCommand;idGameLocal::sessionCommand258,8452
+	idMultiplayerGame		mpGame;idGameLocal::mpGame260,8557
+	idSmokeParticles *		smokeParticles;idGameLocal::smokeParticles262,8623
+	idEditEntities *		editEntities;idGameLocal::editEntities263,8685
+	int						cinematicSkipTime;idGameLocal::cinematicSkipTime265,8740
+	int						cinematicStopTime;idGameLocal::cinematicStopTime266,8887
+	int						cinematicMaxSkipTime;idGameLocal::cinematicMaxSkipTime267,9050
+	bool					inCinematic;idGameLocal::inCinematic268,9196
+	bool					skipCinematic;idGameLocal::skipCinematic269,9275
+	int						framenum;idGameLocal::framenum272,9364
+	int						previousTime;idGameLocal::previousTime273,9384
+	int						time;idGameLocal::time274,9440
+	static const int		msec idGameLocal::msec275,9471
+	int						vacuumAreaNum;idGameLocal::vacuumAreaNum277,9554
+	gameType_t				gameType;idGameLocal::gameType279,9628
+	bool					isMultiplayer;idGameLocal::isMultiplayer280,9653
+	bool					isServer;idGameLocal::isServer281,9726
+	bool					isClient;idGameLocal::isClient282,9808
+	int						localClientNum;idGameLocal::localClientNum285,10016
+	idLinkList<idEntity>	snapshotEntities;idGameLocal::snapshotEntities286,10097
+	int						realClientTime;idGameLocal::realClientTime287,10173
+	bool					isNewFrame;idGameLocal::isNewFrame288,10221
+	float					clientSmoothing;idGameLocal::clientSmoothing289,10313
+	int						entityDefBits;idGameLocal::entityDefBits290,10384
+	static const char *		sufaceTypeNames[idGameLocal::sufaceTypeNames292,10459
+	idEntityPtr<idEntity>	lastGUIEnt;idGameLocal::lastGUIEnt294,10552
+	int						lastGUI;idGameLocal::lastGUI295,10639
+	int                                             numPyClients;idGameLocal::numPyClients296,10691
+	int						GetFrameNum(idGameLocal::GetFrameNum433,18461
+	int						GetTime(idGameLocal::GetTime434,18513
+	int						GetMSec(idGameLocal::GetMSec435,18557
+	void					SetGibTime(idGameLocal::SetGibTime462,19918
+	int						GetGibTime(idGameLocal::GetGibTime463,19978
+	const static int		INITIAL_SPAWN_COUNT idGameLocal::INITIAL_SPAWN_COUNT468,20062
+	idStr					mapFileName;idGameLocal::mapFileName470,20107
+	idMapFile *				mapFile;idGameLocal::mapFile471,20183
+	bool					mapCycleLoaded;idGameLocal::mapCycleLoaded472,20274
+	int						spawnCount;idGameLocal::spawnCount474,20301
+	int						mapSpawnCount;idGameLocal::mapSpawnCount475,20323
+	idLocationEntity **		locationEntities;idGameLocal::locationEntities477,20408
+	idCamera *				camera;idGameLocal::camera479,20477
+	const idMaterial *		globalMaterial;idGameLocal::globalMaterial480,20500
+	idList<idAAS *>			aasList;idGameLocal::aasList482,20569
+	idStrList				aasNames;idGameLocal::aasNames483,20615
+	idEntityPtr<idActor>	lastAIAlertEntity;idGameLocal::lastAIAlertEntity485,20640
+	int						lastAIAlertTime;idGameLocal::lastAIAlertTime486,20681
+	idDict					spawnArgs;idGameLocal::spawnArgs488,20709
+	pvsHandle_t				playerPVS;idGameLocal::playerPVS490,20817
+	pvsHandle_t				playerConnectedAreas;idGameLocal::playerConnectedAreas491,20876
+	idVec3					gravity;idGameLocal::gravity493,20957
+	gameState_t				gamestate;idGameLocal::gamestate494,21006
+	bool					influenceActive;idGameLocal::influenceActive495,21112
+	int						nextGibTime;idGameLocal::nextGibTime496,21177
+	idList<int>				clientDeclRemap[idGameLocal::clientDeclRemap498,21201
+	entityState_t *			clientEntityStates[idGameLocal::clientEntityStates500,21264
+	int						clientPVS[idGameLocal::clientPVS501,21331
+	snapshot_t *			clientSnapshots[idGameLocal::clientSnapshots502,21382
+	idBlockAlloc<idGameLocal::idBlockAlloc503,21428
+	idBlockAlloc<entityState_t,256>entityStateAllocator;idGameLocal::entityStateAllocator503,21428
+	idBlockAlloc<idGameLocal::idBlockAlloc504,21482
+	idBlockAlloc<snapshot_t,64>snapshotAllocator;idGameLocal::snapshotAllocator504,21482
+	idEventQueue			eventQueue;idGameLocal::eventQueue506,21530
+	idEventQueue			savedEventQueue;idGameLocal::savedEventQueue507,21558
+	idStaticList<idGameLocal::idStaticList509,21592
+	idStaticList<spawnSpot_t, MAX_GENTITIES> spawnSpots;idGameLocal::spawnSpots509,21592
+	idStaticList<idGameLocal::idStaticList510,21646
+	idStaticList<idEntity *, MAX_GENTITIES> initialSpots;idGameLocal::initialSpots510,21646
+	int						currentInitialSpot;idGameLocal::currentInitialSpot511,21701
+	idDict					newInfo;idGameLocal::newInfo513,21732
+	idStrList				shakeSounds;idGameLocal::shakeSounds515,21754
+	byte					lagometer[idGameLocal::lagometer517,21782
+class idGameError 580,24366
+	idGameError(idGameError::idGameError582,24415
+ID_INLINE idEntityPtr<type>::idEntityPtr(idEntityPtr588,24580
+ID_INLINE void idEntityPtr<type>::Save(Save593,24665
+ID_INLINE void idEntityPtr<type>::Restore(Restore598,24794
+ID_INLINE idEntityPtr<type> &idEntityPtr<type>::operator=(operator=603,24922
+ID_INLINE bool idEntityPtr<type>::SetSpawnId(SetSpawnId613,25180
+ID_INLINE bool idEntityPtr<type>::IsValid(IsValid627,25603
+ID_INLINE type *idEntityPtr<type>::GetEntity(GetEntity632,25799
+ID_INLINE int idEntityPtr<type>::GetEntityNum(GetEntityNum641,26105
+	SND_CHANNEL_ANY ::SND_CHANNEL_ANY652,26485
+	SND_CHANNEL_ANY = SCHANNEL_ANY,::SCHANNEL_ANY652,26485
+	SND_CHANNEL_VOICE ::SND_CHANNEL_VOICE653,26518
+	SND_CHANNEL_VOICE = SCHANNEL_ONE,::SCHANNEL_ONE653,26518
+	SND_CHANNEL_VOICE2,::SND_CHANNEL_VOICE2654,26553
+	SND_CHANNEL_BODY,::SND_CHANNEL_BODY655,26574
+	SND_CHANNEL_BODY2,::SND_CHANNEL_BODY2656,26593
+	SND_CHANNEL_BODY3,::SND_CHANNEL_BODY3657,26613
+	SND_CHANNEL_WEAPON,::SND_CHANNEL_WEAPON658,26633
+	SND_CHANNEL_ITEM,::SND_CHANNEL_ITEM659,26654
+	SND_CHANNEL_HEART,::SND_CHANNEL_HEART660,26673
+	SND_CHANNEL_PDA,::SND_CHANNEL_PDA661,26693
+	SND_CHANNEL_DEMONIC,::SND_CHANNEL_DEMONIC662,26711
+	SND_CHANNEL_RADIO,::SND_CHANNEL_RADIO663,26733
+	SND_CHANNEL_AMBIENT,::SND_CHANNEL_AMBIENT666,26818
+	SND_CHANNEL_DAMAGE::SND_CHANNEL_DAMAGE667,26840
+} gameSoundChannel_t;668,26860
+
+neo/game/IK.h,3167
+#define __GAME_IK_H__30,1513
+#define IK_ANIM	45,1818
+class idIK 47,1848
+	bool					initialized;idIK::initialized65,2463
+	bool					ik_activate;idIK::ik_activate66,2486
+	idEntity *				self;idIK::self67,2509
+	idAnimator *			animator;idIK::animator68,2568
+	int						modifiedAnim;idIK::modifiedAnim69,2618
+	idVec3					modelOffset;idIK::modelOffset70,2675
+class idIK_Walk 82,2948
+	static const int		MAX_LEGS	idIK_Walk::MAX_LEGS101,3436
+	idClipModel *			footModel;idIK_Walk::footModel103,3471
+	int						numLegs;idIK_Walk::numLegs105,3500
+	int						enabledLegs;idIK_Walk::enabledLegs106,3519
+	jointHandle_t			footJoints[idIK_Walk::footJoints107,3542
+	jointHandle_t			ankleJoints[idIK_Walk::ankleJoints108,3581
+	jointHandle_t			kneeJoints[idIK_Walk::kneeJoints109,3621
+	jointHandle_t			hipJoints[idIK_Walk::hipJoints110,3660
+	jointHandle_t			dirJoints[idIK_Walk::dirJoints111,3698
+	jointHandle_t			waistJoint;idIK_Walk::waistJoint112,3736
+	idVec3					hipForward[idIK_Walk::hipForward114,3766
+	idVec3					kneeForward[idIK_Walk::kneeForward115,3800
+	float					upperLegLength[idIK_Walk::upperLegLength117,3836
+	float					lowerLegLength[idIK_Walk::lowerLegLength118,3873
+	idMat3					upperLegToHipJoint[idIK_Walk::upperLegToHipJoint120,3911
+	idMat3					lowerLegToKneeJoint[idIK_Walk::lowerLegToKneeJoint121,3953
+	float					smoothing;idIK_Walk::smoothing123,3997
+	float					waistSmoothing;idIK_Walk::waistSmoothing124,4019
+	float					footShift;idIK_Walk::footShift125,4046
+	float					waistShift;idIK_Walk::waistShift126,4068
+	float					minWaistFloorDist;idIK_Walk::minWaistFloorDist127,4091
+	float					minWaistAnkleDist;idIK_Walk::minWaistAnkleDist128,4121
+	float					footUpTrace;idIK_Walk::footUpTrace129,4151
+	float					footDownTrace;idIK_Walk::footDownTrace130,4175
+	bool					tiltWaist;idIK_Walk::tiltWaist131,4201
+	bool					usePivot;idIK_Walk::usePivot132,4222
+	int						pivotFoot;idIK_Walk::pivotFoot135,4253
+	float					pivotYaw;idIK_Walk::pivotYaw136,4274
+	idVec3					pivotPos;idIK_Walk::pivotPos137,4295
+	bool					oldHeightsValid;idIK_Walk::oldHeightsValid138,4317
+	float					oldWaistHeight;idIK_Walk::oldWaistHeight139,4344
+	float					oldAnkleHeights[idIK_Walk::oldAnkleHeights140,4371
+	idVec3					waistOffset;idIK_Walk::waistOffset141,4409
+class idIK_Reach 153,4668
+	static const int		MAX_ARMS	idIK_Reach::MAX_ARMS168,5035
+	int						numArms;idIK_Reach::numArms170,5069
+	int						enabledArms;idIK_Reach::enabledArms171,5088
+	jointHandle_t			handJoints[idIK_Reach::handJoints172,5111
+	jointHandle_t			elbowJoints[idIK_Reach::elbowJoints173,5150
+	jointHandle_t			shoulderJoints[idIK_Reach::shoulderJoints174,5190
+	jointHandle_t			dirJoints[idIK_Reach::dirJoints175,5233
+	idVec3					shoulderForward[idIK_Reach::shoulderForward177,5272
+	idVec3					elbowForward[idIK_Reach::elbowForward178,5311
+	float					upperArmLength[idIK_Reach::upperArmLength180,5348
+	float					lowerArmLength[idIK_Reach::lowerArmLength181,5385
+	idMat3					upperArmToShoulderJoint[idIK_Reach::upperArmToShoulderJoint183,5423
+	idMat3					lowerArmToElbowJoint[idIK_Reach::lowerArmToElbowJoint184,5470
+
+neo/game/Item.h,1556
+#define __GAME_ITEM_H__30,1515
+class idItem 43,1808
+		EVENT_PICKUP idItem::EVENT_PICKUP61,2246
+		EVENT_PICKUP = idEntity::EVENT_MAXEVENTS,idItem::idEntity::EVENT_MAXEVENTS61,2246
+		EVENT_RESPAWN,idItem::EVENT_RESPAWN62,2290
+		EVENT_RESPAWNFX,idItem::EVENT_RESPAWNFX63,2307
+		EVENT_MAXEVENTSidItem::EVENT_MAXEVENTS64,2326
+	idVec3					orgOrigin;idItem::orgOrigin75,2625
+	bool					spin;idItem::spin76,2648
+	bool					pulse;idItem::pulse77,2664
+	bool					canPickUp;idItem::canPickUp78,2681
+	int						itemShellHandle;idItem::itemShellHandle81,2729
+	const idMaterial *		shellMaterial;idItem::shellMaterial82,2756
+	mutable bool			inView;idItem::inView85,2834
+	mutable int				inViewTime;idItem::inViewTime86,2858
+	mutable int				lastCycle;idItem::lastCycle87,2886
+	mutable int				lastRenderViewTime;idItem::lastRenderViewTime88,2913
+class idItemPowerup 100,3361
+	int						time;idItemPowerup::time113,3640
+	int						type;idItemPowerup::type114,3656
+class idObjective 117,3676
+	idVec3					playerPos;idObjective::playerPos129,3899
+class idVideoCDItem 137,4080
+class idPDAItem 145,4235
+class idMoveableItem 152,4363
+	idPhysics_RigidBody		physicsObj;idMoveableItem::physicsObj173,5086
+	idClipModel *			trigger;idMoveableItem::trigger174,5120
+	const idDeclParticle *	smoke;idMoveableItem::smoke175,5146
+	int						smokeTime;idMoveableItem::smokeTime176,5177
+class idMoveablePDAItem 184,5354
+class idItemRemover 199,5692
+class idObjectiveComplete 210,5899
+	idVec3					playerPos;idObjectiveComplete::playerPos222,6153
+
+neo/game/Light.h,1320
+#define __GAME_LIGHT_H__30,1516
+class idLight 47,1919
+	const idVec3 &	GetBaseColor(idLight::GetBaseColor71,2736
+	qhandle_t		GetLightDefHandle(idLight::GetLightDefHandle84,3360
+	void			SetLightParent(idLight::SetLightParent85,3431
+		EVENT_BECOMEBROKEN idLight::EVENT_BECOMEBROKEN91,3584
+		EVENT_BECOMEBROKEN = idEntity::EVENT_MAXEVENTS,idLight::idEntity::EVENT_MAXEVENTS91,3584
+		EVENT_MAXEVENTSidLight::EVENT_MAXEVENTS92,3634
+	renderLight_t	renderLight;idLight::renderLight101,3909
+	idVec3			localLightOrigin;idLight::localLightOrigin102,3975
+	idMat3			localLightAxis;idLight::localLightAxis103,4052
+	qhandle_t		lightDefHandle;idLight::lightDefHandle104,4120
+	idStr			brokenModel;idLight::brokenModel105,4183
+	int				levels;idLight::levels106,4205
+	int				currentLevel;idLight::currentLevel107,4221
+	idVec3			baseColor;idLight::baseColor108,4243
+	bool			breakOnTrigger;idLight::breakOnTrigger109,4264
+	int				count;idLight::count110,4288
+	int				triggercount;idLight::triggercount111,4303
+	idEntity *		lightParent;idLight::lightParent112,4325
+	idVec4			fadeFrom;idLight::fadeFrom113,4351
+	idVec4			fadeTo;idLight::fadeTo114,4371
+	int				fadeStart;idLight::fadeStart115,4389
+	int				fadeEnd;idLight::fadeEnd116,4408
+	bool			soundWasPlaying;idLight::soundWasPlaying117,4425
+
+neo/game/Misc.h,4563
+#define __GAME_MISC_H__30,1515
+class idSpawnableEntity 48,2136
+private:idSpawnableEntity::private54,2253
+class idPlayerStart 69,2681
+		EVENT_TELEPORTPLAYER idPlayerStart::EVENT_TELEPORTPLAYER74,2773
+		EVENT_TELEPORTPLAYER = idEntity::EVENT_MAXEVENTS,idPlayerStart::idEntity::EVENT_MAXEVENTS74,2773
+		EVENT_MAXEVENTSidPlayerStart::EVENT_MAXEVENTS75,2825
+	int					teleportStage;idPlayerStart::teleportStage88,3083
+class idActivator 107,3705
+	bool				stay_on;idActivator::stay_on119,3941
+class idPathCorner 132,4221
+class idDamagable 155,4737
+	int					count;idDamagable::count168,5075
+	int					nextTriggerTime;idDamagable::nextTriggerTime169,5091
+class idExplodable 185,5476
+class idSpring 204,5824
+	idEntity *			ent1;idSpring::ent1213,5963
+	idEntity *			ent2;idSpring::ent2214,5983
+	int					id1;idSpring::id1215,6003
+	int					id2;idSpring::id2216,6017
+	idVec3				p1;idSpring::p1217,6031
+	idVec3				p2;idSpring::p2218,6046
+	idForce_Spring		spring;idSpring::spring219,6061
+class idForceField 233,6311
+	idForce_Field		forceField;idForceField::forceField245,6549
+class idAnimated 263,6906
+	int						num_anims;idAnimated::num_anims279,7307
+	int						current_anim_index;idAnimated::current_anim_index280,7328
+	int						anim;idAnimated::anim281,7358
+	int						blendFrames;idAnimated::blendFrames282,7374
+	jointHandle_t			soundJoint;idAnimated::soundJoint283,7397
+	idEntityPtr<idEntity>	activator;idAnimated::activator284,7426
+	bool					activated;idAnimated::activated285,7460
+class idStaticEntity 307,8166
+	int					spawnTime;idStaticEntity::spawnTime329,8754
+	bool				active;idStaticEntity::active330,8774
+	idVec4				fadeFrom;idStaticEntity::fadeFrom331,8791
+	idVec4				fadeTo;idStaticEntity::fadeTo332,8812
+	int					fadeStart;idStaticEntity::fadeStart333,8831
+	int					fadeEnd;idStaticEntity::fadeEnd334,8851
+	bool				runGui;idStaticEntity::runGui335,8869
+class idFuncEmitter 347,9074
+	bool				hidden;idFuncEmitter::hidden363,9489
+class idFuncSmoke 376,9693
+	int						smokeTime;idFuncSmoke::smokeTime391,10005
+	const idDeclParticle *	smoke;idFuncSmoke::smoke392,10026
+	bool					restart;idFuncSmoke::restart393,10057
+class idFuncSplat 405,10262
+class idTextEntity 427,10663
+	idStr				text;idTextEntity::text439,10901
+	bool				playerOriented;idTextEntity::playerOriented440,10917
+class idLocationEntity 452,11133
+private:idLocationEntity::private460,11291
+class idLocationSeparatorEntity 463,11304
+private:idLocationSeparatorEntity::private469,11437
+class idVacuumSeparatorEntity 472,11450
+	qhandle_t			portal;idVacuumSeparatorEntity::portal486,11768
+class idVacuumEntity 489,11793
+private:idVacuumEntity::private495,11904
+class idBeam 507,12096
+	idEntityPtr<idBeam>	target;idBeam::target532,12667
+	idEntityPtr<idBeam>	master;idBeam::master533,12696
+class idLiquid 547,12938
+	idRenderModelLiquid *model;idLiquid::model560,13196
+class idShaking 572,13411
+	idPhysics_Parametric	physicsObj;idShaking::physicsObj584,13636
+	bool					active;idShaking::active585,13670
+class idEarthQuake 600,13959
+	int					nextTriggerTime;idEarthQuake::nextTriggerTime614,14220
+	int					shakeStopTime;idEarthQuake::shakeStopTime615,14246
+	float				wait;idEarthQuake::wait616,14270
+	float				random;idEarthQuake::random617,14286
+	bool				triggered;idEarthQuake::triggered618,14304
+	bool				playerOriented;idEarthQuake::playerOriented619,14324
+	bool				disabled;idEarthQuake::disabled620,14349
+	float				shakeTime;idEarthQuake::shakeTime621,14368
+class idFuncPortal 635,14627
+	qhandle_t			portal;idFuncPortal::portal647,14857
+	bool				state;idFuncPortal::state648,14878
+class idFuncAASPortal 661,15134
+	bool				state;idFuncAASPortal::state673,15373
+class idFuncAASObstacle 686,15631
+	bool				state;idFuncAASObstacle::state698,15876
+class idFuncRadioChatter 712,16134
+	float				time;idFuncRadioChatter::time724,16382
+class idPhantomObjects 738,16692
+	int					end_time;idPhantomObjects::end_time756,17107
+	float				throw_time;idPhantomObjects::throw_time757,17126
+	float				shake_time;idPhantomObjects::shake_time758,17148
+	idVec3				shake_ang;idPhantomObjects::shake_ang759,17170
+	float				speed;idPhantomObjects::speed760,17192
+	int					min_wait;idPhantomObjects::min_wait761,17209
+	int					max_wait;idPhantomObjects::max_wait762,17228
+	idEntityPtr<idActor>target;idPhantomObjects::target763,17247
+	idList<int>			targetTime;idPhantomObjects::targetTime764,17276
+	idList<idVec3>		lastTargetPos;idPhantomObjects::lastTargetPos765,17303
+
+neo/game/Moveable.h,2494
+#define __GAME_MOVEABLE_H__30,1519
+class idMoveable 50,1998
+	idPhysics_RigidBody		physicsObj;idMoveable::physicsObj75,2758
+	idStr					brokenModel;idMoveable::brokenModel76,2813
+	idStr					damage;idMoveable::damage77,2892
+	idStr					fxCollide;idMoveable::fxCollide78,2954
+	int						nextCollideFxTime;idMoveable::nextCollideFxTime79,3030
+	float					minDamageVelocity;idMoveable::minDamageVelocity80,3104
+	float					maxDamageVelocity;idMoveable::maxDamageVelocity81,3186
+	idCurve_Spline<idVec3> *initialSpline;idMoveable::initialSpline82,3268
+	idVec3					initialSplineDir;idMoveable::initialSplineDir83,3354
+	bool					explode;idMoveable::explode84,3437
+	bool					unbindOnDeath;idMoveable::unbindOnDeath85,3518
+	bool					allowStep;idMoveable::allowStep86,3607
+	bool					canDamage;idMoveable::canDamage87,3671
+	int						nextDamageTime;idMoveable::nextDamageTime88,3733
+	int						nextSoundTime;idMoveable::nextSoundTime89,3806
+class idBarrel 113,4600
+	float					radius;idBarrel::radius130,5011
+	int						barrelAxis;idBarrel::barrelAxis131,5054
+	idVec3					lastOrigin;idBarrel::lastOrigin132,5144
+	idMat3					lastAxis;idBarrel::lastAxis133,5216
+	float					additionalRotation;idBarrel::additionalRotation134,5284
+	idMat3					additionalAxis;idBarrel::additionalAxis135,5369
+class idExplodingBarrel 149,5787
+		EVENT_EXPLODE idExplodingBarrel::EVENT_EXPLODE171,6578
+		EVENT_EXPLODE = idEntity::EVENT_MAXEVENTS,idExplodingBarrel::idEntity::EVENT_MAXEVENTS171,6578
+		EVENT_MAXEVENTSidExplodingBarrel::EVENT_MAXEVENTS172,6623
+		NORMAL idExplodingBarrel::NORMAL177,6671
+		BURNING,idExplodingBarrel::BURNING178,6685
+		BURNEXPIRED,idExplodingBarrel::BURNEXPIRED179,6696
+		EXPLODINGidExplodingBarrel::EXPLODING180,6711
+	} explode_state_t;idExplodingBarrel::explode_state_t181,6723
+	explode_state_t			state;idExplodingBarrel::state182,6743
+	idVec3					spawnOrigin;idExplodingBarrel::spawnOrigin184,6770
+	idMat3					spawnAxis;idExplodingBarrel::spawnAxis185,6795
+	qhandle_t				particleModelDefHandle;idExplodingBarrel::particleModelDefHandle186,6818
+	qhandle_t				lightDefHandle;idExplodingBarrel::lightDefHandle187,6856
+	renderEntity_t			particleRenderEntity;idExplodingBarrel::particleRenderEntity188,6886
+	renderLight_t			light;idExplodingBarrel::light189,6926
+	int						particleTime;idExplodingBarrel::particleTime190,6950
+	int						lightTime;idExplodingBarrel::lightTime191,6974
+	float					time;idExplodingBarrel::time192,6995
+
+neo/game/Mover.h,7135
+#define __GAME_MOVER_H__30,1516
+class idMover 48,1949
+		ACCELERATION_STAGE,idMover::ACCELERATION_STAGE71,2530
+		LINEAR_STAGE,idMover::LINEAR_STAGE72,2552
+		DECELERATION_STAGE,idMover::DECELERATION_STAGE73,2568
+		FINISHED_STAGEidMover::FINISHED_STAGE74,2590
+	} moveStage_t;idMover::moveStage_t75,2607
+		MOVER_NONE,idMover::MOVER_NONE78,2640
+		MOVER_ROTATING,idMover::MOVER_ROTATING79,2654
+		MOVER_MOVING,idMover::MOVER_MOVING80,2672
+		MOVER_SPLINEidMover::MOVER_SPLINE81,2688
+	} moverCommand_t;idMover::moverCommand_t82,2703
+		DIR_UP	idMover::DIR_UP88,2852
+		DIR_DOWN	idMover::DIR_DOWN89,2870
+		DIR_LEFT	idMover::DIR_LEFT90,2889
+		DIR_RIGHT	idMover::DIR_RIGHT91,2908
+		DIR_FORWARD	idMover::DIR_FORWARD92,2928
+		DIR_BACK	idMover::DIR_BACK93,2950
+		DIR_REL_UP	idMover::DIR_REL_UP94,2969
+		DIR_REL_DOWN	idMover::DIR_REL_DOWN95,2990
+		DIR_REL_LEFT	idMover::DIR_REL_LEFT96,3012
+		DIR_REL_RIGHT	idMover::DIR_REL_RIGHT97,3034
+		DIR_REL_FORWARD	idMover::DIR_REL_FORWARD98,3058
+		DIR_REL_BACK	idMover::DIR_REL_BACK99,3084
+	} moverDir_t;idMover::moverDir_t100,3106
+		moveStage_t			stage;idMover::stage103,3140
+		int					acceleration;idMover::acceleration104,3163
+		int					movetime;idMover::movetime105,3187
+		int					deceleration;idMover::deceleration106,3207
+		idVec3				dir;idMover::dir107,3231
+	} moveState_t;idMover::moveState_t108,3248
+		moveStage_t			stage;idMover::stage111,3283
+		int					acceleration;idMover::acceleration112,3306
+		int					movetime;idMover::movetime113,3330
+		int					deceleration;idMover::deceleration114,3350
+		idAngles			rot;idMover::rot115,3374
+	} rotationState_t;idMover::rotationState_t116,3392
+	idPhysics_Parametric	physicsObj;idMover::physicsObj118,3413
+	moveState_t				move;idMover::move135,4063
+	rotationState_t			rot;idMover::rot138,4095
+	int						move_thread;idMover::move_thread140,4120
+	int						rotate_thread;idMover::rotate_thread141,4143
+	idAngles				dest_angles;idMover::dest_angles142,4168
+	idAngles				angle_delta;idMover::angle_delta143,4194
+	idVec3					dest_position;idMover::dest_position144,4220
+	idVec3					move_delta;idMover::move_delta145,4247
+	float					move_speed;idMover::move_speed146,4271
+	int						move_time;idMover::move_time147,4294
+	int						deceltime;idMover::deceltime148,4315
+	int						acceltime;idMover::acceltime149,4336
+	bool					stopRotation;idMover::stopRotation150,4357
+	bool					useSplineAngles;idMover::useSplineAngles151,4381
+	idEntityPtr<idEntity>	splineEnt;idMover::splineEnt152,4408
+	moverCommand_t			lastCommand;idMover::lastCommand153,4442
+	float					damage;idMover::damage154,4473
+	qhandle_t				areaPortal;idMover::areaPortal156,4493
+	idList< idEntityPtr<idEntity> >	guiTargets;idMover::guiTargets158,4538
+class idSplinePath 201,6481
+struct floorInfo_s 211,6617
+	idVec3					pos;floorInfo_s::pos212,6638
+	idStr					door;floorInfo_s::door213,6655
+	int						floor;floorInfo_s::floor214,6672
+class idElevator 217,6693
+		INIT,idElevator::INIT241,7340
+		IDLE,idElevator::IDLE242,7348
+		WAITING_ON_DOORSidElevator::WAITING_ON_DOORS243,7356
+	} elevatorState_t;idElevator::elevatorState_t244,7375
+	elevatorState_t			state;idElevator::state246,7396
+	idList<floorInfo_s>		floorInfo;idElevator::floorInfo247,7422
+	int						currentFloor;idElevator::currentFloor248,7455
+	int						pendingFloor;idElevator::pendingFloor249,7479
+	int						lastFloor;idElevator::lastFloor250,7503
+	bool					controlsDisabled;idElevator::controlsDisabled251,7524
+	float					returnTime;idElevator::returnTime252,7552
+	int						returnFloor;idElevator::returnFloor253,7575
+	int						lastTouchTime;idElevator::lastTouchTime254,7598
+	MOVER_POS1,::MOVER_POS1280,8247
+	MOVER_POS2,::MOVER_POS2281,8260
+	MOVER_1TO2,::MOVER_1TO2282,8273
+	MOVER_2TO1::MOVER_2TO1283,8286
+} moverState_t;284,8298
+class idMover_Binary 286,8315
+	idMover_Binary *		GetActivateChain(idMover_Binary::GetActivateChain309,9069
+	idMover_Binary *		GetMoveMaster(idMover_Binary::GetMoveMaster310,9145
+	idVec3					pos1;idMover_Binary::pos1322,9535
+	idVec3					pos2;idMover_Binary::pos2323,9553
+	moverState_t			moverState;idMover_Binary::moverState324,9571
+	idMover_Binary *		moveMaster;idMover_Binary::moveMaster325,9599
+	idMover_Binary *		activateChain;idMover_Binary::activateChain326,9630
+	int						soundPos1;idMover_Binary::soundPos1327,9664
+	int						sound1to2;idMover_Binary::sound1to2328,9685
+	int						sound2to1;idMover_Binary::sound2to1329,9706
+	int						soundPos2;idMover_Binary::soundPos2330,9727
+	int						soundLoop;idMover_Binary::soundLoop331,9748
+	float					wait;idMover_Binary::wait332,9769
+	float					damage;idMover_Binary::damage333,9786
+	int						duration;idMover_Binary::duration334,9805
+	int						accelTime;idMover_Binary::accelTime335,9825
+	int						decelTime;idMover_Binary::decelTime336,9846
+	idEntityPtr<idEntity>	activatedBy;idMover_Binary::activatedBy337,9867
+	int						stateStartTime;idMover_Binary::stateStartTime338,9903
+	idStr					team;idMover_Binary::team339,9929
+	bool					enabled;idMover_Binary::enabled340,9946
+	int						move_thread;idMover_Binary::move_thread341,9965
+	int						updateStatus;idMover_Binary::updateStatus342,9988
+	idStrList				buddies;idMover_Binary::buddies343,10058
+	idPhysics_Parametric	physicsObj;idMover_Binary::physicsObj344,10081
+	qhandle_t				areaPortal;idMover_Binary::areaPortal345,10115
+	bool					blocked;idMover_Binary::blocked346,10160
+	idList< idEntityPtr<idEntity> >	guiTargets;idMover_Binary::guiTargets347,10179
+	moverState_t			GetMoverState(idMover_Binary::GetMoverState354,10454
+class idDoor 373,11148
+	float					triggersize;idDoor::triggersize401,11812
+	bool					crusher;idDoor::crusher402,11836
+	bool					noTouch;idDoor::noTouch403,11855
+	bool					aas_area_closed;idDoor::aas_area_closed404,11874
+	idStr					buddyStr;idDoor::buddyStr405,11901
+	idClipModel *			trigger;idDoor::trigger406,11922
+	idClipModel *			sndTrigger;idDoor::sndTrigger407,11948
+	int						nextSndTriggerTime;idDoor::nextSndTriggerTime408,11977
+	idVec3					localTriggerOrigin;idDoor::localTriggerOrigin409,12007
+	idMat3					localTriggerAxis;idDoor::localTriggerAxis410,12039
+	idStr					requires;idDoor::requires411,12069
+	int						removeItem;idDoor::removeItem412,12090
+	idStr					syncLock;idDoor::syncLock413,12112
+	int						normalAxisIndex;idDoor::normalAxisIndex414,12133
+	idDoor *				companionDoor;idDoor::companionDoor415,12206
+class idPlat 440,13116
+	idClipModel *			trigger;idPlat::trigger457,13467
+	idVec3					localTriggerOrigin;idPlat::localTriggerOrigin458,13493
+	idMat3					localTriggerAxis;idPlat::localTriggerAxis459,13525
+class idMover_Periodic 478,14063
+	idPhysics_Parametric	physicsObj;idMover_Periodic::physicsObj495,14473
+	float					damage;idMover_Periodic::damage496,14507
+class idRotater 502,14670
+	idEntityPtr<idEntity>	activatedBy;idRotater::activatedBy514,14909
+class idBobber 519,14999
+private:idBobber::private527,15133
+class idPendulum 530,15146
+private:idPendulum::private538,15286
+class idRiser 541,15299
+
+neo/game/MultiplayerGame.h,7606
+#define	__MULTIPLAYERGAME_H__30,1521
+	GAME_SP,::GAME_SP49,1880
+	GAME_DM,::GAME_DM50,1890
+	GAME_TOURNEY,::GAME_TOURNEY51,1900
+	GAME_TDM,::GAME_TDM52,1915
+	GAME_LASTMAN::GAME_LASTMAN53,1926
+} gameType_t;54,1940
+		PLAYER_VOTE_NONE,::PLAYER_VOTE_NONE57,1970
+		PLAYER_VOTE_NO,::PLAYER_VOTE_NO58,1990
+		PLAYER_VOTE_YES,::PLAYER_VOTE_YES59,2008
+		PLAYER_VOTE_WAIT	::PLAYER_VOTE_WAIT60,2027
+} playerVote_t;61,2079
+typedef struct mpPlayerState_s 63,2096
+	int				ping;mpPlayerState_s::ping64,2129
+	int				fragCount;mpPlayerState_s::fragCount65,2160
+	int				teamFragCount;mpPlayerState_s::teamFragCount66,2189
+	int				wins;mpPlayerState_s::wins67,2226
+	playerVote_t	vote;mpPlayerState_s::vote68,2250
+	bool			scoreBoardUp;mpPlayerState_s::scoreBoardUp69,2289
+	bool			ingame;mpPlayerState_s::ingame70,2404
+} mpPlayerState_t;71,2420
+const int NUM_CHAT_NOTIFY	73,2440
+const int CHAT_FADE_TIME	74,2471
+const int FRAGLIMIT_DELAY	75,2503
+const int MP_PLAYER_MINFRAGS 77,2538
+const int MP_PLAYER_MAXFRAGS 78,2575
+const int MP_PLAYER_MAXWINS	79,2611
+const int MP_PLAYER_MAXPING	80,2646
+typedef struct mpChatLine_s 82,2682
+	idStr			line;mpChatLine_s::line83,2712
+	short			fade;mpChatLine_s::fade84,2727
+} mpChatLine_t;85,2805
+	SND_YOUWIN ::SND_YOUWIN88,2837
+	SND_YOULOSE,::SND_YOULOSE89,2854
+	SND_FIGHT,::SND_FIGHT90,2868
+	SND_VOTE,::SND_VOTE91,2880
+	SND_VOTE_PASSED,::SND_VOTE_PASSED92,2891
+	SND_VOTE_FAILED,::SND_VOTE_FAILED93,2909
+	SND_THREE,::SND_THREE94,2927
+	SND_TWO,::SND_TWO95,2939
+	SND_ONE,::SND_ONE96,2949
+	SND_SUDDENDEATH,::SND_SUDDENDEATH97,2959
+	SND_COUNT::SND_COUNT98,2977
+} snd_evt_t;99,2988
+class idMultiplayerGame 101,3002
+		INACTIVE idMultiplayerGame::INACTIVE138,3984
+		WARMUP,idMultiplayerGame::WARMUP139,4020
+		COUNTDOWN,idMultiplayerGame::COUNTDOWN140,4051
+		GAMEON,idMultiplayerGame::GAMEON141,4094
+		SUDDENDEATH,idMultiplayerGame::SUDDENDEATH142,4125
+		GAMEREVIEW,idMultiplayerGame::GAMEREVIEW143,4196
+		NEXTGAME,idMultiplayerGame::NEXTGAME144,4310
+		STATE_COUNTidMultiplayerGame::STATE_COUNT145,4322
+	} gameState_t;idMultiplayerGame::gameState_t146,4336
+	static const char *GameStateStrings[idMultiplayerGame::GameStateStrings147,4352
+	static const char *GlobalSoundStrings[idMultiplayerGame::GlobalSoundStrings150,4467
+		MSG_SUICIDE idMultiplayerGame::MSG_SUICIDE155,4648
+		MSG_KILLED,idMultiplayerGame::MSG_KILLED156,4667
+		MSG_KILLEDTEAM,idMultiplayerGame::MSG_KILLEDTEAM157,4681
+		MSG_DIED,idMultiplayerGame::MSG_DIED158,4699
+		MSG_VOTE,idMultiplayerGame::MSG_VOTE159,4711
+		MSG_VOTEPASSED,idMultiplayerGame::MSG_VOTEPASSED160,4723
+		MSG_VOTEFAILED,idMultiplayerGame::MSG_VOTEFAILED161,4741
+		MSG_SUDDENDEATH,idMultiplayerGame::MSG_SUDDENDEATH162,4759
+		MSG_FORCEREADY,idMultiplayerGame::MSG_FORCEREADY163,4778
+		MSG_JOINEDSPEC,idMultiplayerGame::MSG_JOINEDSPEC164,4796
+		MSG_TIMELIMIT,idMultiplayerGame::MSG_TIMELIMIT165,4814
+		MSG_FRAGLIMIT,idMultiplayerGame::MSG_FRAGLIMIT166,4831
+		MSG_TELEFRAGGED,idMultiplayerGame::MSG_TELEFRAGGED167,4848
+		MSG_JOINTEAM,idMultiplayerGame::MSG_JOINTEAM168,4867
+		MSG_HOLYSHIT,idMultiplayerGame::MSG_HOLYSHIT169,4883
+		MSG_COUNTidMultiplayerGame::MSG_COUNT170,4899
+	} msg_evt_t;idMultiplayerGame::msg_evt_t171,4911
+		VOTE_RESTART idMultiplayerGame::VOTE_RESTART182,5338
+		VOTE_TIMELIMIT,idMultiplayerGame::VOTE_TIMELIMIT183,5358
+		VOTE_FRAGLIMIT,idMultiplayerGame::VOTE_FRAGLIMIT184,5376
+		VOTE_GAMETYPE,idMultiplayerGame::VOTE_GAMETYPE185,5394
+		VOTE_KICK,idMultiplayerGame::VOTE_KICK186,5411
+		VOTE_MAP,idMultiplayerGame::VOTE_MAP187,5424
+		VOTE_SPECTATORS,idMultiplayerGame::VOTE_SPECTATORS188,5436
+		VOTE_NEXTMAP,idMultiplayerGame::VOTE_NEXTMAP189,5455
+		VOTE_COUNT,idMultiplayerGame::VOTE_COUNT190,5471
+		VOTE_NONEidMultiplayerGame::VOTE_NONE191,5485
+	} vote_flags_t;idMultiplayerGame::vote_flags_t192,5497
+		VOTE_UPDATE,idMultiplayerGame::VOTE_UPDATE195,5531
+		VOTE_FAILED,idMultiplayerGame::VOTE_FAILED196,5546
+		VOTE_PASSED,idMultiplayerGame::VOTE_PASSED197,5561
+		VOTE_ABORTED,idMultiplayerGame::VOTE_ABORTED198,5604
+		VOTE_RESET	idMultiplayerGame::VOTE_RESET199,5620
+	} vote_result_t;idMultiplayerGame::vote_result_t200,5670
+	static const char	*MPGuis[idMultiplayerGame::MPGuis246,7404
+	static const char	*ThrottleVars[idMultiplayerGame::ThrottleVars247,7434
+	static const char	*ThrottleVarsInEnglish[idMultiplayerGame::ThrottleVarsInEnglish248,7470
+	static const int	ThrottleDelay[idMultiplayerGame::ThrottleDelay249,7515
+	gameState_t		gameState;idMultiplayerGame::gameState252,7566
+	gameState_t		nextState;idMultiplayerGame::nextState253,7631
+	int				pingUpdateTime;idMultiplayerGame::pingUpdateTime254,7709
+	mpPlayerState_t	playerState[idMultiplayerGame::playerState256,7759
+	vote_flags_t	vote;idMultiplayerGame::vote261,7894
+	int				voteTimeOut;idMultiplayerGame::voteTimeOut262,7946
+	int				voteExecTime;idMultiplayerGame::voteExecTime263,8002
+	float			yesVotes;idMultiplayerGame::yesVotes264,8071
+	float			noVotes;idMultiplayerGame::noVotes265,8118
+	idStr			voteValue;idMultiplayerGame::voteValue266,8159
+	idStr			voteString;idMultiplayerGame::voteString267,8216
+	bool			voted;idMultiplayerGame::voted268,8270
+	int				kickVoteMap[idMultiplayerGame::kickVoteMap269,8317
+	int				nextStateSwitch;idMultiplayerGame::nextStateSwitch272,8371
+	int				warmupEndTime;idMultiplayerGame::warmupEndTime273,8423
+	int				matchStartedTime;idMultiplayerGame::matchStartedTime274,8465
+	int				currentTourneyPlayer[idMultiplayerGame::currentTourneyPlayer277,8535
+	int				lastWinner;idMultiplayerGame::lastWinner278,8597
+	idStr			warmupText;idMultiplayerGame::warmupText281,8647
+	bool			one,idMultiplayerGame::one282,8710
+	bool			one, two,idMultiplayerGame::two282,8710
+	bool			one, two, three;idMultiplayerGame::three282,8710
+	idUserInterface *scoreBoard;idMultiplayerGame::scoreBoard285,8787
+	idUserInterface *spectateGui;idMultiplayerGame::spectateGui286,8833
+	idUserInterface *guiChat;idMultiplayerGame::guiChat287,8883
+	idUserInterface *mainGui;idMultiplayerGame::mainGui288,8926
+	idListGUI		*mapList;idMultiplayerGame::mapList289,8985
+	idUserInterface *msgmodeGui;idMultiplayerGame::msgmodeGui290,9007
+	int				currentMenu;idMultiplayerGame::currentMenu291,9055
+	int				nextMenu;idMultiplayerGame::nextMenu292,9119
+	bool			bCurrentMenuMsg;idMultiplayerGame::bCurrentMenuMsg293,9165
+	mpChatLine_t	chatHistory[idMultiplayerGame::chatHistory296,9243
+	int				chatHistoryIndex;idMultiplayerGame::chatHistoryIndex297,9289
+	int				chatHistorySize;idMultiplayerGame::chatHistorySize298,9315
+	bool			chatDataUpdated;idMultiplayerGame::chatDataUpdated299,9369
+	int				lastChatLineTime;idMultiplayerGame::lastChatLineTime300,9394
+	int				numRankedPlayers;idMultiplayerGame::numRankedPlayers303,9477
+	idPlayer *		rankedPlayers[idMultiplayerGame::rankedPlayers304,9563
+	bool			pureReady;idMultiplayerGame::pureReady306,9605
+	int				fragLimitTimeout;idMultiplayerGame::fragLimitTimeout307,9709
+	int				switchThrottle[idMultiplayerGame::switchThrottle309,9736
+	int				voiceChatThrottle;idMultiplayerGame::voiceChatThrottle310,9765
+	gameType_t		lastGameType;idMultiplayerGame::lastGameType312,9793
+	int				startFragLimit;idMultiplayerGame::startFragLimit313,9838
+ID_INLINE idMultiplayerGame::gameState_t idMultiplayerGame::GetGameState(360,11726
+ID_INLINE bool idMultiplayerGame::IsPureReady(364,11837
+ID_INLINE void idMultiplayerGame::ClearFrags(368,11921
+ID_INLINE bool idMultiplayerGame::IsInGame(372,12029
+
+neo/game/Player.h,16499
+#define __GAME_PLAYER_H__30,1517
+const float THIRD_PERSON_FOCUS_DISTANCE	62,2338
+const int	LAND_DEFLECT_TIME 63,2388
+const int	LAND_RETURN_TIME 64,2423
+const int	FOCUS_TIME 65,2457
+const int	FOCUS_GUI_TIME 66,2485
+const int MAX_WEAPONS 68,2518
+const int DEAD_HEARTRATE 70,2547
+const int LOWHEALTH_HEARTRATE_ADJ 71,2601
+const int DYING_HEARTRATE 72,2644
+const int BASE_HEARTRATE 73,2719
+const int ZEROSTAMINA_HEARTRATE 74,2763
+const int MAX_HEARTRATE 75,2817
+const int ZERO_VOLUME 76,2861
+const int DMG_VOLUME 77,2910
+const int DEATH_VOLUME 78,2968
+const int SAVING_THROW_TIME 80,3019
+struct idItemInfo 85,3197
+	idStr name;idItemInfo::name86,3217
+	idStr icon;idItemInfo::icon87,3230
+struct idObjectiveInfo 90,3247
+	idStr title;idObjectiveInfo::title91,3272
+	idStr text;idObjectiveInfo::text92,3286
+	idStr screenshot;idObjectiveInfo::screenshot93,3299
+struct idLevelTriggerInfo 96,3322
+	idStr levelName;idLevelTriggerInfo::levelName97,3350
+	idStr triggerName;idLevelTriggerInfo::triggerName98,3368
+	BERSERK ::BERSERK103,3448
+	INVISIBILITY,::INVISIBILITY104,3462
+	MEGAHEALTH,::MEGAHEALTH105,3477
+	ADRENALINE,::ADRENALINE106,3490
+	MAX_POWERUPS::MAX_POWERUPS107,3503
+	SPEED ::SPEED112,3549
+	PROJECTILE_DAMAGE,::PROJECTILE_DAMAGE113,3561
+	MELEE_DAMAGE,::MELEE_DAMAGE114,3581
+	MELEE_DISTANCE::MELEE_DISTANCE115,3596
+	INFLUENCE_NONE ::INFLUENCE_NONE120,3643
+	INFLUENCE_LEVEL1,::INFLUENCE_LEVEL1121,3674
+	INFLUENCE_LEVEL2,::INFLUENCE_LEVEL2122,3712
+	INFLUENCE_LEVEL3,::INFLUENCE_LEVEL3123,3758
+class idInventory 126,3807
+	int						maxHealth;idInventory::maxHealth128,3835
+	int						weapons;idInventory::weapons129,3856
+	int						powerups;idInventory::powerups130,3875
+	int						armor;idInventory::armor131,3895
+	int						maxarmor;idInventory::maxarmor132,3912
+	int						ammo[idInventory::ammo133,3932
+	int						clip[idInventory::clip134,3965
+	int						powerupEndTime[idInventory::powerupEndTime135,3996
+	int						ammoPredictTime;idInventory::ammoPredictTime138,4046
+	int						deplete_armor;idInventory::deplete_armor140,4074
+	float					deplete_rate;idInventory::deplete_rate141,4099
+	int						deplete_ammount;idInventory::deplete_ammount142,4124
+	int						nextArmorDepleteTime;idInventory::nextArmorDepleteTime143,4151
+	int						pdasViewed[idInventory::pdasViewed145,4184
+	int						selPDA;idInventory::selPDA147,4267
+	int						selEMail;idInventory::selEMail148,4285
+	int						selVideo;idInventory::selVideo149,4305
+	int						selAudio;idInventory::selAudio150,4325
+	bool					pdaOpened;idInventory::pdaOpened151,4345
+	bool					turkeyScore;idInventory::turkeyScore152,4366
+	idList<idDict *>		items;idInventory::items153,4389
+	idStrList				pdas;idInventory::pdas154,4415
+	idStrList				pdaSecurity;idInventory::pdaSecurity155,4435
+	idStrList				videos;idInventory::videos156,4462
+	idStrList				emails;idInventory::emails157,4484
+	bool					ammoPulse;idInventory::ammoPulse159,4507
+	bool					weaponPulse;idInventory::weaponPulse160,4528
+	bool					armorPulse;idInventory::armorPulse161,4551
+	int						lastGiveTime;idInventory::lastGiveTime162,4573
+	idList<idLevelTriggerInfo> levelTriggers;idInventory::levelTriggers164,4598
+							idInventory(idInventory::idInventory166,4642
+							~idInventory(idInventory::~idInventory167,4676
+	int						nextItemPickup;idInventory::nextItemPickup193,6075
+	int						nextItemNum;idInventory::nextItemNum194,6101
+	int						onePickupTime;idInventory::onePickupTime195,6124
+	idList<idItemInfo>		pickupItemNames;idInventory::pickupItemNames196,6149
+	idList<idObjectiveInfo>	objectiveNames;idInventory::objectiveNames197,6187
+	int		time;::time201,6249
+	idVec3	dir;::dir202,6261
+} loggedAccel_t;203,6304
+	int		areaNum;::areaNum206,6339
+	idVec3	pos;::pos207,6354
+} aasLocation_t;208,6367
+const int SELECT_RUN 213,6396
+const int SELECT_FIRE 214,6465
+const int SELECT_TURN 215,6492
+const int SELECT_RELOAD 216,6519
+class selectInfo220,6559
+  bool ammo_active;selectInfo::ammo_active240,7031
+  bool run_active;selectInfo::run_active241,7084
+  bool angle_active;selectInfo::angle_active242,7135
+  bool reload_active;selectInfo::reload_active243,7190
+  bool ammo_select;selectInfo::ammo_select245,7236
+  bool run_select;selectInfo::run_select246,7327
+  bool angle_select;selectInfo::angle_select247,7417
+  bool reload_select;selectInfo::reload_select248,7498
+  unsigned int ammo;selectInfo::ammo250,7583
+  unsigned int run;selectInfo::run251,7662
+  int angle_final;selectInfo::angle_final252,7732
+  int angle_inc;selectInfo::angle_inc253,7779
+  int angle_cur;selectInfo::angle_cur254,7844
+  bool reload_finished;selectInfo::reload_finished255,7897
+class idPlayer 259,7959
+		EVENT_IMPULSE idPlayer::EVENT_IMPULSE262,8009
+		EVENT_IMPULSE = idEntity::EVENT_MAXEVENTS,idPlayer::idEntity::EVENT_MAXEVENTS262,8009
+		EVENT_EXIT_TELEPORTER,idPlayer::EVENT_EXIT_TELEPORTER263,8054
+		EVENT_ABORT_TELEPORTER,idPlayer::EVENT_ABORT_TELEPORTER264,8079
+		EVENT_POWERUP,idPlayer::EVENT_POWERUP265,8105
+		EVENT_SPECTATE,idPlayer::EVENT_SPECTATE266,8122
+		EVENT_MAXEVENTSidPlayer::EVENT_MAXEVENTS267,8140
+	usercmd_t				usercmd;idPlayer::usercmd270,8163
+	selectInfo                              pulseCount;idPlayer::pulseCount271,8186
+	class idPlayerView		playerView;idPlayer::playerView273,8240
+	bool					noclip;idPlayer::noclip275,8312
+	bool					godmode;idPlayer::godmode276,8330
+	bool					spawnAnglesSet;idPlayer::spawnAnglesSet278,8350
+	idAngles				spawnAngles;idPlayer::spawnAngles279,8422
+	idAngles				viewAngles;idPlayer::viewAngles280,8448
+	idAngles				cmdAngles;idPlayer::cmdAngles281,8497
+	int						buttonMask;idPlayer::buttonMask283,8545
+	int						oldButtons;idPlayer::oldButtons284,8567
+	int						oldFlags;idPlayer::oldFlags285,8589
+	int						lastHitTime;idPlayer::lastHitTime287,8610
+	int						lastSndHitTime;idPlayer::lastSndHitTime288,8686
+	int						lastSavingThrowTime;idPlayer::lastSavingThrowTime289,8767
+	idScriptBool			AI_FORWARD;idPlayer::AI_FORWARD291,8829
+	idScriptBool			AI_BACKWARD;idPlayer::AI_BACKWARD292,8857
+	idScriptBool			AI_STRAFE_LEFT;idPlayer::AI_STRAFE_LEFT293,8886
+	idScriptBool			AI_STRAFE_RIGHT;idPlayer::AI_STRAFE_RIGHT294,8918
+	idScriptBool			AI_ATTACK_HELD;idPlayer::AI_ATTACK_HELD295,8951
+	idScriptBool			AI_WEAPON_FIRED;idPlayer::AI_WEAPON_FIRED296,8983
+	idScriptBool			AI_JUMP;idPlayer::AI_JUMP297,9016
+	idScriptBool			AI_CROUCH;idPlayer::AI_CROUCH298,9041
+	idScriptBool			AI_ONGROUND;idPlayer::AI_ONGROUND299,9068
+	idScriptBool			AI_ONLADDER;idPlayer::AI_ONLADDER300,9097
+	idScriptBool			AI_DEAD;idPlayer::AI_DEAD301,9126
+	idScriptBool			AI_RUN;idPlayer::AI_RUN302,9151
+	idScriptBool			AI_PAIN;idPlayer::AI_PAIN303,9175
+	idScriptBool			AI_HARDLANDING;idPlayer::AI_HARDLANDING304,9200
+	idScriptBool			AI_SOFTLANDING;idPlayer::AI_SOFTLANDING305,9232
+	idScriptBool			AI_RELOAD;idPlayer::AI_RELOAD306,9264
+	idScriptBool			AI_TELEPORT;idPlayer::AI_TELEPORT307,9291
+	idScriptBool			AI_TURN_LEFT;idPlayer::AI_TURN_LEFT308,9320
+	idScriptBool			AI_TURN_RIGHT;idPlayer::AI_TURN_RIGHT309,9350
+	idInventory				inventory;idPlayer::inventory312,9396
+	idEntityPtr<idWeapon>	weapon;idPlayer::weapon314,9424
+	idUserInterface *		hud;idPlayer::hud315,9455
+	idUserInterface *		objectiveSystem;idPlayer::objectiveSystem316,9518
+	bool					objectiveSystemOpen;idPlayer::objectiveSystemOpen317,9555
+	int						weapon_soulcube;idPlayer::weapon_soulcube319,9587
+	int						weapon_pda;idPlayer::weapon_pda320,9614
+	int						weapon_fists;idPlayer::weapon_fists321,9636
+	int						heartRate;idPlayer::heartRate323,9661
+	idInterpolate<float>	heartInfo;idPlayer::heartInfo324,9682
+	int						lastHeartAdjust;idPlayer::lastHeartAdjust325,9715
+	int						lastHeartBeat;idPlayer::lastHeartBeat326,9742
+	int						lastDmgTime;idPlayer::lastDmgTime327,9767
+	int						deathClearContentsTime;idPlayer::deathClearContentsTime328,9790
+	bool					doingDeathSkin;idPlayer::doingDeathSkin329,9824
+	int						lastArmorPulse;idPlayer::lastArmorPulse330,9850
+	float					stamina;idPlayer::stamina331,9923
+	float					healthPool;idPlayer::healthPool332,9943
+	int						nextHealthPulse;idPlayer::nextHealthPulse333,10006
+	bool					healthPulse;idPlayer::healthPulse334,10033
+	bool					healthTake;idPlayer::healthTake335,10056
+	int						nextHealthTake;idPlayer::nextHealthTake336,10078
+	bool					hiddenWeapon;idPlayer::hiddenWeapon339,10106
+	idEntityPtr<idProjectile> soulCubeProjectile;idPlayer::soulCubeProjectile340,10180
+	static idVec3			colorBarTable[idPlayer::colorBarTable343,10241
+	int						spectator;idPlayer::spectator344,10278
+	idVec3					colorBar;idPlayer::colorBar345,10299
+	int						colorBarIndex;idPlayer::colorBarIndex346,10362
+	bool					scoreBoardOpen;idPlayer::scoreBoardOpen347,10387
+	bool					forceScoreBoard;idPlayer::forceScoreBoard348,10413
+	bool					forceRespawn;idPlayer::forceRespawn349,10440
+	bool					spectating;idPlayer::spectating350,10464
+	int						lastSpectateTeleport;idPlayer::lastSpectateTeleport351,10486
+	bool					lastHitToggle;idPlayer::lastHitToggle352,10518
+	bool					forcedReady;idPlayer::forcedReady353,10543
+	bool					wantSpectate;idPlayer::wantSpectate354,10566
+	bool					weaponGone;idPlayer::weaponGone355,10608
+	bool					useInitialSpawns;idPlayer::useInitialSpawns356,10653
+	int						latchedTeam;idPlayer::latchedTeam357,10747
+	int						tourneyRank;idPlayer::tourneyRank358,10811
+	int						tourneyLine;idPlayer::tourneyLine359,10910
+	int						spawnedTime;idPlayer::spawnedTime360,10995
+	idEntityPtr<idEntity>	teleportEntity;idPlayer::teleportEntity362,11057
+	int						teleportKiller;idPlayer::teleportKiller363,11169
+	bool					lastManOver;idPlayer::lastManOver364,11256
+	bool					lastManPlayAgain;idPlayer::lastManPlayAgain365,11328
+	bool					lastManPresent;idPlayer::lastManPresent366,11434
+	bool					isLagged;idPlayer::isLagged367,11544
+	bool					isChatting;idPlayer::isChatting368,11644
+	int						minRespawnTime;idPlayer::minRespawnTime371,11739
+	int						maxRespawnTime;idPlayer::maxRespawnTime372,11826
+	idVec3					firstPersonViewOrigin;idPlayer::firstPersonViewOrigin376,11983
+	idMat3					firstPersonViewAxis;idPlayer::firstPersonViewAxis377,12018
+	idDragEntity			dragEntity;idPlayer::dragEntity379,12052
+	bool					GuiActive(idPlayer::GuiActive509,17204
+	int						GetInfluenceLevel(idPlayer::GetInfluenceLevel522,17753
+	idCamera *				GetPrivateCameraView(idPlayer::GetPrivateCameraView524,17871
+	bool					IsTipVisible(idPlayer::IsTipVisible534,18347
+	idEntity				*GetInfluenceEntity(idPlayer::GetInfluenceEntity554,19186
+	const idMaterial		*GetInfluenceMaterial(idPlayer::GetInfluenceMaterial555,19256
+	float					GetInfluenceRadius(idPlayer::GetInfluenceRadius556,19336
+	bool pythonBot;idPlayer::pythonBot581,20189
+	pyBotClass *pybot;idPlayer::pybot582,20222
+	jointHandle_t			hipJoint;idPlayer::hipJoint599,20846
+	jointHandle_t			chestJoint;idPlayer::chestJoint600,20873
+	jointHandle_t			headJoint;idPlayer::headJoint601,20902
+	idPhysics_Player		physicsObj;idPlayer::physicsObj603,20931
+	idList<aasLocation_t>	aasLocation;idPlayer::aasLocation605,20983
+	int						bobFoot;idPlayer::bobFoot607,21051
+	float					bobFrac;idPlayer::bobFrac608,21070
+	float					bobfracsin;idPlayer::bobfracsin609,21090
+	int						bobCycle;idPlayer::bobCycle610,21113
+	float					xyspeed;idPlayer::xyspeed611,21179
+	int						stepUpTime;idPlayer::stepUpTime612,21199
+	float					stepUpDelta;idPlayer::stepUpDelta613,21221
+	float					idealLegsYaw;idPlayer::idealLegsYaw614,21245
+	float					legsYaw;idPlayer::legsYaw615,21270
+	bool					legsForward;idPlayer::legsForward616,21290
+	float					oldViewYaw;idPlayer::oldViewYaw617,21313
+	idAngles				viewBobAngles;idPlayer::viewBobAngles618,21336
+	idVec3					viewBob;idPlayer::viewBob619,21364
+	int						landChange;idPlayer::landChange620,21385
+	int						landTime;idPlayer::landTime621,21407
+	int						currentWeapon;idPlayer::currentWeapon623,21428
+	int						idealWeapon;idPlayer::idealWeapon624,21453
+	int						previousWeapon;idPlayer::previousWeapon625,21476
+	int						weaponSwitchTime;idPlayer::weaponSwitchTime626,21502
+	bool					weaponEnabled;idPlayer::weaponEnabled627,21530
+	bool					showWeaponViewModel;idPlayer::showWeaponViewModel628,21555
+	const idDeclSkin *		skin;idPlayer::skin630,21587
+	const idDeclSkin *		powerUpSkin;idPlayer::powerUpSkin631,21614
+	idStr					baseSkinName;idPlayer::baseSkinName632,21648
+	int						numProjectilesFired;idPlayer::numProjectilesFired634,21674
+	int						numProjectileHits;idPlayer::numProjectileHits635,21736
+	bool					airless;idPlayer::airless637,21793
+	int						airTics;idPlayer::airTics638,21812
+	int						lastAirDamage;idPlayer::lastAirDamage639,21881
+	bool					gibDeath;idPlayer::gibDeath641,21907
+	bool					gibsLaunched;idPlayer::gibsLaunched642,21927
+	idVec3					gibsDir;idPlayer::gibsDir643,21951
+	idInterpolate<float>	zoomFov;idPlayer::zoomFov645,21973
+	idInterpolate<float>	centerView;idPlayer::centerView646,22004
+	bool					fxFov;idPlayer::fxFov647,22038
+	float					influenceFov;idPlayer::influenceFov649,22056
+	int						influenceActive;idPlayer::influenceActive650,22081
+	idEntity *				influenceEntity;idPlayer::influenceEntity651,22176
+	const idMaterial *		influenceMaterial;idPlayer::influenceMaterial652,22208
+	float					influenceRadius;idPlayer::influenceRadius653,22248
+	const idDeclSkin *		influenceSkin;idPlayer::influenceSkin654,22276
+	idCamera *				privateCameraView;idPlayer::privateCameraView656,22313
+	static const int		NUM_LOGGED_VIEW_ANGLES idPlayer::NUM_LOGGED_VIEW_ANGLES658,22348
+	idAngles				loggedViewAngles[idPlayer::loggedViewAngles659,22433
+	static const int		NUM_LOGGED_ACCELS idPlayer::NUM_LOGGED_ACCELS660,22535
+	loggedAccel_t			loggedAccel[idPlayer::loggedAccel661,22616
+	int						currentLoggedAccel;idPlayer::currentLoggedAccel662,22713
+	idEntity *				focusGUIent;idPlayer::focusGUIent665,22827
+	idUserInterface *		focusUI;idPlayer::focusUI666,22855
+	idAI *					focusCharacter;idPlayer::focusCharacter667,22935
+	int						talkCursor;idPlayer::talkCursor668,22963
+	int						focusTime;idPlayer::focusTime669,23090
+	idAFEntity_Vehicle *	focusVehicle;idPlayer::focusVehicle670,23111
+	idUserInterface *		cursor;idPlayer::cursor671,23147
+	int						oldMouseX;idPlayer::oldMouseX674,23228
+	int						oldMouseY;idPlayer::oldMouseY675,23249
+	idStr					pdaAudio;idPlayer::pdaAudio677,23271
+	idStr					pdaVideo;idPlayer::pdaVideo678,23292
+	idStr					pdaVideoWave;idPlayer::pdaVideoWave679,23313
+	bool					tipUp;idPlayer::tipUp681,23339
+	bool					objectiveUp;idPlayer::objectiveUp682,23356
+	int						lastDamageDef;idPlayer::lastDamageDef684,23380
+	idVec3					lastDamageDir;idPlayer::lastDamageDir685,23405
+	int						lastDamageLocation;idPlayer::lastDamageLocation686,23432
+	int						smoothedFrame;idPlayer::smoothedFrame687,23462
+	bool					smoothedOriginUpdated;idPlayer::smoothedOriginUpdated688,23487
+	idVec3					smoothedOrigin;idPlayer::smoothedOrigin689,23520
+	idAngles				smoothedAngles;idPlayer::smoothedAngles690,23548
+	bool					ready;idPlayer::ready693,23585
+	bool					respawning;idPlayer::respawning694,23623
+	bool					leader;idPlayer::leader695,23705
+	int						lastSpectateChange;idPlayer::lastSpectateChange696,23758
+	int						lastTeleFX;idPlayer::lastTeleFX697,23788
+	unsigned int			lastSnapshotSequence;idPlayer::lastSnapshotSequence698,23810
+	bool					weaponCatchup;idPlayer::weaponCatchup699,23882
+	int						MPAim;idPlayer::MPAim700,23960
+	int						lastMPAim;idPlayer::lastMPAim701,24002
+	int						lastMPAimTime;idPlayer::lastMPAimTime702,24023
+	int						MPAimFadeTime;idPlayer::MPAimFadeTime703,24079
+	bool					MPAimHighlight;idPlayer::MPAimHighlight704,24122
+	bool					isTelefragged;idPlayer::isTelefragged705,24148
+	idPlayerIcon			playerIcon;idPlayer::playerIcon707,24197
+	bool					selfSmooth;idPlayer::selfSmooth709,24226
+ID_INLINE bool idPlayer::IsReady(771,26445
+ID_INLINE bool idPlayer::IsRespawning(775,26521
+ID_INLINE idPhysics* idPlayer::GetPlayerPhysics(779,26592
+ID_INLINE bool idPlayer::IsInTeleport(783,26674
+ID_INLINE void idPlayer::SetLeader(787,26773
+ID_INLINE bool idPlayer::IsLeader(791,26842
+ID_INLINE bool idPlayer::SelfSmooth(795,26905
+ID_INLINE void idPlayer::SetSelfSmooth(799,26974
+
+neo/game/PlayerIcon.h,324
+#define	__PLAYERICON_H__30,1516
+	ICON_LAG,33,1557
+	ICON_CHAT,34,1568
+	ICON_NONE35,1580
+} playerIconType_t;36,1591
+class idPlayerIcon 38,1612
+	playerIconType_t	iconType;idPlayerIcon::iconType49,1802
+	renderEntity_t		renderEnt;idPlayerIcon::renderEnt50,1830
+	qhandle_t			iconHandle;idPlayerIcon::iconHandle51,1858
+
+neo/game/PlayerView.h,2005
+#define __GAME_PLAYERVIEW_H__30,1521
+	const idMaterial *	material;::material50,1975
+	float				x,::x51,2005
+	float				x, y,::y51,2005
+	float				x, y, w,::w51,2005
+	float				x, y, w, h;::h51,2005
+	float				s1,::s152,2027
+	float				s1, t1,::t152,2027
+	float				s1, t1, s2,::s252,2027
+	float				s1, t1, s2, t2;::t252,2027
+	int					finishTime;::finishTime53,2053
+	int					startFadeTime;::startFadeTime54,2074
+	float				driftAmount;::driftAmount55,2098
+} screenBlob_t;56,2121
+#define	MAX_SCREEN_BLOBS	58,2138
+class idPlayerView 60,2166
+	void				EnableBFGVision(idPlayerView::EnableBFGVision92,3028
+	screenBlob_t		screenBlobs[idPlayerView::screenBlobs103,3458
+	int					dvFinishTime;idPlayerView::dvFinishTime105,3505
+	const idMaterial *	dvMaterial;idPlayerView::dvMaterial106,3575
+	int					kickFinishTime;idPlayerView::kickFinishTime108,3660
+	idAngles			kickAngles;idPlayerView::kickAngles109,3728
+	bool				bfgVision;idPlayerView::bfgVision111,3753
+	const idMaterial *	tunnelMaterial;idPlayerView::tunnelMaterial113,3779
+	const idMaterial *	armorMaterial;idPlayerView::armorMaterial114,3840
+	const idMaterial *	berserkMaterial;idPlayerView::berserkMaterial115,3904
+	const idMaterial *	irGogglesMaterial;idPlayerView::irGogglesMaterial116,3959
+	const idMaterial *	bloodSprayMaterial;idPlayerView::bloodSprayMaterial117,4011
+	const idMaterial *	bfgMaterial;idPlayerView::bfgMaterial118,4066
+	const idMaterial *	lagoMaterial;idPlayerView::lagoMaterial119,4126
+	float				lastDamageTime;idPlayerView::lastDamageTime120,4182
+	idVec4				fadeColor;idPlayerView::fadeColor122,4254
+	idVec4				fadeToColor;idPlayerView::fadeToColor123,4292
+	idVec4				fadeFromColor;idPlayerView::fadeFromColor124,4337
+	float				fadeRate;idPlayerView::fadeRate125,4386
+	int					fadeTime;idPlayerView::fadeTime126,4421
+	idAngles			shakeAng;idPlayerView::shakeAng128,4456
+	idPlayer *			player;idPlayerView::player130,4507
+	renderView_t		view;idPlayerView::view131,4529
+
+neo/game/Projectile.h,4511
+#define __GAME_PROJECTILE_H__30,1521
+class idProjectile 46,1869
+		EVENT_DAMAGE_EFFECT idProjectile::EVENT_DAMAGE_EFFECT74,2912
+		EVENT_DAMAGE_EFFECT = idEntity::EVENT_MAXEVENTS,idProjectile::idEntity::EVENT_MAXEVENTS74,2912
+		EVENT_MAXEVENTSidProjectile::EVENT_MAXEVENTS75,2963
+	idEntityPtr<idEntity>	owner;idProjectile::owner86,3550
+	struct projectileFlags_s idProjectile::projectileFlags_s88,3581
+		bool				detonate_on_world	idProjectile::projectileFlags_s::detonate_on_world89,3609
+		bool				detonate_on_actor	idProjectile::projectileFlags_s::detonate_on_actor90,3644
+		bool				randomShaderSpin	idProjectile::projectileFlags_s::randomShaderSpin91,3679
+		bool				isTracer	idProjectile::projectileFlags_s::isTracer92,3713
+		bool				noSplashDamage	idProjectile::projectileFlags_s::noSplashDamage93,3741
+	} projectileFlags;idProjectile::projectileFlags94,3774
+	float					thrust;idProjectile::thrust96,3795
+	int						thrust_end;idProjectile::thrust_end97,3814
+	float					damagePower;idProjectile::damagePower98,3836
+	renderLight_t			renderLight;idProjectile::renderLight100,3861
+	qhandle_t				lightDefHandle;idProjectile::lightDefHandle101,3891
+	idVec3					lightOffset;idProjectile::lightOffset102,3956
+	int						lightStartTime;idProjectile::lightStartTime103,3981
+	int						lightEndTime;idProjectile::lightEndTime104,4007
+	idVec3					lightColor;idProjectile::lightColor105,4031
+	idForce_Constant		thruster;idProjectile::thruster107,4056
+	idPhysics_RigidBody		physicsObj;idProjectile::physicsObj108,4085
+	const idDeclParticle *	smokeFly;idProjectile::smokeFly110,4120
+	int						smokeFlyTime;idProjectile::smokeFlyTime111,4154
+		SPAWNED idProjectile::SPAWNED115,4256
+		CREATED idProjectile::CREATED116,4271
+		LAUNCHED idProjectile::LAUNCHED117,4286
+		FIZZLED idProjectile::FIZZLED118,4302
+		EXPLODED idProjectile::EXPLODED119,4317
+	} projectileState_t;idProjectile::projectileState_t120,4332
+	projectileState_t		state;idProjectile::state122,4355
+	bool					netSyncPhysics;idProjectile::netSyncPhysics125,4392
+class idGuidedProjectile 136,4727
+	float					speed;idGuidedProjectile::speed151,5248
+	idEntityPtr<idEntity>	enemy;idGuidedProjectile::enemy152,5266
+	idAngles				rndScale;idGuidedProjectile::rndScale156,5349
+	idAngles				rndAng;idGuidedProjectile::rndAng157,5372
+	idAngles				angles;idGuidedProjectile::angles158,5393
+	int						rndUpdateTime;idGuidedProjectile::rndUpdateTime159,5414
+	float					turn_max;idGuidedProjectile::turn_max160,5439
+	float					clamp_dist;idGuidedProjectile::clamp_dist161,5460
+	bool					burstMode;idGuidedProjectile::burstMode162,5483
+	bool					unGuided;idGuidedProjectile::unGuided163,5504
+	float					burstDist;idGuidedProjectile::burstDist164,5524
+	float					burstVelocity;idGuidedProjectile::burstVelocity165,5546
+class idSoulCubeMissile 168,5576
+	idVec3					startingVelocity;idSoulCubeMissile::startingVelocity185,6174
+	idVec3					endingVelocity;idSoulCubeMissile::endingVelocity186,6204
+	float					accelTime;idSoulCubeMissile::accelTime187,6232
+	int						launchTime;idSoulCubeMissile::launchTime188,6254
+	bool					killPhase;idSoulCubeMissile::killPhase189,6276
+	bool					returnPhase;idSoulCubeMissile::returnPhase190,6297
+	idVec3					destOrg;idSoulCubeMissile::destOrg191,6320
+	idVec3					orbitOrg;idSoulCubeMissile::orbitOrg192,6341
+	int						orbitTime;idSoulCubeMissile::orbitTime193,6363
+	int						smokeKillTime;idSoulCubeMissile::smokeKillTime194,6384
+	const idDeclParticle *	smokeKill;idSoulCubeMissile::smokeKill195,6409
+struct beamTarget_t 198,6448
+	idEntityPtr<idEntity>	target;beamTarget_t::target199,6470
+	renderEntity_t			renderEntity;beamTarget_t::renderEntity200,6501
+	qhandle_t				modelDefHandle;beamTarget_t::modelDefHandle201,6533
+class idBFGProjectile 204,6567
+	idList<beamTarget_t>	beamTargets;idBFGProjectile::beamTargets220,7133
+	renderEntity_t			secondModel;idBFGProjectile::secondModel221,7168
+	qhandle_t				secondModelDefHandle;idBFGProjectile::secondModelDefHandle222,7199
+	int						nextDamageTime;idBFGProjectile::nextDamageTime223,7235
+	idStr					damageFreq;idBFGProjectile::damageFreq224,7261
+class idDebris 239,7548
+	idEntityPtr<idEntity>	owner;idDebris::owner262,8260
+	idPhysics_RigidBody		physicsObj;idDebris::physicsObj263,8290
+	const idDeclParticle *	smokeFly;idDebris::smokeFly264,8324
+	int						smokeFlyTime;idDebris::smokeFlyTime265,8358
+	const idSoundShader *	sndBounce;idDebris::sndBounce266,8382
+
+neo/game/Pvs.h,1038
+#define __GAME_PVS_H__30,1514
+typedef struct pvsHandle_s 47,1892
+	int					i;48,1921
+	unsigned int		h;49,1959
+} pvsHandle_t;50,2005
+typedef struct pvsCurrent_s 53,2022
+	pvsHandle_t			handle;54,2052
+	byte *				pvs;55,2098
+} pvsCurrent_t;56,2141
+#define MAX_CURRENT_PVS	58,2158
+	PVS_NORMAL	61,2226
+	PVS_ALL_PORTALS_OPEN	62,2303
+	PVS_CONNECTED_AREAS	63,2383
+} pvsType_t;64,2471
+class idPVS 67,2486
+	int					numAreas;idPVS::numAreas101,4382
+	int					numPortals;idPVS::numPortals102,4401
+	bool *				connectedAreas;idPVS::connectedAreas103,4422
+	int *				areaQueue;idPVS::areaQueue104,4449
+	byte *				areaPVS;idPVS::areaPVS105,4470
+	mutable pvsCurrent_t currentPVS[idPVS::currentPVS107,4590
+	int					portalVisBytes;idPVS::portalVisBytes109,4669
+	int					portalVisInts;idPVS::portalVisInts110,4694
+	int					areaVisBytes;idPVS::areaVisBytes111,4718
+	int					areaVisInts;idPVS::areaVisInts112,4741
+	struct pvsPortal_s *pvsPortals;idPVS::pvsPortals113,4763
+	struct pvsArea_s *	pvsAreas;idPVS::pvsAreas114,4796
+
+neo/game/SecurityCamera.h,1348
+#define __GAME_SECURITYCAMERA_H__30,1525
+class idSecurityCamera 43,1776
+	enum { SCANNING,idSecurityCamera::SCANNING62,2325
+	enum { SCANNING, LOSINGINTEREST,idSecurityCamera::LOSINGINTEREST62,2325
+	enum { SCANNING, LOSINGINTEREST, ALERT,idSecurityCamera::ALERT62,2325
+	enum { SCANNING, LOSINGINTEREST, ALERT, ACTIVATED idSecurityCamera::ACTIVATED62,2325
+	float					angle;idSecurityCamera::angle64,2380
+	float					sweepAngle;idSecurityCamera::sweepAngle65,2398
+	int						modelAxis;idSecurityCamera::modelAxis66,2421
+	bool					flipAxis;idSecurityCamera::flipAxis67,2442
+	float					scanDist;idSecurityCamera::scanDist68,2462
+	float					scanFov;idSecurityCamera::scanFov69,2483
+	float					sweepStart;idSecurityCamera::sweepStart71,2504
+	float					sweepEnd;idSecurityCamera::sweepEnd72,2527
+	bool					negativeSweep;idSecurityCamera::negativeSweep73,2548
+	bool					sweeping;idSecurityCamera::sweeping74,2573
+	int						alertMode;idSecurityCamera::alertMode75,2593
+	float					stopSweeping;idSecurityCamera::stopSweeping76,2614
+	float					scanFovCos;idSecurityCamera::scanFovCos77,2639
+	idVec3					viewOffset;idSecurityCamera::viewOffset79,2663
+	int						pvsArea;idSecurityCamera::pvsArea81,2688
+	idPhysics_RigidBody		physicsObj;idSecurityCamera::physicsObj82,2707
+	idTraceModel			trm;idSecurityCamera::trm83,2741
+
+neo/game/SmokeParticles.h,1084
+#define __SMOKEPARTICLES_H__30,1520
+typedef struct singleSmoke_s 60,2575
+	struct singleSmoke_s	 *	next;61,2606
+	int							privateStartTime;62,2637
+	int							index;63,2709
+	idRandom					random;64,2794
+	idVec3						origin;65,2816
+	idMat3						axis;66,2837
+} singleSmoke_t;67,2856
+	const idParticleStage *		stage;70,2891
+	singleSmoke_t *				smokes;71,2924
+} activeSmokeStage_t;72,2952
+class idSmokeParticles 75,2976
+	bool						initialized;idSmokeParticles::initialized91,3496
+	renderEntity_t				renderEntity;idSmokeParticles::renderEntity93,3521
+	int							renderEntityHandle;idSmokeParticles::renderEntityHandle94,3599
+	static const int			MAX_SMOKE_PARTICLES idSmokeParticles::MAX_SMOKE_PARTICLES96,3667
+	singleSmoke_t				smokes[idSmokeParticles::smokes97,3716
+	idList<activeSmokeStage_t>	activeStages;idSmokeParticles::activeStages99,3764
+	singleSmoke_t *				freeSmokes;idSmokeParticles::freeSmokes100,3806
+	int							numActiveSmokes;idSmokeParticles::numActiveSmokes101,3838
+	int							currentParticleTime;idSmokeParticles::currentParticleTime102,3866
+
+neo/game/Sound.h,445
+#define __GAME_SOUND_H__30,1516
+class idSound 42,1757
+	float			lastSoundVol;idSound::lastSoundVol62,2237
+	float			soundVol;idSound::soundVol63,2260
+	float			random;idSound::random64,2279
+	float			wait;idSound::wait65,2296
+	bool			timerOn;idSound::timerOn66,2311
+	idVec3			shakeTranslate;idSound::shakeTranslate67,2328
+	idAngles		shakeRotate;idSound::shakeRotate68,2354
+	int				playingUntilTime;idSound::playingUntilTime69,2378
+
+neo/game/Target.h,2297
+#define __GAME_TARGET_H__30,1517
+class idTarget 44,1780
+class idTarget_Remove 58,2043
+class idTarget_Show 75,2376
+class idTarget_Damage 92,2707
+class idTarget_SessionCommand 109,3050
+class idTarget_EndLevel 126,3403
+class idTarget_WaitForButton 144,3750
+class idTarget_SetGlobalShaderTime 162,4136
+class idTarget_SetShaderParm 179,4504
+class idTarget_SetShaderTime 196,4860
+class idTarget_FadeEntity 212,5212
+	idVec4				fadeFrom;idTarget_FadeEntity::fadeFrom224,5469
+	int					fadeStart;idTarget_FadeEntity::fadeStart225,5490
+	int					fadeEnd;idTarget_FadeEntity::fadeEnd226,5510
+class idTarget_LightFadeIn 239,5771
+class idTarget_LightFadeOut 255,6121
+class idTarget_Give 271,6465
+class idTarget_GiveEmail 290,6824
+class idTarget_SetModel 308,7191
+class idTarget_SetInfluence 327,7561
+	idList<int>			lightList;idTarget_SetInfluence::lightList346,8053
+	idList<int>			guiList;idTarget_SetInfluence::guiList347,8079
+	idList<int>			soundList;idTarget_SetInfluence::soundList348,8103
+	idList<int>			genericList;idTarget_SetInfluence::genericList349,8129
+	float				flashIn;idTarget_SetInfluence::flashIn350,8157
+	float				flashOut;idTarget_SetInfluence::flashOut351,8176
+	float				delay;idTarget_SetInfluence::delay352,8196
+	idStr				flashInSound;idTarget_SetInfluence::flashInSound353,8213
+	idStr				flashOutSound;idTarget_SetInfluence::flashOutSound354,8237
+	idEntity *			switchToCamera;idTarget_SetInfluence::switchToCamera355,8262
+	idInterpolate<float>fovSetting;idTarget_SetInfluence::fovSetting356,8292
+	bool				soundFaded;idTarget_SetInfluence::soundFaded357,8325
+	bool				restoreOnTrigger;idTarget_SetInfluence::restoreOnTrigger358,8346
+class idTarget_SetKeyVal 370,8566
+class idTarget_SetFov 387,8907
+	idInterpolate<int>	fovSetting;idTarget_SetFov::fovSetting397,9120
+class idTarget_SetPrimaryObjective 411,9404
+class idTarget_LockDoor:idTarget_LockDoor427,9766
+class idTarget_CallObjectFunction 443,10115
+class idTarget_EnableLevelWeapons 460,10476
+class idTarget_Tip 477,10832
+	idVec3				playerPos;idTarget_Tip::playerPos489,11068
+class idTarget_GiveSecurity 503,11401
+class idTarget_RemoveWeapons 518,11753
+class idTarget_LevelTrigger 533,12106
+class idTarget_EnableStamina 547,12457
+class idTarget_FadeSoundClass 561,12811
+
+neo/game/Trigger.h,2063
+#define __GAME_TRIGGER_H__30,1518
+class idTrigger 46,1851
+	const function_t *	scriptFunction;idTrigger::scriptFunction69,2330
+class idTrigger_Multi 81,2589
+	float				wait;idTrigger_Multi::wait93,2835
+	float				random;idTrigger_Multi::random94,2851
+	float				delay;idTrigger_Multi::delay95,2869
+	float				random_delay;idTrigger_Multi::random_delay96,2886
+	int					nextTriggerTime;idTrigger_Multi::nextTriggerTime97,2910
+	idStr				requires;idTrigger_Multi::requires98,2936
+	int					removeItem;idTrigger_Multi::removeItem99,2956
+	bool				touchClient;idTrigger_Multi::touchClient100,2977
+	bool				touchOther;idTrigger_Multi::touchOther101,2999
+	bool				triggerFirst;idTrigger_Multi::triggerFirst102,3020
+	bool				triggerWithSelf;idTrigger_Multi::triggerWithSelf103,3043
+class idTrigger_EntityName 121,3566
+	float				wait;idTrigger_EntityName::wait133,3827
+	float				random;idTrigger_EntityName::random134,3843
+	float				delay;idTrigger_EntityName::delay135,3861
+	float				random_delay;idTrigger_EntityName::random_delay136,3878
+	int					nextTriggerTime;idTrigger_EntityName::nextTriggerTime137,3902
+	bool				triggerFirst;idTrigger_EntityName::triggerFirst138,3928
+	idStr				entityName;idTrigger_EntityName::entityName139,3951
+class idTrigger_Timer 155,4393
+	float				random;idTrigger_Timer::random170,4703
+	float				wait;idTrigger_Timer::wait171,4721
+	bool				on;idTrigger_Timer::on172,4737
+	float				delay;idTrigger_Timer::delay173,4750
+	idStr				onName;idTrigger_Timer::onName174,4767
+	idStr				offName;idTrigger_Timer::offName175,4785
+class idTrigger_Count 190,5132
+	int					goal;idTrigger_Count::goal202,5378
+	int					count;idTrigger_Count::count203,5393
+	float				delay;idTrigger_Count::delay204,5409
+class idTrigger_Hurt 219,5742
+	bool				on;idTrigger_Hurt::on231,5985
+	float				delay;idTrigger_Hurt::delay232,5998
+	int					nextTime;idTrigger_Hurt::nextTime233,6015
+class idTrigger_Fade 248,6351
+class idTrigger_Touch 266,6744
+	idClipModel *		clipModel;idTrigger_Touch::clipModel285,7112
+
+neo/game/Weapon.h,6647
+#define __GAME_WEAPON_H__30,1517
+	WP_READY,46,1836
+	WP_OUTOFAMMO,47,1847
+	WP_RELOAD,48,1862
+	WP_HOLSTERED,49,1874
+	WP_RISING,50,1889
+	WP_LOWERING51,1901
+} weaponStatus_t;52,1914
+typedef int ammo_t;54,1933
+static const int AMMO_NUMTYPES 55,1953
+static const int LIGHTID_WORLD_MUZZLE_FLASH 59,2008
+static const int LIGHTID_VIEW_MUZZLE_FLASH 60,2057
+class idWeapon 64,2131
+		EVENT_RELOAD idWeapon::EVENT_RELOAD152,5100
+		EVENT_RELOAD = idEntity::EVENT_MAXEVENTS,idWeapon::idEntity::EVENT_MAXEVENTS152,5100
+		EVENT_ENDRELOAD,idWeapon::EVENT_ENDRELOAD153,5144
+		EVENT_CHANGESKIN,idWeapon::EVENT_CHANGESKIN154,5163
+		EVENT_MAXEVENTSidWeapon::EVENT_MAXEVENTS155,5183
+	idScriptBool			WEAPON_ATTACK;idWeapon::WEAPON_ATTACK163,5362
+	idScriptBool			WEAPON_RELOAD;idWeapon::WEAPON_RELOAD164,5393
+	idScriptBool			WEAPON_NETRELOAD;idWeapon::WEAPON_NETRELOAD165,5424
+	idScriptBool			WEAPON_NETENDRELOAD;idWeapon::WEAPON_NETENDRELOAD166,5458
+	idScriptBool			WEAPON_NETFIRING;idWeapon::WEAPON_NETFIRING167,5495
+	idScriptBool			WEAPON_RAISEWEAPON;idWeapon::WEAPON_RAISEWEAPON168,5529
+	idScriptBool			WEAPON_LOWERWEAPON;idWeapon::WEAPON_LOWERWEAPON169,5565
+	weaponStatus_t			status;idWeapon::status170,5601
+	idThread *				thread;idWeapon::thread171,5627
+	idStr					state;idWeapon::state172,5650
+	idStr					idealState;idWeapon::idealState173,5668
+	int						animBlendFrames;idWeapon::animBlendFrames174,5691
+	int						animDoneTime;idWeapon::animDoneTime175,5718
+	bool					isLinked;idWeapon::isLinked176,5742
+	idEntity				*projectileEnt;idWeapon::projectileEnt179,5789
+	idPlayer *				owner;idWeapon::owner181,5819
+	idEntityPtr<idAnimatedEntity>	worldModel;idWeapon::worldModel182,5841
+	int						hideTime;idWeapon::hideTime185,5916
+	float					hideDistance;idWeapon::hideDistance186,5936
+	int						hideStartTime;idWeapon::hideStartTime187,5961
+	float					hideStart;idWeapon::hideStart188,5986
+	float					hideEnd;idWeapon::hideEnd189,6008
+	float					hideOffset;idWeapon::hideOffset190,6028
+	bool					hide;idWeapon::hide191,6051
+	bool					disabled;idWeapon::disabled192,6067
+	int						berserk;idWeapon::berserk195,6100
+	idVec3					playerViewOrigin;idWeapon::playerViewOrigin198,6186
+	idMat3					playerViewAxis;idWeapon::playerViewAxis199,6216
+	idVec3					viewWeaponOrigin;idWeapon::viewWeaponOrigin202,6285
+	idMat3					viewWeaponAxis;idWeapon::viewWeaponAxis203,6315
+	idVec3					muzzleOrigin;idWeapon::muzzleOrigin206,6426
+	idMat3					muzzleAxis;idWeapon::muzzleAxis207,6452
+	idVec3					pushVelocity;idWeapon::pushVelocity209,6477
+	const idDeclEntityDef *	weaponDef;idWeapon::weaponDef214,6683
+	const idDeclEntityDef *	meleeDef;idWeapon::meleeDef215,6719
+	idDict					projectileDict;idWeapon::projectileDict216,6754
+	float					meleeDistance;idWeapon::meleeDistance217,6782
+	idStr					meleeDefName;idWeapon::meleeDefName218,6808
+	idDict					brassDict;idWeapon::brassDict219,6833
+	int						brassDelay;idWeapon::brassDelay220,6856
+	idStr					icon;idWeapon::icon221,6878
+	renderLight_t			guiLight;idWeapon::guiLight224,6922
+	int						guiLightHandle;idWeapon::guiLightHandle225,6949
+	renderLight_t			muzzleFlash;idWeapon::muzzleFlash228,6993
+	int						muzzleFlashHandle;idWeapon::muzzleFlashHandle229,7058
+	renderLight_t			worldMuzzleFlash;idWeapon::worldMuzzleFlash231,7088
+	int						worldMuzzleFlashHandle;idWeapon::worldMuzzleFlashHandle232,7158
+	idVec3					flashColor;idWeapon::flashColor234,7193
+	int						muzzleFlashEnd;idWeapon::muzzleFlashEnd235,7217
+	int						flashTime;idWeapon::flashTime236,7243
+	bool					lightOn;idWeapon::lightOn237,7264
+	bool					silent_fire;idWeapon::silent_fire238,7283
+	bool					allowDrop;idWeapon::allowDrop239,7306
+	bool					hasBloodSplat;idWeapon::hasBloodSplat242,7340
+	int						kick_endtime;idWeapon::kick_endtime245,7382
+	int						muzzle_kick_time;idWeapon::muzzle_kick_time246,7406
+	int						muzzle_kick_maxtime;idWeapon::muzzle_kick_maxtime247,7434
+	idAngles				muzzle_kick_angles;idWeapon::muzzle_kick_angles248,7465
+	idVec3					muzzle_kick_offset;idWeapon::muzzle_kick_offset249,7498
+	ammo_t					ammoType;idWeapon::ammoType252,7551
+	int						ammoRequired;idWeapon::ammoRequired253,7573
+	int						clipSize;idWeapon::clipSize254,7669
+	int						ammoClip;idWeapon::ammoClip255,7712
+	int						lowAmmo;idWeapon::lowAmmo256,7732
+	bool					powerAmmo;idWeapon::powerAmmo257,7798
+	bool					isFiring;idWeapon::isFiring260,7943
+	int						zoomFov;idWeapon::zoomFov263,7973
+	jointHandle_t			barrelJointView;idWeapon::barrelJointView266,8050
+	jointHandle_t			flashJointView;idWeapon::flashJointView267,8084
+	jointHandle_t			ejectJointView;idWeapon::ejectJointView268,8117
+	jointHandle_t			guiLightJointView;idWeapon::guiLightJointView269,8150
+	jointHandle_t			ventLightJointView;idWeapon::ventLightJointView270,8186
+	jointHandle_t			flashJointWorld;idWeapon::flashJointWorld272,8224
+	jointHandle_t			barrelJointWorld;idWeapon::barrelJointWorld273,8258
+	jointHandle_t			ejectJointWorld;idWeapon::ejectJointWorld274,8293
+	const idSoundShader *	sndHum;idWeapon::sndHum277,8338
+	const idDeclParticle *	weaponSmoke;idWeapon::weaponSmoke280,8398
+	int						weaponSmokeStartTime;idWeapon::weaponSmokeStartTime281,8465
+	bool					continuousSmoke;idWeapon::continuousSmoke282,8540
+	const idDeclParticle *  strikeSmoke;idWeapon::strikeSmoke283,8607
+	int						strikeSmokeStartTime;idWeapon::strikeSmokeStartTime284,8678
+	idVec3					strikePos;idWeapon::strikePos285,8720
+	idMat3					strikeAxis;idWeapon::strikeAxis286,8779
+	int						nextStrikeFx;idWeapon::nextStrikeFx287,8835
+	bool					nozzleFx;idWeapon::nozzleFx290,8942
+	int						nozzleFxFade;idWeapon::nozzleFxFade292,9078
+	int						lastAttack;idWeapon::lastAttack293,9148
+	renderLight_t			nozzleGlow;idWeapon::nozzleGlow294,9203
+	int						nozzleGlowHandle;idWeapon::nozzleGlowHandle295,9250
+	idVec3					nozzleGlowColor;idWeapon::nozzleGlowColor297,9306
+	const idMaterial *		nozzleGlowShader;idWeapon::nozzleGlowShader298,9363
+	float					nozzleGlowRadius;idWeapon::nozzleGlowRadius299,9427
+	int						weaponAngleOffsetAverages;idWeapon::weaponAngleOffsetAverages302,9516
+	float					weaponAngleOffsetScale;idWeapon::weaponAngleOffsetScale303,9553
+	float					weaponAngleOffsetMax;idWeapon::weaponAngleOffsetMax304,9588
+	float					weaponOffsetTime;idWeapon::weaponOffsetTime305,9621
+	float					weaponOffsetScale;idWeapon::weaponOffsetScale306,9650
+ID_INLINE bool idWeapon::IsLinked(358,11715
+ID_INLINE bool idWeapon::IsWorldModelReady(362,11780
+ID_INLINE idPlayer* idWeapon::GetOwner(366,11880
+
+neo/game/WorldSpawn.h,66
+#define __GAME_WORLDSPAWN_H__30,1521
+class idWorldspawn 42,1758
+
+neo/game/Actor.cpp,5438
+idAnimState::idAnimState(51,1924
+idAnimState::~idAnimState(67,2201
+void idAnimState::Save(76,2318
+void idAnimState::Restore(99,2826
+void idAnimState::Init(124,3447
+void idAnimState::Shutdown(144,3830
+void idAnimState::SetState(154,3974
+void idAnimState::StopAnim(184,4764
+void idAnimState::PlayAnim(194,4969
+void idAnimState::CycleAnim(206,5210
+void idAnimState::BecomeIdle(218,5454
+bool idAnimState::Disabled(227,5586
+bool idAnimState::AnimDone(236,5722
+bool idAnimState::IsIdle(255,6115
+animFlags_t idAnimState::GetAnimFlags(264,6265
+void idAnimState::Enable(280,6590
+void idAnimState::Disable(296,6895
+bool idAnimState::UpdateState(306,7046
+CLASS_DECLARATION(369,9710
+idActor::~idActor(468,12982
+void idActor::Spawn(501,13550
+void idActor::FinishSetup(638,17539
+void idActor::SetupHead(658,17971
+void idActor::CopyJointsFromBodyToHead(719,19763
+void idActor::Restart(754,20828
+void idActor::Save(767,21011
+void idActor::Restore(881,23733
+void idActor::Hide(987,26201
+void idActor::Show(1013,26670
+int	idActor::GetDefaultSurfaceType(1038,27148
+void idActor::ProjectOverlay(1047,27290
+bool idActor::LoadAF(1068,27822
+void idActor::SetupBody(1083,28120
+void idActor::CheckBlink(1154,30672
+bool idActor::GetPhysicsToVisualTransform(1176,31294
+bool idActor::GetPhysicsToSoundTransform(1191,31596
+void idActor::ShutdownThreads(1214,32175
+bool idActor::ShouldConstructScriptObjectAtSpawn(1235,32678
+idThread *idActor::ConstructScriptObject(idActor::ConstructScriptObject1247,32985
+const function_t *idActor::GetScriptFunction(idActor::GetScriptFunction1285,34024
+void idActor::SetState(1301,34368
+void idActor::SetState(1320,34813
+void idActor::UpdateScript(1332,35035
+void idActor::SetFOV(1375,35943
+void idActor::SetEyeHeight(1384,36101
+float idActor::EyeHeight(1393,36241
+idVec3 idActor::EyeOffset(1402,36375
+idVec3 idActor::GetEyePosition(1411,36551
+void idActor::GetViewPos(1420,36760
+bool idActor::CheckFOV(1430,36942
+bool idActor::CanSee(1457,37456
+bool idActor::PointVisible(1491,38085
+void idActor::GetAIAimTargets(1510,38468
+renderView_t *idActor::GetRenderView(idActor::GetRenderView1520,38767
+void idActor::SetCombatModel(1538,39157
+idClipModel *idActor::GetCombatModel(idActor::GetCombatModel1561,39565
+void idActor::LinkCombat(1570,39702
+void idActor::UnlinkCombat(1591,40086
+bool idActor::StartRagdoll(1608,40342
+void idActor::StopRagdoll(1665,42345
+bool idActor::UpdateAnimationControllers(1676,42500
+void idActor::RemoveAttachments(1697,42830
+void idActor::Attach(1715,43173
+void idActor::Teleport(1750,44181
+const idAngles &idActor::GetDeltaViewAngles(idActor::GetDeltaViewAngles1769,44610
+void idActor::SetDeltaViewAngles(1778,44766
+bool idActor::HasEnemies(1787,44915
+idActor *idActor::ClosestEnemyToPoint(idActor::ClosestEnemyToPoint1804,45185
+idActor *idActor::EnemyWithMostHealth(idActor::EnemyWithMostHealth1833,45790
+bool idActor::OnLadder(1853,46159
+void idActor::GetAASLocation(1862,46276
+void idActor::SetAnimState(1894,46948
+const char *idActor::GetAnimState(idActor::GetAnimState1934,47856
+bool idActor::InAnimState(1960,48293
+const char *idActor::WaitState(idActor::WaitState1993,48845
+void idActor::SetWaitState(2006,49044
+void idActor::UpdateAnimState(2015,49202
+int idActor::GetAnim(2026,49388
+void idActor::SyncAnimChannels(2058,49968
+void idActor::Gib(2124,52090
+void idActor::Damage(2160,53056
+void idActor::ClearPain(2217,54451
+bool idActor::Pain(2226,54577
+void idActor::SpawnGibs(2309,56764
+void idActor::SetupDamageGroups(2321,57065
+int idActor::GetDamageForLocation(2370,58348
+const char *idActor::GetDamageGroup(idActor::GetDamageGroup2383,58629
+void idActor::PlayFootStepSound(2403,59040
+void idActor::Event_EnableEyeFocus(2429,59720
+void idActor::Event_DisableEyeFocus(2439,59975
+void idActor::Event_Footstep(2455,60340
+void idActor::Event_EnableWalkIK(2464,60482
+void idActor::Event_DisableWalkIK(2473,60628
+void idActor::Event_EnableLegIK(2482,60774
+void idActor::Event_DisableLegIK(2491,60926
+void idActor::Event_PreventPain(2500,61079
+void idActor::Event_DisablePain(2509,61248
+void idActor::Event_EnablePain(2518,61377
+void idActor::Event_GetPainAnim(2527,61517
+void idActor::Event_SetAnimPrefix(2540,61757
+void idActor::Event_StopAnim(2549,61902
+void idActor::Event_PlayAnim(2574,62311
+void idActor::Event_PlayCycle(2654,64744
+void idActor::Event_IdleAnim(2728,67076
+void idActor::Event_SetSyncedAnimWeight(2835,70646
+void idActor::Event_OverrideAnim(2884,72109
+void idActor::Event_EnableAnim(2919,73014
+void idActor::Event_SetBlendFrames(2944,73445
+void idActor::Event_GetBlendFrames(2972,74043
+void idActor::Event_AnimState(2997,74507
+void idActor::Event_GetAnimState(3006,74713
+void idActor::Event_InAnimState(3018,74920
+void idActor::Event_FinishAction(3030,75156
+void idActor::Event_AnimDone(3041,75341
+void idActor::Event_HasAnim(3070,75903
+void idActor::Event_CheckAnim(3083,76161
+void idActor::Event_ChooseAnim(3098,76569
+void idActor::Event_AnimLength(3122,77064
+void idActor::Event_AnimDistance(3146,77576
+void idActor::Event_HasEnemies(3170,78102
+void idActor::Event_NextEnemy(3182,78288
+void idActor::Event_ClosestEnemyToPoint(3213,78988
+void idActor::Event_StopSound(3223,79203
+void idActor::Event_SetNextState(3238,79542
+void idActor::Event_SetState(3250,79764
+void idActor::Event_GetState(3263,80015
+void idActor::Event_GetHead(3276,80234
+
+neo/game/AF.cpp,1093
+#define ARTICULATED_FIGURE_ANIM	43,1809
+#define POSE_BOUNDS_EXPANSION	44,1852
+idAF::idAF(51,1940
+idAF::~idAF(69,2213
+void idAF::Save(77,2289
+void idAF::Restore(95,2760
+bool idAF::UpdateAnimation(138,3716
+idBounds idAF::GetBounds(196,5307
+void idAF::SetupPose(232,6192
+void idAF::ChangePose(285,7400
+int idAF::EntitiesTouchingAF(337,8644
+int idAF::BodyForClipModelId(387,9876
+void idAF::GetPhysicsToVisualTransform(405,10172
+void idAF::GetImpactInfo(415,10368
+void idAF::ApplyImpulse(425,10627
+void idAF::AddForce(435,10886
+void idAF::AddBody(447,11148
+void idAF::SetBase(478,12133
+bool idAF::LoadBody(490,12471
+bool idAF::LoadConstraint(622,16127
+static bool GetJointTransform(778,20577
+bool idAF::Load(796,21061
+void idAF::Start(942,26283
+bool idAF::TestSolid(962,26700
+void idAF::StartFromCurrentPose(1000,27673
+void idAF::Stop(1043,28537
+void idAF::Rest(1054,28721
+void idAF::SetConstraintPosition(1065,28909
+void idAF::SaveState(1108,30076
+void idAF::LoadState(1129,30507
+void idAF::AddBindConstraints(1161,31266
+void idAF::RemoveBindConstraints(1249,33889
+
+neo/game/AFEntity.cpp,5882
+CLASS_DECLARATION(48,1901
+idMultiModelAF::~idMultiModelAF(65,2161
+void idMultiModelAF::SetModelForId(81,2462
+void idMultiModelAF::Present(92,2745
+void idMultiModelAF::Think(126,3502
+CLASS_DECLARATION(140,3749
+void idChain::Spawn(218,6051
+CLASS_DECLARATION(249,6950
+idAFAttachment::~idAFAttachment(269,7307
+void idAFAttachment::Spawn(282,7506
+void idAFAttachment::SetBody(291,7660
+void idAFAttachment::ClearBody(308,8029
+idEntity *idAFAttachment::GetBody(idAFAttachment::GetBody319,8200
+void idAFAttachment::Save(330,8362
+void idAFAttachment::Restore(343,8629
+void idAFAttachment::Hide(357,8918
+void idAFAttachment::Show(367,9054
+void idAFAttachment::Damage(379,9220
+void idAFAttachment::AddDamageEffect(392,9564
+void idAFAttachment::GetImpactInfo(405,9909
+void idAFAttachment::ApplyImpulse(418,10251
+void idAFAttachment::AddForce(431,10595
+void idAFAttachment::PlayIdleAnim(444,10925
+void idAFAttachment::Think(455,11213
+void idAFAttachment::SetCombatModel(467,11422
+idClipModel *idAFAttachment::GetCombatModel(idAFAttachment::GetCombatModel482,11729
+void idAFAttachment::LinkCombat(491,11880
+void idAFAttachment::UnlinkCombat(506,12157
+static const float BOUNCE_SOUND_MAX_VELOCITY	528,12720
+idAFEntity_Base::idAFEntity_Base(535,12849
+idAFEntity_Base::~idAFEntity_Base(548,13080
+void idAFEntity_Base::Save(558,13231
+void idAFEntity_Base::Restore(572,13576
+void idAFEntity_Base::Spawn(588,13933
+bool idAFEntity_Base::LoadAF(599,14138
+void idAFEntity_Base::Think(630,14796
+int idAFEntity_Base::BodyForClipModelId(644,15020
+void idAFEntity_Base::SaveState(653,15185
+void idAFEntity_Base::LoadState(686,15923
+void idAFEntity_Base::AddBindConstraints(695,16081
+void idAFEntity_Base::RemoveBindConstraints(704,16240
+void idAFEntity_Base::GetImpactInfo(713,16397
+void idAFEntity_Base::ApplyImpulse(726,16706
+void idAFEntity_Base::AddForce(740,17035
+bool idAFEntity_Base::Collide(754,17345
+bool idAFEntity_Base::GetPhysicsToVisualTransform(778,18178
+bool idAFEntity_Base::UpdateAnimationControllers(791,18504
+void idAFEntity_Base::SetCombatModel(805,18732
+idClipModel *idAFEntity_Base::GetCombatModel(idAFEntity_Base::GetCombatModel819,19009
+void idAFEntity_Base::SetCombatContents(828,19169
+void idAFEntity_Base::LinkCombat(846,19657
+void idAFEntity_Base::UnlinkCombat(860,19935
+void idAFEntity_Base::FreeModelDef(871,20103
+void idAFEntity_Base::ShowEditingDialog(881,20268
+void idAFEntity_Base::DropAFs(897,20699
+void idAFEntity_Base::Event_SetConstraintPosition(938,21845
+CLASS_DECLARATION(953,22250
+idAFEntity_Gibbable::~idAFEntity_Gibbable(975,22708
+void idAFEntity_Gibbable::Save(987,22956
+void idAFEntity_Gibbable::Restore(997,23168
+void idAFEntity_Gibbable::Spawn(1016,23482
+void idAFEntity_Gibbable::InitSkeletonModel(1027,23646
+void idAFEntity_Gibbable::Present(1058,24535
+void idAFEntity_Gibbable::Damage(1090,25242
+void idAFEntity_Gibbable::SpawnGibs(1105,25710
+void idAFEntity_Gibbable::Gib(1155,27325
+void idAFEntity_Gibbable::Event_Gib(1212,28665
+CLASS_DECLARATION(1224,28967
+idAFEntity_Generic::~idAFEntity_Generic(1242,29339
+void idAFEntity_Generic::Save(1250,29457
+void idAFEntity_Generic::Restore(1259,29634
+void idAFEntity_Generic::Think(1268,29808
+void idAFEntity_Generic::Spawn(1281,30008
+void idAFEntity_Generic::Event_Activate(1303,30414
+CLASS_DECLARATION(1339,31376
+idAFEntity_WithAttachedHead::~idAFEntity_WithAttachedHead(1358,31859
+void idAFEntity_WithAttachedHead::Spawn(1370,32112
+void idAFEntity_WithAttachedHead::Save(1400,32664
+void idAFEntity_WithAttachedHead::Restore(1409,32839
+void idAFEntity_WithAttachedHead::SetupHead(1418,33019
+void idAFEntity_WithAttachedHead::Think(1453,34104
+void idAFEntity_WithAttachedHead::LinkCombat(1462,34264
+void idAFEntity_WithAttachedHead::UnlinkCombat(1483,34669
+void idAFEntity_WithAttachedHead::Hide(1500,34957
+void idAFEntity_WithAttachedHead::Show(1513,35184
+void idAFEntity_WithAttachedHead::ProjectOverlay(1526,35419
+void idAFEntity_WithAttachedHead::Gib(1540,35772
+void idAFEntity_WithAttachedHead::Event_Gib(1556,36089
+void idAFEntity_WithAttachedHead::Event_Activate(1565,36293
+CLASS_DECLARATION(1601,37255
+void idAFEntity_Vehicle::Spawn(1624,37694
+void idAFEntity_Vehicle::Use(1662,38817
+float idAFEntity_Vehicle::GetSteerAngle(1691,39430
+CLASS_DECLARATION(1717,40027
+idAFEntity_VehicleSimple::~idAFEntity_VehicleSimple(1737,40415
+void idAFEntity_VehicleSimple::Spawn(1747,40592
+void idAFEntity_VehicleSimple::Think(1798,42330
+CLASS_DECLARATION(1910,45831
+void idAFEntity_VehicleFourWheels::Spawn(1936,46327
+void idAFEntity_VehicleFourWheels::Think(1996,48380
+CLASS_DECLARATION(2087,51243
+void idAFEntity_VehicleSixWheels::Spawn(2114,51779
+void idAFEntity_VehicleSixWheels::Think(2180,53982
+CLASS_DECLARATION(2277,57009
+idAFEntity_SteamPipe::~idAFEntity_SteamPipe(2299,57456
+void idAFEntity_SteamPipe::Save(2310,57674
+void idAFEntity_SteamPipe::Restore(2318,57811
+void idAFEntity_SteamPipe::Spawn(2327,57956
+void idAFEntity_SteamPipe::InitSteamRenderEntity(2357,58698
+void idAFEntity_SteamPipe::Think(2395,59933
+idAFEntity_ClawFourFingers::idAFEntity_ClawFourFingers(2442,61402
+void idAFEntity_ClawFourFingers::Save(2454,61623
+void idAFEntity_ClawFourFingers::Restore(2467,61845
+void idAFEntity_ClawFourFingers::Spawn(2484,62213
+void idAFEntity_ClawFourFingers::Event_SetFingerAngle(2510,62833
+void idAFEntity_ClawFourFingers::Event_StopFingers(2525,63139
+bool idGameEdit::AF_SpawnEntity(2548,63563
+void idGameEdit::AF_UpdateEntities(2598,64826
+void idGameEdit::AF_UndoChanges(2623,65432
+	renderEntity_t *ent;::ent2657,66251
+	const idMD5Joint *joints;::joints2658,66273
+} jointTransformData_t;2659,66300
+static bool GetJointTransform(2661,66325
+static const char *GetArgString(GetArgString2683,66839
+idRenderModel *idGameEdit::AF_CreateMesh(idGameEdit::AF_CreateMesh2698,67123
+
+neo/game/BrittleFracture.cpp,1434
+const int SHARD_FADE_START	43,1840
+static const char *brittleFracture_SnapshotName brittleFracture_SnapshotName45,1876
+idBrittleFracture::idBrittleFracture(52,2034
+idBrittleFracture::~idBrittleFracture(81,2568
+void idBrittleFracture::Save(99,2939
+void idBrittleFracture::Restore(164,4866
+void idBrittleFracture::Spawn(251,7368
+void idBrittleFracture::AddShard(298,9163
+void idBrittleFracture::RemoveShard(315,9591
+bool idBrittleFracture::UpdateRenderEntity(332,9903
+bool idBrittleFracture::ModelCallback(518,15749
+void idBrittleFracture::Present(534,16212
+void idBrittleFracture::Think(564,16918
+void idBrittleFracture::ApplyImpulse(636,18292
+void idBrittleFracture::AddForce(654,18722
+void idBrittleFracture::ProjectDecal(672,19142
+void idBrittleFracture::DropShard(775,21919
+void idBrittleFracture::Shatter(837,23953
+void idBrittleFracture::DropFloatingIslands(895,25205
+void idBrittleFracture::Break(969,26694
+bool idBrittleFracture::IsBroken(979,26897
+void idBrittleFracture::Killed(988,27051
+void idBrittleFracture::AddDamageEffect(1000,27318
+void idBrittleFracture::Fracture_r(1011,27630
+void idBrittleFracture::CreateFractures(1085,29424
+void idBrittleFracture::FindNeighbours(1124,30325
+void idBrittleFracture::Event_Activate(1211,32650
+void idBrittleFracture::Event_Touch(1223,32850
+void idBrittleFracture::ClientPredictionThink(1245,33324
+bool idBrittleFracture::ClientReceiveEvent(1259,33590
+
+neo/game/Camera.cpp,982
+ABSTRACT_DECLARATION(46,1828
+renderView_t *idCamera::GetRenderView(idCamera::GetRenderView62,2056
+CLASS_DECLARATION(75,2416
+void idCameraView::Save(97,2812
+void idCameraView::Restore(108,3040
+void idCameraView::Event_SetAttachments(119,3342
+void idCameraView::Event_Activate(129,3553
+void idCameraView::Stop(151,4076
+void idCameraView::SetAttachment(165,4372
+void idCameraView::Spawn(178,4622
+void idCameraView::GetViewParms(196,5048
+CLASS_DECLARATION(235,5849
+idCameraAnim::~idCameraAnim(263,6418
+void idCameraAnim::Save(274,6585
+void idCameraAnim::Restore(288,6898
+void idCameraAnim::Spawn(304,7232
+void idCameraAnim::LoadAnim(322,7538
+void idCameraAnim::Start(456,11154
+void idCameraAnim::Stop(481,11799
+void idCameraAnim::Think(502,12261
+void idCameraAnim::GetViewParms(545,13211
+void idCameraAnim::Event_Activate(682,17297
+void idCameraAnim::Event_Start(696,17516
+void idCameraAnim::Event_Stop(705,17634
+void idCameraAnim::Event_SetCallback(714,17758
+
+neo/game/EndLevel.cpp,292
+CLASS_DECLARATION(43,1682
+idTarget_EndLevel::~idTarget_EndLevel(76,2304
+void idTarget_EndLevel::Event_Trigger(86,2508
+void idTarget_EndLevel::Draw(114,3174
+void idTarget_EndLevel::PlayerCommand(152,3940
+const char *idTarget_EndLevel::ExitCommand(idTarget_EndLevel::ExitCommand170,4260
+
+neo/game/Entity.cpp,10636
+ABSTRACT_DECLARATION(124,5856
+void AddRenderGui(213,9894
+void idGameEdit::ParseSpawnArgsToRenderEntity(228,10341
+void idGameEdit::ParseSpawnArgsToRefSound(323,13556
+void idEntity::UpdateChangeableSpawnArgs(376,15429
+idEntity::idEntity(400,15910
+void idEntity::FixupLocalizedStrings(445,16764
+static void mystop 454,17091
+void idEntity::Spawn(462,17178
+idEntity::~idEntity(583,20855
+void idEntity::Save(635,22018
+void idEntity::Restore(705,23771
+const char * idEntity::GetEntityDefName(791,26056
+void idEntity::SetName(805,26455
+const char * idEntity::GetName(826,27004
+void idEntity::Think(842,27292
+bool idEntity::DoDormantTests(855,27531
+bool idEntity::CheckDormant(896,28521
+void idEntity::DormantBegin(918,28885
+void idEntity::DormantEnd(928,29032
+bool idEntity::IsActive(936,29130
+void idEntity::BecomeActive(945,29265
+void idEntity::BecomeInactive(975,30104
+void idEntity::SetShaderParm(1017,31174
+void idEntity::SetColor(1032,31512
+void idEntity::SetColor(1044,31817
+void idEntity::GetColor(1054,31995
+void idEntity::SetColor(1065,32275
+void idEntity::GetColor(1078,32643
+bool idEntity::UpdateAnimationControllers(1090,32999
+void idEntity::SetModel(1100,33196
+void idEntity::SetSkin(1128,33734
+const idDeclSkin *idEntity::GetSkin(idEntity::GetSkin1138,33897
+void idEntity::FreeModelDef(1147,34048
+void idEntity::FreeLightDef(1159,34261
+bool idEntity::IsHidden(1167,34361
+void idEntity::Hide(1176,34478
+void idEntity::Show(1189,34648
+void idEntity::UpdateModelTransform(1201,34816
+void idEntity::UpdateModel(1219,35257
+void idEntity::UpdateVisuals(1241,35795
+void idEntity::UpdatePVSAreas(1251,35934
+void idEntity::UpdatePVSAreas(1279,37032
+int idEntity::GetNumPVSAreas(1294,37323
+const int *idEntity::GetPVSAreas(idEntity::GetPVSAreas1306,37497
+void idEntity::ClearPVSAreas(1318,37674
+bool idEntity::PhysicsTeamInPVS(1329,37887
+void idEntity::ProjectOverlay(1349,38343
+void idEntity::Present(1402,39856
+renderEntity_t *idEntity::GetRenderEntity(idEntity::GetRenderEntity1437,40624
+int idEntity::GetModelDefHandle(1446,40770
+bool idEntity::UpdateRenderEntity(1455,40908
+bool idEntity::ModelCallback(1475,41338
+idAnimator *idEntity::GetAnimator(idEntity::GetAnimator1493,41786
+renderView_t *idEntity::GetRenderView(idEntity::GetRenderView1504,41965
+bool idEntity::CanPlayChatterSounds(1540,42823
+bool idEntity::StartSound(1549,42953
+bool idEntity::StartSoundShader(1583,43787
+void idEntity::StopSound(1640,45129
+void idEntity::SetSoundVolume(1667,45702
+void idEntity::UpdateSound(1676,45848
+int idEntity::GetListenerId(1696,46303
+idSoundEmitter *idEntity::GetSoundEmitter(idEntity::GetSoundEmitter1705,46445
+void idEntity::FreeSoundEmitter(1714,46606
+void idEntity::PreBind(1732,47002
+void idEntity::PostBind(1740,47097
+void idEntity::PreUnbind(1748,47194
+void idEntity::PostUnbind(1756,47293
+bool idEntity::InitBind(1764,47391
+void idEntity::FinishBind(1797,48073
+void idEntity::Bind(1823,48825
+void idEntity::BindToJoint(1848,49201
+void idEntity::BindToJoint(1886,50062
+void idEntity::BindToBody(1911,50470
+void idEntity::Unbind(1938,50900
+void idEntity::RemoveBinds(2028,53088
+bool idEntity::IsBound(2047,53415
+bool idEntity::IsBoundTo(2059,53571
+idEntity *idEntity::GetBindMaster(idEntity::GetBindMaster2080,53878
+jointHandle_t idEntity::GetBindJoint(2089,54014
+int idEntity::GetBindBody(2098,54151
+idEntity *idEntity::GetTeamMaster(idEntity::GetTeamMaster2107,54278
+idEntity *idEntity::GetNextTeamEntity(idEntity::GetNextTeamEntity2116,54419
+void idEntity::ConvertLocalToWorldTransform(2125,54584
+idVec3 idEntity::GetLocalVector(2143,55018
+idVec3 idEntity::GetLocalCoordinates(2167,55449
+idVec3 idEntity::GetWorldVector(2194,55984
+idVec3 idEntity::GetWorldCoordinates(2218,56417
+bool idEntity::GetMasterPosition(2240,56776
+void idEntity::GetWorldVelocities(2278,57933
+void idEntity::JoinTeam(2304,58722
+void idEntity::QuitTeam(2374,60400
+void idEntity::InitDefaultPhysics(2428,61565
+void idEntity::SetPhysics(2501,63818
+void idEntity::RestorePhysics(2523,64349
+idPhysics *idEntity::GetPhysics(idEntity::GetPhysics2534,64534
+bool idEntity::RunPhysics(2543,64663
+void idEntity::UpdateFromPhysics(2685,68434
+void idEntity::SetOrigin(2710,69013
+void idEntity::SetAxis(2722,69175
+void idEntity::SetAngles(2738,69456
+bool idEntity::GetFloorPos(2747,69597
+bool idEntity::GetPhysicsToVisualTransform(2770,70126
+bool idEntity::GetPhysicsToSoundTransform(2779,70298
+bool idEntity::Collide(2794,70672
+void idEntity::GetImpactInfo(2804,70883
+void idEntity::ApplyImpulse(2813,71095
+void idEntity::AddForce(2822,71307
+void idEntity::ActivatePhysics(2831,71514
+bool idEntity::IsAtRest(2840,71653
+int idEntity::GetRestStartTime(2849,71797
+void idEntity::AddContactEntity(2858,71956
+void idEntity::RemoveContactEntity(2867,72120
+bool idEntity::CanDamage(2887,72534
+void idEntity::DamageFeedback(2966,74775
+void idEntity::Damage(2987,75378
+void idEntity::AddDamageEffect(3030,76329
+bool idEntity::Pain(3073,77607
+void idEntity::Killed(3085,77915
+bool idEntity::ShouldConstructScriptObjectAtSpawn(3103,78445
+idThread *idEntity::ConstructScriptObject(idEntity::ConstructScriptObject3115,78753
+void idEntity::DeconstructScriptObject(3149,79636
+bool idEntity::HasSignal(3175,80263
+void idEntity::SetSignal(3188,80536
+void idEntity::ClearSignal(3225,81353
+void idEntity::ClearSignalThread(3243,81695
+void idEntity::Signal(3274,82276
+void idEntity::SignalEvent(3312,83203
+void idEntity::TriggerGuis(3336,83661
+bool idEntity::HandleGuiCommands(3350,83918
+bool idEntity::HandleSingleGuiCommand(3508,88223
+void idEntity::FindTargets(3527,88748
+void idEntity::RemoveNullTargets(3546,89236
+void idEntity::ActivateTargets(3563,89571
+void idEntity::Teleport(3595,90307
+bool idEntity::TouchTriggers(3609,90627
+idCurve_Spline<idVec3> *idEntity::GetSpline(idEntity::GetSpline3664,91878
+void idEntity::ShowEditingDialog(3709,93029
+void idEntity::Event_GetName(3723,93298
+void idEntity::Event_SetName(3732,93445
+void idEntity::Event_FindTargets(3741,93589
+void idEntity::Event_ActivateTargets(3753,93818
+void idEntity::Event_NumTargets(3762,93981
+void idEntity::Event_GetTarget(3771,94133
+void idEntity::Event_RandomTarget(3787,94424
+void idEntity::Event_BindToJoint(3828,95208
+void idEntity::Event_RemoveBinds(3837,95434
+void idEntity::Event_Bind(3846,95557
+void idEntity::Event_BindPosition(3855,95700
+void idEntity::Event_Unbind(3864,95846
+void idEntity::Event_SpawnBind(3873,95964
+void idEntity::Event_SetOwner(3944,98541
+void idEntity::Event_SetModel(3957,98786
+void idEntity::Event_SetSkin(3966,98934
+void idEntity::Event_GetShaderParm(3976,99142
+void idEntity::Event_SetShaderParm(3989,99471
+void idEntity::Event_SetShaderParms(3998,99644
+void idEntity::Event_SetColor(4012,100042
+void idEntity::Event_GetColor(4021,100211
+void idEntity::Event_IsHidden(4033,100383
+void idEntity::Event_Hide(4042,100522
+void idEntity::Event_Show(4051,100631
+void idEntity::Event_CacheSoundShader(4060,100752
+void idEntity::Event_StartSoundShader(4069,100931
+void idEntity::Event_StopSound(4081,101237
+void idEntity::Event_StartSound(4090,101409
+void idEntity::Event_FadeSound(4102,101697
+void idEntity::Event_GetWorldOrigin(4113,101937
+void idEntity::Event_SetWorldOrigin(4122,102111
+void idEntity::Event_SetOrigin(4132,102306
+void idEntity::Event_GetOrigin(4141,102448
+void idEntity::Event_SetAngles(4150,102635
+void idEntity::Event_GetAngles(4159,102779
+void idEntity::Event_SetLinearVelocity(4169,103010
+void idEntity::Event_GetLinearVelocity(4178,103200
+void idEntity::Event_SetAngularVelocity(4187,103389
+void idEntity::Event_GetAngularVelocity(4196,103582
+void idEntity::Event_SetSize(4205,103762
+void idEntity::Event_GetSize(4214,103961
+void idEntity::Event_GetMins(4226,104173
+void idEntity::Event_GetMaxs(4235,104336
+void idEntity::Event_Touches(4244,104499
+void idEntity::Event_SetGuiParm(4261,104865
+void idEntity::Event_SetGuiFloat(4278,105293
+void idEntity::Event_GetNextKey(4292,105640
+void idEntity::Event_SetKey(4315,106087
+void idEntity::Event_GetKey(4324,106251
+void idEntity::Event_GetIntKey(4336,106465
+void idEntity::Event_GetFloatKey(4350,106705
+void idEntity::Event_GetVectorKey(4362,106919
+void idEntity::Event_GetEntityKey(4374,107141
+void idEntity::Event_RestorePosition(4396,107620
+void idEntity::Event_UpdateCameraTarget(4434,108749
+void idEntity::Event_DistanceTo(4465,109540
+void idEntity::Event_DistanceToPoint(4480,109897
+void idEntity::Event_StartFx(4490,110124
+void idEntity::Event_WaitFrame(4499,110294
+void idEntity::Event_Wait(4513,110509
+void idEntity::Event_HasFunction(4528,110792
+void idEntity::Event_CallFunction(4544,111088
+void idEntity::Event_SetNeverDormant(4574,111967
+void idEntity::ClientPredictionThink(4590,112310
+void idEntity::WriteBindToSnapshot(4600,112457
+void idEntity::ReadBindFromSnapshot(4624,113097
+void idEntity::WriteColorToSnapshot(4661,113982
+void idEntity::ReadColorFromSnapshot(4676,114405
+void idEntity::WriteGUIToSnapshot(4691,114827
+void idEntity::ReadGUIFromSnapshot(4705,115166
+void idEntity::WriteToSnapshot(4722,115541
+void idEntity::ReadFromSnapshot(4730,115672
+void idEntity::ServerSendEvent(4741,115950
+void idEntity::ClientSendEvent(4783,117063
+bool idEntity::ServerReceiveEvent(4817,117936
+bool idEntity::ClientReceiveEvent(4832,118160
+CLASS_DECLARATION(4884,119881
+idAnimatedEntity::~idAnimatedEntity(4909,120647
+void idAnimatedEntity::Save(4925,120909
+void idAnimatedEntity::Restore(4939,121194
+void idAnimatedEntity::ClientPredictionThink(4959,121778
+void idAnimatedEntity::Think(4970,121947
+void idAnimatedEntity::UpdateAnimation(4982,122134
+idAnimator *idAnimatedEntity::GetAnimator(idAnimatedEntity::GetAnimator5023,123091
+void idAnimatedEntity::SetModel(5032,123232
+bool idAnimatedEntity::GetJointWorldTransform(5058,123885
+bool idAnimatedEntity::GetJointTransformForAnim(5072,124252
+void idAnimatedEntity::AddDamageEffect(5105,125184
+int	idAnimatedEntity::GetDefaultSurfaceType(5159,126839
+void idAnimatedEntity::AddLocalDamageEffect(5169,127002
+void idAnimatedEntity::UpdateDamageEffects(5245,129401
+bool idAnimatedEntity::ClientReceiveEvent(5284,130313
+void idAnimatedEntity::Event_GetJointHandle(5319,131605
+void idAnimatedEntity::Event_ClearAllJoints(5333,131904
+void idAnimatedEntity::Event_ClearJoint(5344,132118
+void idAnimatedEntity::Event_SetJointPos(5355,132363
+void idAnimatedEntity::Event_SetJointAngle(5366,132691
+void idAnimatedEntity::Event_GetJointPos(5380,133045
+void idAnimatedEntity::Event_GetJointAngle(5398,133483
+
+neo/game/Fx.cpp,967
+CLASS_DECLARATION(50,1975
+void idEntityFx::Restore(101,3181
+void idEntityFx::Setup(152,4556
+const char *idEntityFx::EffectName(idEntityFx::EffectName200,5778
+const char *idEntityFx::Joint(idEntityFx::Joint209,5931
+void idEntityFx::CleanUp(218,6085
+void idEntityFx::CleanUpSingleAction(234,6427
+void idEntityFx::Start(251,6998
+void idEntityFx::Stop(272,7421
+const int idEntityFx::Duration(282,7544
+const bool idEntityFx::Done(305,7921
+void idEntityFx::ApplyFade(317,8112
+void idEntityFx::Run(345,9517
+idEntityFx::idEntityFx(556,17215
+idEntityFx::~idEntityFx(568,17389
+void idEntityFx::Spawn(578,17508
+void idEntityFx::Think(605,18053
+void idEntityFx::Event_ClearFx(625,18345
+void idEntityFx::Event_Trigger(655,18945
+idEntityFx *idEntityFx::StartFx(idEntityFx::StartFx691,19677
+void idEntityFx::WriteToSnapshot(724,20536
+void idEntityFx::ReadFromSnapshot(736,20873
+void idEntityFx::ClientPredictionThink(766,21724
+CLASS_DECLARATION(782,22046
+
+neo/game/GameEdit.cpp,2772
+CLASS_DECLARATION(49,1911
+idCursor3D::~idCursor3D(66,2148
+void idCursor3D::Spawn(74,2241
+void idCursor3D::Present(82,2335
+void idCursor3D::Think(100,2855
+#define MAX_DRAG_TRACE_DISTANCE	116,3206
+idDragEntity::idDragEntity(123,3312
+idDragEntity::~idDragEntity(133,3442
+void idDragEntity::Clear(146,3603
+void idDragEntity::StopDrag(161,3841
+void idDragEntity::Update(173,4014
+void idDragEntity::SetSelected(302,8275
+void idDragEntity::DeleteSelected(312,8423
+void idDragEntity::BindSelected(323,8594
+void idDragEntity::UnbindSelected(379,10047
+idEditEntities::idEditEntities(419,11021
+bool idEditEntities::SelectEntity(429,11183
+void idEditEntities::AddSelectedEntity(468,12099
+void idEditEntities::RemoveSelectedEntity(478,12291
+void idEditEntities::ClearSelectedEntities(489,12503
+bool idEditEntities::EntityIsSelectable(505,12779
+void idEditEntities::DisplayEntities(538,13440
+idGameEdit			gameEditLocal;673,17692
+idGameEdit *		gameEdit 674,17720
+int idGameEdit::GetSelectedEntities(682,17829
+void idGameEdit::TriggerSelected(702,18192
+void idGameEdit::ClearEntitySelection(716,18513
+void idGameEdit::AddSelectedEntity(730,18817
+const idDict *idGameEdit::FindEntityDefDict(idGameEdit::FindEntityDefDict741,19013
+void idGameEdit::SpawnEntityDef(750,19231
+idEntity *idGameEdit::FindEntity(idGameEdit::FindEntity759,19409
+const char *idGameEdit::GetUniqueEntityName(idGameEdit::GetUniqueEntityName770,19624
+void  idGameEdit::EntityGetOrigin(792,20224
+void idGameEdit::EntityGetAxis(803,20422
+void idGameEdit::EntitySetOrigin(814,20619
+void idGameEdit::EntitySetAxis(825,20801
+void idGameEdit::EntitySetColor(836,20982
+void idGameEdit::EntityTranslate(847,21167
+const idDict *idGameEdit::EntityGetSpawnArgs(idGameEdit::EntityGetSpawnArgs858,21368
+void idGameEdit::EntityUpdateChangeableSpawnArgs(870,21582
+void idGameEdit::EntityChangeSpawnArgs(881,21806
+void idGameEdit::EntityUpdateVisuals(900,22254
+void idGameEdit::EntitySetModel(911,22421
+void idGameEdit::EntityStopSound(923,22639
+void idGameEdit::EntityDelete(934,22820
+bool idGameEdit::PlayerIsValid(943,22951
+void idGameEdit::PlayerGetOrigin(952,23111
+void idGameEdit::PlayerGetAxis(961,23298
+void idGameEdit::PlayerGetViewAngles(970,23489
+void idGameEdit::PlayerGetEyePosition(979,23680
+const idDict *idGameEdit::MapGetEntityDict(idGameEdit::MapGetEntityDict989,23867
+void idGameEdit::MapSave(1005,24202
+void idGameEdit::MapSetEntityKeyVal(1017,24458
+void idGameEdit::MapCopyDictToEntity(1032,24826
+int idGameEdit::MapGetUniqueMatchingKeyVals(1054,25375
+void idGameEdit::MapAddEntity(1076,25888
+void idGameEdit::MapRemoveEntity(1090,26179
+int idGameEdit::MapGetEntitiesMatchingClassWithString(1106,26504
+void idGameEdit::MapEntityTranslate(1137,27368
+
+neo/game/Game_local.cpp,7756
+const int NUM_RENDER_PORTAL_BITS	52,2057
+const float	DEFAULT_GRAVITY	54,2133
+const idVec3	DEFAULT_GRAVITY_VEC3( 0, 0, -DEFAULT_GRAVITY DEFAULT_GRAVITY55,2174
+const int	CINEMATIC_SKIP_DELAY	56,2235
+idSys *						sys 60,2302
+idCommon *					common 61,2327
+idCmdSystem *				cmdSystem 62,2357
+idCVarSystem *				cvarSystem 63,2392
+idFileSystem *				fileSystem 64,2429
+idNetworkSystem *			networkSystem 65,2466
+idRenderSystem *			renderSystem 66,2508
+idSoundSystem *				soundSystem 67,2548
+idRenderModelManager *		renderModelManager 68,2587
+idUserInterfaceManager *	uiManager 69,2638
+idDeclManager *				declManager 70,2681
+idAASFileManager *			AASFileManager 71,2720
+idCollisionModelManager *	collisionModelManager 72,2764
+idCVar *					idCVar::staticVars 73,2820
+idRenderWorld *				gameRenderWorld 79,2996
+idSoundWorld *				gameSoundWorld 80,3077
+static gameExport_t			gameExport;82,3152
+idAnimManager				animationLib;85,3211
+idGameLocal					gameLocal;88,3346
+idGame *					game 89,3373
+const char *idGameLocal::sufaceTypeNames[idGameLocal::sufaceTypeNames91,3446
+extern "C" ID_GAME_API gameExport_t *GetGameAPI(GetGameAPI101,3741
+void TestGameAPI(139,4803
+idGameLocal::idGameLocal(165,5561
+void idGameLocal::Clear(174,5653
+void idGameLocal::Init(265,7760
+void idGameLocal::Shutdown(350,9918
+void idGameLocal::SaveGame(423,11160
+const idDict &idGameLocal::GetPersistentPlayerInfo(idGameLocal::GetPersistentPlayerInfo598,15205
+void idGameLocal::SetPersistentPlayerInfo(615,15585
+void idGameLocal::Printf(624,15776
+void idGameLocal::DPrintf(640,16072
+void idGameLocal::Warning(660,16414
+void idGameLocal::DWarning(682,16834
+void idGameLocal::Error(708,17298
+void gameError(730,17706
+void idGameLocal::SetLocalClient(746,17993
+const idDict* idGameLocal::SetUserInfo(755,18133
+const idDict* idGameLocal::GetUserInfo(812,19831
+void idGameLocal::SetServerInfo(830,20223
+int idGameLocal::FindNoOfPythonClients 852,20781
+const char *idGameLocal::FindDefinition idGameLocal::FindDefinition875,21292
+int idGameLocal::FindEntityFromPair 895,21703
+int idGameLocal::FindEntityFromName 916,22160
+void idGameLocal::LoadMap(937,22591
+int idGameLocal::GetNumPyClients 1046,25133
+void idGameLocal::LocalMapRestart(1057,25277
+void idGameLocal::MapRestart(1115,26731
+void idGameLocal::MapRestart_f(1159,27946
+bool idGameLocal::NextMap(1174,28304
+void idGameLocal::NextMap_f(1224,29712
+void idGameLocal::MapPopulate(1240,30092
+void idGameLocal::InitFromNewMap(1270,31034
+bool idGameLocal::InitFromSaveGame(1308,31769
+void idGameLocal::MapClear(1527,36987
+void idGameLocal::MapShutdown(1567,37840
+void idGameLocal::DumpOggSounds(1613,38682
+void idGameLocal::GetShakeSounds(1718,42027
+void idGameLocal::CacheDictionaryMedia(1746,42814
+void idGameLocal::InitScriptForMap(1908,47274
+void idGameLocal::SpawnPlayer(1931,47861
+void idGameLocal::SpawnPlayer(1943,48092
+idPlayer *idGameLocal::GetClientByNum(idGameLocal::GetClientByNum1985,49305
+idPlayer *idGameLocal::GetClientByName(idGameLocal::GetClientByName2000,49605
+idPlayer *idGameLocal::GetClientByCmdArgs(idGameLocal::GetClientByCmdArgs2019,50033
+int idGameLocal::GetNextClientNum(2042,50576
+idPlayer *idGameLocal::GetLocalPlayer(idGameLocal::GetLocalPlayer2066,51180
+pvsHandle_t idGameLocal::GetClientPVS(2083,51550
+void idGameLocal::SetupPlayerPVS(2098,52066
+void idGameLocal::FreePlayerPVS(2140,53113
+bool idGameLocal::InPlayerPVS(2158,53495
+bool idGameLocal::InPlayerConnectedArea(2172,53824
+void idGameLocal::UpdateGravity(2184,54110
+const idVec3 &idGameLocal::GetGravity(idGameLocal::GetGravity2211,54697
+void idGameLocal::SortActiveEntityList(2223,54986
+gameReturn_t idGameLocal::RunFrame(2287,56838
+void idGameLocal::CalcFov(2506,62640
+bool idGameLocal::Draw(2579,64369
+escReply_t idGameLocal::HandleESC(2601,64736
+idUserInterface* idGameLocal::StartMenu(2623,65142
+const char* idGameLocal::HandleGuiCommands(2635,65337
+void idGameLocal::HandleMainMenuCommands(2647,65580
+idMapFile *idGameLocal::GetLevelMap(idGameLocal::GetLevelMap2656,65789
+const char *idGameLocal::GetMapName(idGameLocal::GetMapName2682,66186
+void idGameLocal::CallFrameCommand(2691,66340
+void idGameLocal::CallObjectFrameCommand(2701,66599
+void idGameLocal::ShowTargets(2720,67110
+void idGameLocal::RunDebugInfo(2779,69220
+int	idGameLocal::NumAAS(2919,73336
+idAAS *idGameLocal::GetAAS(idGameLocal::GetAAS2928,73466
+idAAS *idGameLocal::GetAAS(idGameLocal::GetAAS2942,73735
+void idGameLocal::SetAASAreaState(2962,74071
+aasHandle_t idGameLocal::AddAASObstacle(2975,74359
+void idGameLocal::RemoveAASObstacle(2998,74811
+void idGameLocal::RemoveAllAASObstacles(3011,75053
+bool idGameLocal::CheatsOk(3024,75262
+void idGameLocal::RegisterEntity(3051,75780
+void idGameLocal::UnregisterEntity(3084,76615
+idEntity *idGameLocal::SpawnEntityType(idGameLocal::SpawnEntityType3107,77195
+static void mystop 3139,77778
+void idGameLocal::mycheck 3141,77808
+bool idGameLocal::SpawnEntityDef(3157,78097
+const idDeclEntityDef *idGameLocal::FindEntityDef(idGameLocal::FindEntityDef3253,80524
+const idDict *idGameLocal::FindEntityDefDict(idGameLocal::FindEntityDefDict3269,80969
+bool idGameLocal::InhibitEntitySpawn(3279,81237
+void idGameLocal::SetSkill(3317,82156
+gameState_t	idGameLocal::GameState(3338,82520
+void idGameLocal::SpawnMapEntities(3349,82736
+void idGameLocal::AddEntityToHash(3406,83959
+bool idGameLocal::RemoveEntityFromHash(3418,84264
+int idGameLocal::GetTargets(3436,84698
+idEntity *idGameLocal::GetTraceEntity(idGameLocal::GetTraceEntity3468,85415
+void idGameLocal::ArgCompletion_EntityName(3488,85811
+idEntity *idGameLocal::FindEntity(idGameLocal::FindEntity3505,86222
+void idGameLocal::DumpEntities 3528,86796
+idEntity *idGameLocal::FindEntityUsingDef(idGameLocal::FindEntityUsingDef3560,87559
+idEntity *idGameLocal::FindTraceEntity(idGameLocal::FindTraceEntity3593,88272
+int idGameLocal::EntitiesWithinRadius(3622,88949
+void idGameLocal::KillBox(3646,89717
+bool idGameLocal::RequirementMet(3696,90899
+void idGameLocal::AlertAI(3720,91405
+idActor *idGameLocal::GetAlertEntity(idGameLocal::GetAlertEntity3733,91683
+void idGameLocal::RadiusDamage(3746,91883
+void idGameLocal::RadiusPush(3851,95309
+void idGameLocal::RadiusPushClipModel(3926,97449
+void idGameLocal::ProjectDecal(3983,99226
+void idGameLocal::BloodSplat(4032,100779
+void idGameLocal::SetCamera(4059,101589
+idCamera *idGameLocal::GetCamera(idGameLocal::GetCamera4148,103983
+bool idGameLocal::SkipCinematic(4157,104112
+void idGameLocal::SpreadLocations(4190,104887
+idLocationEntity *idGameLocal::LocationForPoint(idGameLocal::LocationForPoint4239,106466
+void idGameLocal::SetPortalState(4261,106963
+int idGameLocal::sortSpawnPoints(4280,107491
+void idGameLocal::RandomizeInitialSpawns(4302,108014
+bool idGameLocal::samePosition 4344,109226
+idVec3 idGameLocal::GetEntityOrigin 4366,109595
+void idGameLocal::DumpEntityOrigin 4383,109873
+idEntity *idGameLocal::SelectPythonSpawnPoint idGameLocal::SelectPythonSpawnPoint4406,110366
+idEntity *idGameLocal::SelectInitialSpawnPoint(idGameLocal::SelectInitialSpawnPoint4446,111618
+void idGameLocal::UpdateServerInfoFlags(4514,113654
+void idGameLocal::SetGlobalMaterial(4543,114607
+const idMaterial *idGameLocal::GetGlobalMaterial(idGameLocal::GetGlobalMaterial4552,114767
+int idGameLocal::GetSpawnId(4561,114911
+void idGameLocal::ThrottleUserInfo(4570,115135
+void idGameLocal::SelectTimeGroup(4579,115271
+int idGameLocal::GetTimeGroupTime(4586,115388
+void idGameLocal::GetBestGameType(4595,115528
+bool idGameLocal::NeedRestart(4605,115776
+void idGameLocal::GetClientStats(4631,116428
+void idGameLocal::SwitchTeam(4641,116620
+void idGameLocal::GetMapLoadingGUI(4666,117130
+
+neo/game/Game_network.cpp,1977
+	#define ASYNC_WRITE_TAGS 53,2209
+void idGameLocal::InitAsyncNetwork(68,3190
+void idGameLocal::ShutdownAsyncNetwork(96,3958
+void idGameLocal::InitLocalClient(111,4365
+void idGameLocal::InitClientDeclRemap(123,4611
+void idGameLocal::ServerSendDeclRemapToClient(155,5631
+int idGameLocal::ServerRemapDecl(196,6829
+int idGameLocal::ClientRemapDecl(218,7326
+allowReply_t idGameLocal::ServerAllowClient(251,8423
+void idGameLocal::ServerClientConnect(296,9789
+void idGameLocal::ServerClientBegin(312,10240
+void idGameLocal::ServerClientDisconnect(345,11228
+void idGameLocal::ServerWriteInitialReliableMessages(384,12374
+void idGameLocal::SaveEntityNetworkEvent(438,14082
+void idGameLocal::FreeSnapshotsOlderThanSequence(460,14634
+bool idGameLocal::ApplySnapshot(488,15462
+void idGameLocal::WriteGameStateToSnapshot(524,16543
+void idGameLocal::ReadGameStateFromSnapshot(539,16835
+void idGameLocal::ServerWriteSnapshot(556,17191
+bool idGameLocal::ServerApplySnapshot(700,22142
+void idGameLocal::NetworkEventWarning(709,22335
+void idGameLocal::ServerProcessEntityNetworkEventQueue(731,23006
+void idGameLocal::ServerSendChatMessage(770,23979
+void idGameLocal::ServerProcessReliableMessage(791,24548
+void idGameLocal::ClientShowSnapshot(872,26568
+void idGameLocal::UpdateLagometer(927,27984
+void idGameLocal::ClientReadSnapshot(963,29054
+bool idGameLocal::ClientApplySnapshot(1248,39496
+void idGameLocal::ClientProcessEntityNetworkEventQueue(1257,39706
+void idGameLocal::ClientProcessReliableMessage(1300,40873
+gameReturn_t idGameLocal::ClientPrediction(1471,45891
+void idGameLocal::Tokenize(1534,47341
+bool idGameLocal::DownloadRequest(1561,47826
+entityNetEvent_t* idEventQueue::Alloc(1622,49632
+void idEventQueue::Free(1634,49842
+void idEventQueue::Shutdown(1645,50079
+void idEventQueue::Init(1655,50214
+entityNetEvent_t* idEventQueue::Dequeue(1665,50339
+entityNetEvent_t* idEventQueue::RemoveLast(1690,50673
+void idEventQueue::Enqueue(1715,51001
+
+neo/game/IK.cpp,931
+idIK::idIK(50,1854
+idIK::~idIK(64,2046
+void idIK::Save(72,2122
+void idIK::Restore(85,2500
+bool idIK::IsInitialized(116,3400
+bool idIK::Init(125,3539
+void idIK::Evaluate(168,4799
+void idIK::ClearJointMods(176,4893
+bool idIK::SolveTwoBones(185,5014
+float idIK::GetBoneAxis(217,5867
+idIK_Walk::idIK_Walk(241,6412
+idIK_Walk::~idIK_Walk(289,7372
+void idIK_Walk::Save(300,7500
+void idIK_Walk::Restore(363,9327
+bool idIK_Walk::Init(426,11158
+void idIK_Walk::Evaluate(566,15811
+void idIK_Walk::ClearJointMods(782,22862
+void idIK_Walk::EnableAll(805,23437
+void idIK_Walk::DisableAll(815,23601
+void idIK_Walk::EnableLeg(825,23746
+void idIK_Walk::DisableLeg(834,23876
+idIK_Reach::idIK_Reach(852,24196
+idIK_Reach::~idIK_Reach(877,24718
+void idIK_Reach::Save(885,24806
+void idIK_Reach::Restore(921,25818
+bool idIK_Reach::Init(957,26842
+void idIK_Reach::Evaluate(1054,29926
+void idIK_Reach::ClearJointMods(1116,32238
+
+neo/game/Item.cpp,2439
+CLASS_DECLARATION(54,2150
+idItem::~idItem(86,2772
+void idItem::Save(98,2967
+void idItem::Restore(118,3397
+bool idItem::UpdateRenderEntity(140,3853
+bool idItem::ModelCallback(199,5242
+void idItem::Think(220,5766
+void idItem::Present(246,6231
+void idItem::Spawn(274,6850
+void idItem::GetAttributes(327,8145
+bool idItem::GiveToPlayer(344,8524
+bool idItem::Pickup(361,8806
+void idItem::ClientPredictionThink(420,10196
+void idItem::WriteToSnapshot(433,10438
+void idItem::ReadFromSnapshot(442,10598
+bool idItem::ClientReceiveEvent(455,10789
+void idItem::Event_DropToFloor(493,11492
+void idItem::Event_Touch(510,11926
+void idItem::Event_Trigger(527,12188
+void idItem::Event_Respawn(544,12512
+void idItem::Event_RespawnFx(563,12970
+CLASS_DECLARATION(587,13471
+void idItemPowerup::Save(605,13712
+void idItemPowerup::Restore(615,13893
+void idItemPowerup::Spawn(625,14070
+bool idItemPowerup::GiveToPlayer(635,14260
+CLASS_DECLARATION(651,14606
+void idObjective::Save(672,15056
+void idObjective::Restore(681,15210
+void idObjective::Spawn(691,15395
+void idObjective::Event_CamShot(701,15545
+void idObjective::Event_Trigger(729,16380
+void idObjective::Event_GetPlayerPos(769,17860
+void idObjective::Event_HideObjective(782,18143
+CLASS_DECLARATION(803,18668
+bool idVideoCDItem::GiveToPlayer(819,18890
+CLASS_DECLARATION(835,19264
+CLASS_DECLARATION(859,19742
+idMoveableItem::~idMoveableItem(880,20132
+void idMoveableItem::Save(891,20271
+void idMoveableItem::Restore(905,20549
+void idMoveableItem::Spawn(920,20853
+void idMoveableItem::Think(984,23062
+bool idMoveableItem::Pickup(1008,23609
+idEntity *idMoveableItem::DropItem(idMoveableItem::DropItem1021,23824
+void idMoveableItem::DropItems(1072,25414
+void idMoveableItem::WriteToSnapshot(1135,27326
+void idMoveableItem::ReadFromSnapshot(1144,27517
+void idMoveableItem::Gib(1156,27726
+void idMoveableItem::Event_DropToFloor(1172,28304
+void idMoveableItem::Event_Gib(1181,28466
+CLASS_DECLARATION(1193,28762
+CLASS_DECLARATION(1217,29271
+void idItemRemover::RemoveItem(1234,29546
+void idItemRemover::Event_Trigger(1246,29776
+CLASS_DECLARATION(1260,30130
+void idObjectiveComplete::Save(1280,30608
+void idObjectiveComplete::Restore(1289,30778
+void idObjectiveComplete::Spawn(1298,30945
+void idObjectiveComplete::Event_Trigger(1308,31117
+void idObjectiveComplete::Event_GetPlayerPos(1333,31861
+void idObjectiveComplete::Event_HideObjective(1346,32160
+
+neo/game/Light.cpp,1913
+CLASS_DECLARATION(56,2400
+void idLight::UpdateChangeableSpawnArgs(172,6712
+idLight::idLight(195,7269
+idLight::~idLight(219,7754
+void idLight::Save(232,7954
+void idLight::Restore(264,8755
+void idLight::Spawn(311,10087
+void idLight::SetLightLevel(428,13545
+void idLight::GetColor(449,14166
+void idLight::GetColor(460,14441
+void idLight::SetColor(472,14773
+void idLight::SetColor(482,14951
+void idLight::SetColor(492,15098
+void idLight::SetShader(504,15375
+void idLight::SetLightParm(515,15614
+void idLight::SetLightParms(529,15949
+void idLight::SetRadiusXYZ(547,16586
+void idLight::SetRadius(559,16831
+void idLight::On(569,17050
+void idLight::Off(586,17535
+void idLight::Fade(602,17874
+void idLight::FadeOut(615,18132
+void idLight::FadeIn(624,18256
+void idLight::Killed(639,18529
+void idLight::BecomeBroken(648,18732
+void idLight::PresentLightDefChange(710,20624
+void idLight::PresentModelDefChange(724,20967
+void idLight::Present(743,21337
+void idLight::Think(776,22228
+bool idLight::GetPhysicsToSoundTransform(801,22700
+void idLight::FreeLightDef(812,22958
+void idLight::SaveState(824,23165
+void idLight::ShowEditingDialog(840,23556
+void idLight::Event_SetShader(853,23820
+void idLight::Event_GetLightParm(862,23975
+void idLight::Event_SetLightParm(875,24299
+void idLight::Event_SetLightParms(884,24467
+void idLight::Event_SetRadiusXYZ(893,24674
+void idLight::Event_SetRadius(902,24832
+void idLight::Event_Hide(911,24965
+void idLight::Event_Show(922,25106
+void idLight::Event_On(933,25244
+void idLight::Event_Off(942,25346
+void idLight::Event_ToggleOnOff(951,25458
+void idLight::Event_SetSoundHandles(987,25981
+void idLight::Event_FadeOut(1018,26691
+void idLight::Event_FadeIn(1027,26818
+void idLight::ClientPredictionThink(1036,26952
+void idLight::WriteToSnapshot(1045,27076
+void idLight::ReadFromSnapshot(1084,28317
+bool idLight::ClientReceiveEvent(1146,30287
+
+neo/game/Misc.cpp,6018
+CLASS_DECLARATION(60,2304
+CLASS_DECLARATION(82,2761
+void idPlayerStart::Spawn(101,3131
+void idPlayerStart::Save(110,3250
+void idPlayerStart::Restore(119,3411
+bool idPlayerStart::ClientReceiveEvent(128,3582
+void idPlayerStart::Event_TeleportStage(154,4238
+void idPlayerStart::TeleportPlayer(194,5503
+void idPlayerStart::Event_TeleportPlayer(226,6778
+CLASS_DECLARATION(265,7645
+void idActivator::Restore(283,7959
+void idActivator::Spawn(296,8157
+void idActivator::Think(315,8527
+void idActivator::Event_Activate(332,8776
+CLASS_DECLARATION(349,9123
+void idPathCorner::DrawDebugInfo(366,9421
+idPathCorner *idPathCorner::RandomPath(idPathCorner::RandomPath385,9880
+void idPathCorner::Event_RandomPath(416,10526
+CLASS_DECLARATION(433,10910
+void idDamagable::Save(453,11283
+void idDamagable::Restore(463,11472
+void idDamagable::Spawn(473,11657
+void idDamagable::BecomeBroken(495,12261
+void idDamagable::Killed(558,13833
+void idDamagable::Event_BecomeBroken(572,14127
+void idDamagable::Event_RestoreDamagable(581,14296
+CLASS_DECLARATION(595,14589
+void idExplodable::Event_Explode(613,14870
+CLASS_DECLARATION(645,15887
+void idSpring::Event_LinkSpring(690,16731
+void idSpring::Spawn(724,17635
+CLASS_DECLARATION(752,18390
+void idForceField::Think(776,18867
+void idForceField::Save(789,19072
+void idForceField::Restore(798,19237
+void idForceField::Spawn(807,19399
+void idForceField::Event_Toggle(850,20706
+void idForceField::Event_Activate(859,20831
+void idForceField::Event_FindTargets(873,21082
+CLASS_DECLARATION(896,21773
+idAnimated::~idAnimated(930,22673
+void idAnimated::Save(940,22802
+void idAnimated::Restore(955,23161
+void idAnimated::Spawn(970,23515
+bool idAnimated::LoadAF(1044,25458
+bool idAnimated::GetPhysicsToSoundTransform(1059,25745
+bool idAnimated::StartRagdoll(1070,26005
+void idAnimated::PlayNextAnim(1095,26438
+void idAnimated::Event_StartRagdoll(1157,27955
+void idAnimated::Event_AnimDone(1166,28087
+void idAnimated::Event_Activate(1189,28674
+void idAnimated::Event_Start(1211,29014
+void idAnimated::Event_Footstep(1251,29986
+void idAnimated::Event_LaunchMissilesUpdate(1260,30185
+void idAnimated::Event_LaunchMissiles(1306,31909
+CLASS_DECLARATION(1346,33408
+void idStaticEntity::Save(1370,33830
+void idStaticEntity::Restore(1385,34183
+void idStaticEntity::Spawn(1400,34527
+void idStaticEntity::ShowEditingDialog(1445,35582
+void idStaticEntity::Think(1453,35745
+void idStaticEntity::Fade(1489,36645
+void idStaticEntity::Hide(1502,36914
+void idStaticEntity::Show(1512,37066
+void idStaticEntity::Event_Activate(1524,37284
+void idStaticEntity::WriteToSnapshot(1553,38103
+void idStaticEntity::ReadFromSnapshot(1566,38409
+CLASS_DECLARATION(1596,38982
+void idFuncEmitter::Spawn(1614,39284
+void idFuncEmitter::Save(1629,39563
+void idFuncEmitter::Restore(1638,39716
+void idFuncEmitter::Event_Activate(1647,39877
+void idFuncEmitter::WriteToSnapshot(1664,40359
+void idFuncEmitter::ReadFromSnapshot(1675,40684
+CLASS_DECLARATION(1695,41207
+void idFuncSplat::Spawn(1713,41520
+void idFuncSplat::Event_Splat(1721,41622
+void idFuncSplat::Event_Activate(1741,42305
+CLASS_DECLARATION(1755,42725
+void idFuncSmoke::Save(1775,43032
+void idFuncSmoke::Restore(1786,43251
+void idFuncSmoke::Spawn(1797,43465
+void idFuncSmoke::Event_Activate(1820,44009
+void idFuncSmoke::Think(1836,44298
+CLASS_DECLARATION(1865,45024
+void idTextEntity::Save(1888,45492
+void idTextEntity::Restore(1898,45685
+void idTextEntity::Think(1908,45874
+CLASS_DECLARATION(1932,46655
+void idVacuumSeparatorEntity::Save(1951,47020
+void idVacuumSeparatorEntity::Restore(1961,47265
+void idVacuumSeparatorEntity::Spawn(1975,47530
+void idVacuumSeparatorEntity::Event_Activate(1992,47978
+CLASS_DECLARATION(2008,48330
+CLASS_DECLARATION(2038,49064
+CLASS_DECLARATION(2066,49652
+const char *idLocationEntity::GetLocation(idLocationEntity::GetLocation2090,50116
+CLASS_DECLARATION(2102,50397
+void idBeam::Save(2122,50705
+void idBeam::Restore(2132,50864
+void idBeam::Spawn(2142,51027
+void idBeam::Think(2159,51310
+void idBeam::SetMaster(2182,51689
+void idBeam::SetBeamTarget(2191,51823
+void idBeam::Show(2205,52360
+void idBeam::Event_MatchTarget(2222,52644
+void idBeam::Event_Activate(2256,53287
+void idBeam::WriteToSnapshot(2269,53461
+void idBeam::ReadFromSnapshot(2283,53890
+CLASS_DECLARATION(2304,54487
+void idLiquid::Restore(2322,54770
+void idLiquid::Spawn(2332,54905
+void idLiquid::Event_Touch(2348,55228
+CLASS_DECLARATION(2367,55675
+void idShaking::Save(2385,55937
+void idShaking::Restore(2395,56126
+void idShaking::Spawn(2406,56343
+void idShaking::BeginShaking(2425,56804
+void idShaking::Event_Activate(2442,57311
+CLASS_DECLARATION(2459,57739
+void idEarthQuake::Save(2484,58160
+void idEarthQuake::Restore(2500,58566
+void idEarthQuake::Spawn(2520,59035
+void idEarthQuake::Event_Activate(2541,59572
+void idEarthQuake::Think(2599,60919
+CLASS_DECLARATION(2622,61607
+void idFuncPortal::Save(2641,61902
+void idFuncPortal::Restore(2651,62088
+void idFuncPortal::Spawn(2662,62347
+void idFuncPortal::Event_Activate(2675,62684
+CLASS_DECLARATION(2690,63050
+void idFuncAASPortal::Save(2708,63353
+void idFuncAASPortal::Restore(2717,63509
+void idFuncAASPortal::Spawn(2727,63757
+void idFuncAASPortal::Event_Activate(2737,64007
+CLASS_DECLARATION(2750,64368
+void idFuncAASObstacle::Save(2768,64685
+void idFuncAASObstacle::Restore(2777,64845
+void idFuncAASObstacle::Spawn(2787,65092
+void idFuncAASObstacle::Event_Activate(2797,65341
+CLASS_DECLARATION(2815,65764
+void idFuncRadioChatter::Save(2834,66152
+void idFuncRadioChatter::Restore(2843,66314
+void idFuncRadioChatter::Spawn(2852,66473
+void idFuncRadioChatter::Event_Activate(2861,66637
+void idFuncRadioChatter::Event_ResetRadioHud(2892,67490
+CLASS_DECLARATION(2907,67965
+void idPhantomObjects::Save(2933,68429
+void idPhantomObjects::Restore(2959,69054
+void idPhantomObjects::Spawn(2999,69966
+void idPhantomObjects::Event_Activate(3020,70538
+void idPhantomObjects::Think(3073,71777
+
+neo/game/Moveable.cpp,2169
+static const float BOUNCE_SOUND_MAX_VELOCITY	59,2433
+idMoveable::idMoveable(66,2552
+idMoveable::~idMoveable(85,2922
+void idMoveable::Spawn(95,3063
+void idMoveable::Save(189,6089
+void idMoveable::Restore(214,6834
+void idMoveable::Hide(247,7692
+void idMoveable::Show(257,7833
+bool idMoveable::Collide(269,8039
+void idMoveable::Killed(309,9518
+bool idMoveable::AllowStep(338,10006
+void idMoveable::BecomeNonSolid(347,10138
+void idMoveable::EnableDamage(358,10468
+void idMoveable::InitInitialSpline(370,10720
+bool idMoveable::FollowInitialSplinePath(391,11327
+void idMoveable::Think(418,12229
+const idMaterial *idMoveable::GetRenderModelMaterial(idMoveable::GetRenderModelMaterial432,12468
+void idMoveable::WriteToSnapshot(447,12821
+void idMoveable::ReadFromSnapshot(456,12992
+void idMoveable::Event_BecomeNonSolid(468,13218
+void idMoveable::Event_Activate(477,13355
+void idMoveable::Event_SetOwnerFromSpawnArgs(514,14254
+void idMoveable::Event_IsAtRest(527,14512
+void idMoveable::Event_EnableDamage(536,14675
+CLASS_DECLARATION(549,14946
+void idBarrel::Save(572,15294
+void idBarrel::Restore(586,15630
+void idBarrel::BarrelThink(600,15964
+void idBarrel::Think(672,18126
+bool idBarrel::GetPhysicsToVisualTransform(687,18363
+void idBarrel::Spawn(698,18560
+void idBarrel::ClientPredictionThink(719,19029
+CLASS_DECLARATION(734,19379
+idExplodingBarrel::~idExplodingBarrel(764,20154
+void idExplodingBarrel::Save(778,20447
+void idExplodingBarrel::Restore(799,20963
+void idExplodingBarrel::Spawn(820,21488
+void idExplodingBarrel::Think(840,21994
+void idExplodingBarrel::AddParticles(883,23180
+void idExplodingBarrel::AddLight(918,24643
+void idExplodingBarrel::ExplodingEffects(944,25517
+void idExplodingBarrel::Killed(976,26224
+void idExplodingBarrel::Damage(1067,28805
+void idExplodingBarrel::Event_TriggerTargets(1086,29462
+void idExplodingBarrel::Event_Explode(1095,29613
+void idExplodingBarrel::Event_Respawn(1107,29844
+void idExplodingBarrel::Event_Activate(1147,30911
+void idExplodingBarrel::WriteToSnapshot(1156,31098
+void idExplodingBarrel::ReadFromSnapshot(1166,31310
+bool idExplodingBarrel::ClientReceiveEvent(1181,31562
+
+neo/game/Mover.cpp,8092
+static const char *guiBinaryMoverStates[guiBinaryMoverStates40,1797
+CLASS_DECLARATION(94,4133
+void idMover::Save(167,6888
+void idMover::Restore(234,8850
+void idMover::Event_PostRestore(310,10799
+void idMover::Spawn(334,11496
+void idMover::Hide(389,13182
+void idMover::Show(399,13317
+void idMover::Killed(412,13535
+void idMover::Event_SetCallback(423,13767
+void idMover::VectorForDir(442,14289
+void idMover::FindGuiTargets(526,15701
+void idMover::SetGuiState(537,15953
+void idMover::Event_FindGuiTargets(558,16571
+void idMover::SetGuiStates(567,16700
+void idMover::Event_InitGuiTargets(585,17114
+void idMover::Event_StopMoving(600,17459
+void idMover::DoneMoving(610,17623
+void idMover::UpdateMoveSound(629,18083
+void idMover::Event_UpdateMove(657,18727
+void idMover::BeginMove(705,19956
+void idMover::Event_StopRotating(793,22207
+void idMover::DoneRotating(804,22473
+void idMover::UpdateRotationSound(817,22719
+void idMover::Event_UpdateRotation(845,23371
+void idMover::BeginRotation(910,25390
+void idMover::Event_TeamBlocked(989,27513
+void idMover::Event_PartBlocked(1000,27877
+void idMover::Event_SetMoveSpeed(1014,28282
+void idMover::Event_SetMoveTime(1028,28598
+void idMover::Event_SetAccellerationTime(1042,28860
+void idMover::Event_SetDecelerationTime(1055,29113
+void idMover::Event_MoveTo(1068,29352
+void idMover::MoveToPos(1082,29635
+void idMover::Event_MoveToPos(1092,29815
+void idMover::Event_MoveDir(1101,29947
+void idMover::Event_MoveAccelerateTo(1117,30255
+void idMover::Event_MoveDecelerateTo(1160,31316
+void idMover::Event_RotateDownTo(1203,32377
+void idMover::Event_RotateUpTo(1225,32797
+void idMover::Event_RotateTo(1247,33213
+void idMover::Event_Rotate(1257,33403
+void idMover::Event_RotateOnce(1275,33757
+void idMover::Event_Bob(1293,34050
+void idMover::Event_Sway(1305,34399
+void idMover::Event_OpenPortal(1323,35032
+void idMover::Event_ClosePortal(1336,35251
+void idMover::Event_SetAccelSound(1347,35416
+void idMover::Event_SetDecelSound(1356,35585
+void idMover::Event_SetMoveSound(1365,35753
+void idMover::Event_EnableSplineAngles(1374,35925
+void idMover::Event_DisableSplineAngles(1383,36077
+void idMover::Event_RemoveInitialSplineAngles(1392,36237
+void idMover::Event_StartSpline(1409,36626
+void idMover::Event_StopSpline(1448,37526
+void idMover::Event_Activate(1458,37707
+void idMover::Event_IsMoving(1468,37865
+void idMover::Event_IsRotating(1481,38121
+void idMover::WriteToSnapshot(1494,38379
+void idMover::ReadFromSnapshot(1507,38666
+void idMover::SetPortalState(1533,39269
+CLASS_DECLARATION(1546,39646
+void idSplinePath::Spawn(1562,39862
+CLASS_DECLARATION(1576,40188
+void idElevator::Save(1607,40900
+void idElevator::Restore(1633,41549
+void idElevator::Spawn(1663,42192
+void idElevator::Event_Touch(1698,43149
+void idElevator::Think(1725,43664
+void idElevator::Event_Activate(1771,44780
+void idElevator::Event_TeamBlocked(1783,45077
+bool idElevator::HandleSingleGuiCommand(1804,45705
+void idElevator::OpenFloorDoor(1847,46569
+void idElevator::OpenInnerDoor(1862,46817
+floorInfo_s *idElevator::GetFloorInfo(idElevator::GetFloorInfo1874,47023
+void idElevator::Event_GotoFloor(1888,47279
+void idElevator::BeginMove(1910,47739
+idDoor *idElevator::GetDoor(idElevator::GetDoor1937,48553
+void idElevator::Event_PostFloorArrival(1966,49132
+void idElevator::DoneMoving(1981,49531
+void idElevator::CloseAllDoors(2010,50399
+void idElevator::DisableAllDoors(2028,50736
+void idElevator::EnableProperDoors(2046,51093
+CLASS_DECLARATION(2079,51966
+idMover_Binary::~idMover_Binary(2130,53368
+void idMover_Binary::Save(2156,53957
+void idMover_Binary::Restore(2212,55286
+void idMover_Binary::Spawn(2280,56869
+void idMover_Binary::GetMovedir(2371,59410
+void idMover_Binary::Event_SetCallback(2386,59719
+void idMover_Binary::UpdateMoverSound(2400,60035
+void idMover_Binary::SetMoverState(2422,60475
+void idMover_Binary::MatchActivateTeam(2473,62015
+void idMover_Binary::Enable(2486,62296
+void idMover_Binary::Event_MatchActivateTeam(2495,62433
+void idMover_Binary::BindTeam(2506,62665
+void idMover_Binary::JoinActivateTeam(2521,62969
+void idMover_Binary::Event_Enable(2533,63232
+void idMover_Binary::Event_Disable(2548,63527
+void idMover_Binary::Event_OpenPortal(2563,63833
+void idMover_Binary::Event_ClosePortal(2580,64186
+void idMover_Binary::Event_ReturnToPos1(2597,64521
+void idMover_Binary::Event_Reached_BinaryMover(2606,64706
+void idMover_Binary::GotoPosition1(2663,65998
+void idMover_Binary::GotoPosition2(2711,67215
+void idMover_Binary::UpdateBuddies(2757,68309
+void idMover_Binary::SetGuiStates(2777,68686
+void idMover_Binary::Use_BinaryMover(2796,69045
+void idMover_Binary::Event_Use_BinaryMover(2855,70373
+void idMover_Binary::PreBind(2864,70539
+void idMover_Binary::PostBind(2874,70720
+void idMover_Binary::FindGuiTargets(2884,70908
+void idMover_Binary::SetGuiState(2895,71174
+void idMover_Binary::Event_FindGuiTargets(2917,71758
+void idMover_Binary::Event_InitGuiTargets(2926,71909
+void idMover_Binary::InitSpeed(2939,72201
+void idMover_Binary::InitTime(2976,73207
+void idMover_Binary::SetBlocked(3003,73944
+bool idMover_Binary::IsBlocked(3024,74504
+idEntity *idMover_Binary::GetActivator(idMover_Binary::GetActivator3033,74634
+void idMover_Binary::WriteToSnapshot(3042,74797
+void idMover_Binary::ReadFromSnapshot(3053,75038
+void idMover_Binary::SetPortalState(3073,75466
+CLASS_DECLARATION(3098,76370
+idDoor::~idDoor(3145,77761
+void idDoor::Save(3159,77927
+void idDoor::Restore(3187,78618
+void idDoor::Spawn(3216,79361
+void idDoor::Think(3338,82602
+void idDoor::PreBind(3362,83193
+void idDoor::PostBind(3371,83312
+void idDoor::SetAASAreaState(3381,83500
+void idDoor::Hide(3391,83744
+void idDoor::Show(3430,84702
+void idDoor::GetLocalTriggerPosition(3469,85740
+void idDoor::Use(3487,86099
+void idDoor::Open(3507,86564
+void idDoor::Close(3516,86667
+void idDoor::Lock(3525,86770
+int idDoor::IsLocked(3561,87737
+bool idDoor::IsOpen(3570,87864
+bool idDoor::IsNoTouch(3579,87993
+void idDoor::CalcTriggerBounds(3590,88153
+void idDoor::Event_StartOpen(3630,89181
+void idDoor::Event_SpawnDoorTrigger(3655,89712
+void idDoor::Event_SpawnSoundTrigger(3709,91102
+void idDoor::Event_Reached_BinaryMover(3731,91597
+void idDoor::Event_TeamBlocked(3760,92439
+void idDoor::SetCompanion(3780,92847
+void idDoor::Event_PartBlocked(3789,92981
+void idDoor::Event_Touch(3800,93229
+void idDoor::Event_SpectatorTouch(3826,93927
+void idDoor::Event_Activate(3860,95029
+void idDoor::Event_Open(3904,95897
+void idDoor::Event_Close(3913,96003
+void idDoor::Event_Lock(3922,96110
+void idDoor::Event_IsOpen(3931,96221
+void idDoor::Event_Locked(3943,96387
+void idDoor::Event_OpenPortal(3954,96600
+void idDoor::Event_ClosePortal(3976,97098
+CLASS_DECLARATION(4002,97713
+idPlat::~idPlat(4024,98126
+void idPlat::Save(4035,98245
+void idPlat::Restore(4046,98476
+void idPlat::Spawn(4057,98702
+void idPlat::Think(4106,99859
+void idPlat::PreBind(4127,100294
+void idPlat::PostBind(4136,100413
+void idPlat::GetLocalTriggerPosition(4146,100586
+void idPlat::SpawnPlatTrigger(4164,100955
+void idPlat::Event_Touch(4201,101831
+void idPlat::Event_TeamBlocked(4216,102169
+void idPlat::Event_PartBlocked(4226,102389
+CLASS_DECLARATION(4241,102764
+void idMover_Periodic::Spawn(4261,103174
+void idMover_Periodic::Save(4273,103405
+void idMover_Periodic::Restore(4283,103609
+void idMover_Periodic::Think(4294,103843
+void idMover_Periodic::Event_TeamBlocked(4309,104103
+void idMover_Periodic::Event_PartBlocked(4317,104276
+void idMover_Periodic::WriteToSnapshot(4328,104548
+void idMover_Periodic::ReadFromSnapshot(4338,104760
+CLASS_DECLARATION(4356,105130
+void idRotater::Spawn(4374,105410
+void idRotater::Save(4397,106239
+void idRotater::Restore(4406,106383
+void idRotater::Event_Activate(4415,106537
+CLASS_DECLARATION(4455,107463
+void idBobber::Spawn(4471,107665
+CLASS_DECLARATION(4516,108901
+void idPendulum::Spawn(4532,109115
+CLASS_DECLARATION(4577,110527
+void idRiser::Spawn(4594,110772
+void idRiser::Event_Activate(4616,111418
+
+neo/game/MultiplayerGame.cpp,4951
+#define LASTMAN_NOLIVES 44,1892
+const char *idMultiplayerGame::GlobalSoundStrings[idMultiplayerGame::GlobalSoundStrings50,2161
+const char *idMultiplayerGame::GameStateStrings[idMultiplayerGame::GameStateStrings64,2557
+const char *idMultiplayerGame::MPGuis[idMultiplayerGame::MPGuis74,2707
+const char *idMultiplayerGame::ThrottleVars[idMultiplayerGame::ThrottleVars82,2844
+const char *idMultiplayerGame::ThrottleVarsInEnglish[idMultiplayerGame::ThrottleVarsInEnglish89,2945
+const int idMultiplayerGame::ThrottleDelay[idMultiplayerGame::ThrottleDelay96,3059
+idMultiplayerGame::idMultiplayerGame(107,3200
+void idMultiplayerGame::Shutdown(123,3459
+void idMultiplayerGame::SetMenuSkin(132,3586
+void idMultiplayerGame::Reset(165,4271
+void idMultiplayerGame::ServerClientConnect(191,5309
+void idMultiplayerGame::SpawnPlayer(200,5523
+void idMultiplayerGame::Clear(224,6168
+void idMultiplayerGame::ClearGuis(270,7132
+void idMultiplayerGame::UpdatePlayerRanks(300,8207
+void idMultiplayerGame::UpdateRankColor(367,10107
+void idMultiplayerGame::UpdateScoreboard(378,10388
+const char *idMultiplayerGame::GameTime(idMultiplayerGame::GameTime534,17326
+int idMultiplayerGame::NumActualClients(573,18085
+bool idMultiplayerGame::EnoughClientsToPlay(601,18684
+bool idMultiplayerGame::AllPlayersReady(616,19006
+idPlayer *idMultiplayerGame::FragLimitHit(idMultiplayerGame::FragLimitHit661,19957
+bool idMultiplayerGame::TimeLimitHit(713,21225
+idPlayer *idMultiplayerGame::FragLeader(idMultiplayerGame::FragLeader730,21604
+void idMultiplayerGame::UpdateWinsLosses(815,23489
+void idMultiplayerGame::TeamScore(867,25136
+void idMultiplayerGame::PlayerDeath(886,25652
+void idMultiplayerGame::PlayerStats(927,26973
+void idMultiplayerGame::PlayerVote(958,27637
+void idMultiplayerGame::DumpTourneyLine(967,27827
+void idMultiplayerGame::NewState(981,28214
+void idMultiplayerGame::FillTourneySlots(1078,31275
+void idMultiplayerGame::UpdateTourneyLine(1126,32643
+void idMultiplayerGame::CycleTourneyPlayers(1170,33672
+void idMultiplayerGame::ExecuteVote(1208,34801
+void idMultiplayerGame::CheckVote(1260,36259
+bool idMultiplayerGame::Warmup(1311,37314
+void idMultiplayerGame::Run(1320,37448
+void idMultiplayerGame::UpdateMainGui(1469,41558
+idUserInterface* idMultiplayerGame::StartMenu(1505,43018
+void idMultiplayerGame::DisableMenu(1580,45120
+void idMultiplayerGame::SetMapShot(1597,45565
+const char* idMultiplayerGame::HandleGuiCommands(1613,46036
+bool idMultiplayerGame::Draw(1827,52803
+void idMultiplayerGame::UpdateHud(1954,56665
+void idMultiplayerGame::DrawScoreBoard(2005,58411
+void idMultiplayerGame::ClearChatData(2025,59010
+void idMultiplayerGame::AddChatLine(2036,59196
+void idMultiplayerGame::DrawChat(2062,59756
+const int ASYNC_PLAYER_FRAG_BITS 2097,60882
+const int ASYNC_PLAYER_WINS_BITS 2098,61019
+const int ASYNC_PLAYER_PING_BITS 2099,61099
+void idMultiplayerGame::WriteToSnapshot(2106,61255
+void idMultiplayerGame::ReadFromSnapshot(2132,62245
+void idMultiplayerGame::PlayGlobalSound(2164,63449
+void idMultiplayerGame::PrintMessageEvent(2201,64390
+void idMultiplayerGame::SuddenRespawn(2279,67971
+void idMultiplayerGame::CheckRespawns(2305,68587
+void idMultiplayerGame::ForceReady(2415,73007
+void idMultiplayerGame::ForceReady_f(2435,73439
+void idMultiplayerGame::DropWeapon(2448,73739
+void idMultiplayerGame::DropWeapon_f(2462,74067
+void idMultiplayerGame::MessageMode_f(2479,74512
+void idMultiplayerGame::MessageMode(2488,74690
+void idMultiplayerGame::Vote_f(2519,75406
+void idMultiplayerGame::CallVote_f(2527,75564
+void idMultiplayerGame::ServerStartVote(2534,75704
+void idMultiplayerGame::ClientStartVote(2560,76430
+void idMultiplayerGame::ClientUpdateVote(2593,77389
+void idMultiplayerGame::ClientCallVote(2648,78817
+void idMultiplayerGame::CastVote(2665,79260
+void idMultiplayerGame::ServerCallVote(2709,80506
+void idMultiplayerGame::DisconnectClient(2846,86666
+void idMultiplayerGame::CheckAbortGame(2859,86900
+void idMultiplayerGame::WantKilled(2895,87943
+void idMultiplayerGame::MapRestart(2907,88226
+void idMultiplayerGame::SwitchToTeam(2935,89144
+void idMultiplayerGame::ProcessChatMessage(2978,90404
+void idMultiplayerGame::Precache(3067,92715
+void idMultiplayerGame::ToggleSpectate(3112,93655
+void idMultiplayerGame::ToggleReady(3135,94364
+void idMultiplayerGame::ToggleTeam(3152,94781
+void idMultiplayerGame::ThrottleUserInfo(3169,95186
+bool idMultiplayerGame::CanPlay(3194,96038
+void idMultiplayerGame::EnterGame(3203,96226
+bool idMultiplayerGame::WantRespawn(3220,96798
+void idMultiplayerGame::VoiceChat_f(3229,97009
+void idMultiplayerGame::VoiceChatTeam_f(3238,97192
+void idMultiplayerGame::VoiceChat(3247,97374
+void idMultiplayerGame::ProcessVoiceChat(3297,98610
+void idMultiplayerGame::ServerWriteInitialReliableMessages(3341,99955
+void idMultiplayerGame::ClientReadStartState(3386,101466
+void idMultiplayerGame::ClientReadWarmupTime(3411,102326
+
+neo/game/Player.cpp,10722
+const bool debug_turn 44,1842
+const bool debug_select 45,1873
+const int ASYNC_PLAYER_INV_AMMO_BITS 47,1907
+const int ASYNC_PLAYER_INV_CLIP_BITS 48,2015
+const int LADDER_RUNG_DISTANCE 60,2464
+const int HEALTH_PER_DOSE 63,2555
+const int WEAPON_DROP_TIME 66,2644
+const int WEAPON_SWITCH_DELAY 69,2737
+const int SPECTATE_RAISE 72,2869
+const int HEALTHPULSE_TIME 74,2901
+const float MIN_BOB_SPEED 77,2992
+const int RAGDOLL_DEATH_TIME 120,5391
+const int MAX_PDAS 121,5428
+const int MAX_PDA_ITEMS 122,5453
+const int STEPUP_TIME 123,5484
+const int MAX_INVENTORY_ITEMS 124,5513
+idVec3 idPlayer::colorBarTable[idPlayer::colorBarTable126,5550
+void idInventory::Clear(140,5809
+void idInventory::GivePowerUp(192,6760
+void idInventory::ClearPowerUps(222,7552
+void idInventory::GetPersistantData(235,7757
+void idInventory::RestoreInventory(324,9783
+void idInventory::Save(431,12514
+void idInventory::Restore(527,15129
+ammo_t idInventory::AmmoIndexForAmmoClass(647,17876
+int idInventory::MaxAmmoForAmmoClass(656,18085
+const char *idInventory::AmmoPickupNameForIndex(idInventory::AmmoPickupNameForIndex665,18324
+int idInventory::WeaponIndexForAmmoClass(675,18573
+ammo_t idInventory::AmmoIndexForWeaponClass(699,19174
+void idInventory::AddPickupName(716,19684
+bool idInventory::Give(737,20170
+void idInventory::Drop(861,23892
+int idInventory::HasAmmo(890,24851
+int idInventory::HasAmmo(910,25221
+bool idInventory::UseAmmo(921,25479
+void idInventory::UpdateArmor(940,25877
+static void mystop 954,26296
+idPlayer::idPlayer(961,26381
+void idPlayer::RegisterPython 1146,30091
+idVec3 idPlayer::GetPos 1165,30609
+bool idPlayer::IsDead 1175,30739
+int idPlayer::setRight 1182,30801
+int idPlayer::setForward 1198,31146
+int idPlayer::setVec 1216,31505
+void idPlayer::select 1234,31907
+void idPlayer::LinkScriptVariables(1247,32079
+void idPlayer::SetupWeaponEntity(1274,33215
+void idPlayer::Init(1301,33802
+void idPlayer::Spawn(1524,38862
+idPlayer::~idPlayer(1726,44395
+void idPlayer::Save(1736,44511
+void idPlayer::Restore(1947,50971
+void idPlayer::PrepareForRestart(2195,58094
+void idPlayer::Restart(2212,58479
+void idPlayer::ServerSpectate(2233,58904
+void idPlayer::SelectInitialSpawnPoint(2261,59588
+void idPlayer::SpawnFromSpawnSpot(2291,60494
+void idPlayer::SpawnToPoint(2310,60982
+void idPlayer::SavePersistantInfo(2415,63424
+void idPlayer::RestorePersistantInfo(2431,63833
+idDict *idPlayer::GetUserInfo(idPlayer::GetUserInfo2450,64292
+void idPlayer::SetSkinColor 2459,64419
+void idPlayer::UpdateSkinSetup(2492,65116
+bool idPlayer::BalanceTDM(2537,66413
+bool idPlayer::UserInfoChanged(2568,67227
+void idPlayer::UpdateHudAmmo(2635,69471
+void idPlayer::UpdateHudStats(2668,70763
+void idPlayer::UpdateHudWeapon(2727,72338
+void idPlayer::DrawHUD(2768,73396
+void idPlayer::EnterCinematic(2800,74295
+void idPlayer::ExitCinematic(2844,75177
+void idPlayer::UpdateConditions(2860,75442
+void idPlayer::WeaponFireFeedback(2903,76902
+void idPlayer::StopFiring(2919,77187
+void idPlayer::FireWeapon(2933,77424
+void idPlayer::CacheWeapons(2980,78396
+bool idPlayer::Give(3006,78847
+void idPlayer::GiveHealthPool(3065,80098
+bool idPlayer::GiveItem(3087,80470
+float idPlayer::PowerUpModifier(3131,81510
+bool idPlayer::PowerUpActive(3173,82139
+bool idPlayer::GivePowerUp(3182,82310
+void idPlayer::ClearPowerup(3264,84399
+void idPlayer::UpdatePowerUps(3298,85030
+void idPlayer::ClearPowerUps(3347,86385
+bool idPlayer::GiveInventoryItem(3362,86628
+void idPlayer::UpdateObjectiveInfo(3388,87316
+void idPlayer::GiveObjective(3409,88153
+void idPlayer::CompleteObjective(3426,88546
+void idPlayer::GiveVideo(3446,88982
+void idPlayer::GiveSecurity(3470,89447
+void idPlayer::GiveEmail(3483,89706
+void idPlayer::GivePDA(3502,90015
+idDict *idPlayer::FindInventoryItem(idPlayer::FindInventoryItem3561,91630
+void idPlayer::RemoveInventoryItem(3578,92007
+void idPlayer::RemoveInventoryItem(3590,92225
+void idPlayer::GiveItem(3600,92385
+int idPlayer::SlotForWeapon(3616,92686
+void idPlayer::Reload(3635,93006
+void idPlayer::NextBestWeapon(3654,93324
+void idPlayer::NextWeapon(3683,93915
+void idPlayer::PrevWeapon(3733,94857
+void idPlayer::SelectWeapon(3783,95804
+void idPlayer::DropWeapon(3839,97325
+void idPlayer::StealWeapon(3905,99516
+idUserInterface *idPlayer::ActiveGui(idPlayer::ActiveGui3958,101448
+void idPlayer::Weapon_Combat(3971,101637
+void idPlayer::Weapon_NPC(4070,104345
+void idPlayer::LowerWeapon(4088,104706
+void idPlayer::RaiseWeapon(4099,104910
+void idPlayer::WeaponLoweringCallback(4110,105124
+void idPlayer::WeaponRisingCallback(4120,105289
+void idPlayer::Weapon_GUI(4130,105442
+void idPlayer::UpdateWeapon(4175,106542
+void idPlayer::SpectateFreeFly(4231,107909
+void idPlayer::SpectateCycle(4275,109354
+void idPlayer::UpdateSpectating(4297,109997
+bool idPlayer::HandleSingleGuiCommand(4320,110531
+bool idPlayer::Collide(4425,113235
+void idPlayer::UpdateLocation(4456,113856
+void idPlayer::ClearFocus(4474,114289
+void idPlayer::UpdateFocus(4490,114615
+void idPlayer::CrashLand(4736,121929
+void idPlayer::BobCycle(4861,125024
+void idPlayer::UpdateDeltaViewAngles(4995,128825
+void idPlayer::SetViewAngles(5009,129128
+void idPlayer::UpdateViewAngles(5019,129311
+void idPlayer::AdjustHeartRate(5112,132687
+int idPlayer::GetBaseHeartRate(5132,133068
+void idPlayer::SetCurrentHeartRate(5145,133591
+void idPlayer::UpdateAir(5198,135159
+int idPlayer::AddGuiPDAData(5269,137057
+const idDeclPDA *idPlayer::GetPDA(idPlayer::GetPDA5321,138456
+const idDeclVideo *idPlayer::GetVideo(idPlayer::GetVideo5335,138724
+void idPlayer::UpdatePDAInfo(5348,139028
+void idPlayer::TogglePDA(5512,145086
+void idPlayer::ToggleScoreboard(5585,147693
+void idPlayer::Spectate(5594,147815
+void idPlayer::SetClipModel(5643,148937
+void idPlayer::UseVehicle(5671,149896
+void idPlayer::PerformImpulse(5698,150593
+bool idPlayer::HandleESC(5782,152481
+bool idPlayer::SkipCinematic(5795,152660
+void idPlayer::EvaluateControls 5805,152869
+void idPlayer::AdjustSpeed(5852,154121
+void idPlayer::AdjustBodyAngles(5907,155675
+void idPlayer::InitAASLocation(6001,158368
+void idPlayer::SetAASLocation(6034,159071
+void idPlayer::GetAASLocation(6070,159712
+void idPlayer::Move(6092,160104
+void idPlayer::UpdateHud(6217,163898
+void idPlayer::UpdateDeathSkin(6294,166442
+void idPlayer::StartFxOnBone(6329,167395
+void idPlayer::dumpControls 6348,167933
+static usercmd_t *uptr uptr6355,168209
+void idPlayer::Think(6365,168328
+void idPlayer::RouteGuiMouse(6630,175005
+void idPlayer::LookAtKiller(6646,175392
+bool idPlayer::isVisible 6666,175883
+void idPlayer::doTurn 6678,176063
+int idPlayer::Turn 6696,176482
+int idPlayer::GetYaw 6713,176927
+bool idPlayer::Aim 6724,177066
+int idPlayer::Fire 6749,177697
+int idPlayer::ChangeWeapon 6776,178231
+int idPlayer::Ammo 6800,178636
+void idPlayer::Kill(6813,178830
+void idPlayer::Killed(6838,179436
+void idPlayer::GetAIAimTargets(6945,182054
+void idPlayer::DamageFeedback(6966,182641
+void idPlayer::CalcDamagePoints(6983,183193
+void idPlayer::Damage(7089,185845
+void idPlayer::Teleport(7257,189968
+void idPlayer::SetPrivateCameraView(7304,191061
+float idPlayer::DefaultFov(7323,191339
+float idPlayer::CalcFov(7345,191708
+idAngles idPlayer::GunTurningOffset(7380,192424
+idVec3	idPlayer::GunAcceleratingOffset(7435,193724
+void idPlayer::CalculateViewWeaponPos(7472,194540
+void idPlayer::OffsetThirdPersonView(7535,196375
+idVec3 idPlayer::GetEyePosition(7606,198455
+void idPlayer::GetViewPos(7623,198863
+void idPlayer::CalculateFirstPersonView(7650,199635
+renderView_t *idPlayer::GetRenderView(idPlayer::GetRenderView7682,200733
+void idPlayer::CalculateRenderView(7693,200921
+void idPlayer::AddAIKill(7766,203297
+void idPlayer::SetSoulCubeProjectile(7792,203944
+void idPlayer::AddProjectilesFired(7801,204112
+void idPlayer::AddProjectileHits(7810,204259
+void idPlayer::SetLastHitTime(7819,204398
+void idPlayer::SetInfluenceLevel(7874,206060
+void idPlayer::SetInfluenceView(7901,206739
+void idPlayer::SetInfluenceFov(7926,207386
+bool idPlayer::OnLadder(7935,207515
+void idPlayer::Event_GetButtons(7944,207660
+void idPlayer::Event_GetMove(7953,207814
+void idPlayer::Event_GetViewAngles(7963,208031
+void idPlayer::Event_StopFxFov(7972,208231
+void idPlayer::StartFxFov(7981,208356
+void idPlayer::Event_EnableWeapon(7991,208542
+void idPlayer::Event_DisableWeapon(8004,208825
+void idPlayer::Event_GetCurrentWeapon(8017,209114
+void idPlayer::Event_GetPreviousWeapon(8033,209446
+void idPlayer::Event_SelectWeapon(8050,209885
+void idPlayer::Event_GetWeaponEntity(8092,210771
+void idPlayer::Event_OpenPDA(8101,210936
+void idPlayer::Event_InPDA(8112,211097
+void idPlayer::TeleportDeath(8121,211250
+void idPlayer::Event_ExitTeleporter(8130,211399
+void idPlayer::ClientPredictionThink(8179,212847
+bool idPlayer::GetPhysicsToVisualTransform(8325,216441
+bool idPlayer::GetPhysicsToSoundTransform(8372,217943
+void idPlayer::WriteToSnapshot(8399,218463
+void idPlayer::ReadFromSnapshot(8424,219381
+void idPlayer::WritePlayerStateToSnapshot(8550,223062
+void idPlayer::ReadPlayerStateFromSnapshot(8572,223603
+bool idPlayer::ServerReceiveEvent(8597,224219
+bool idPlayer::ClientReceiveEvent(8620,224616
+void idPlayer::Hide(8666,225598
+void idPlayer::Show(8681,225794
+void idPlayer::StartAudioLog(8696,225997
+void idPlayer::StopAudioLog(8707,226158
+void idPlayer::ShowTip(8718,226315
+void idPlayer::HideTip(8736,226682
+void idPlayer::Event_HideTip(8746,226839
+void idPlayer::ShowObjective(8755,226955
+void idPlayer::HideObjective(8765,227122
+void idPlayer::Event_StopAudioLog(8775,227297
+void idPlayer::SetSpectateOrigin(8784,227427
+void idPlayer::RemoveWeapon(8798,227664
+bool idPlayer::CanShowWeaponViewmodel(8809,227879
+void idPlayer::SetLevelTrigger(8818,228029
+void idPlayer::Event_LevelTrigger(8832,228379
+void idPlayer::Event_Gibbed(8851,228880
+void idPlayer::Event_GetIdealWeapon(8859,228996
+void idPlayer::UpdatePlayerIcons(8875,229310
+void idPlayer::DrawPlayerIcons(8889,229624
+void idPlayer::HidePlayerIcons(8902,229830
+bool idPlayer::NeedsIcon(8911,229955
+int min 8919,230170
+int max 8927,230238
+selectInfo::selectInfo 8939,230381
+selectInfo::~selectInfo 8951,230699
+selectInfo::selectInfo 8960,230776
+void selectInfo::set_ammo 8966,230846
+int selectInfo::get_run 8973,230928
+void selectInfo::set_run 8979,230979
+void selectInfo::set_angle 8986,231058
+void selectInfo::set_reload 8998,231356
+void selectInfo::dec_ammo 9004,231421
+void selectInfo::dec_run 9014,231619
+void selectInfo::inc_angle 9024,231808
+void selectInfo::finished_reload 9137,234833
+void selectInfo::select 9148,235016
+void selectInfo::poll 9174,235712
+
+neo/game/PlayerIcon.cpp,344
+static const char * iconKeys[iconKeys36,1599
+idPlayerIcon::idPlayerIcon(46,1748
+idPlayerIcon::~idPlayerIcon(56,1889
+void idPlayerIcon::Draw(65,1994
+void idPlayerIcon::Draw(85,2331
+void idPlayerIcon::FreeIcon(113,3011
+bool idPlayerIcon::CreateIcon(126,3236
+bool idPlayerIcon::CreateIcon(137,3584
+void idPlayerIcon::UpdateIcon(177,4781
+
+neo/game/PlayerView.cpp,907
+const int IMPULSE_DELAY 39,1679
+idPlayerView::idPlayerView(45,1773
+void idPlayerView::Save(77,2766
+void idPlayerView::Restore(128,4249
+void idPlayerView::SetPlayerEntity(179,5734
+void idPlayerView::ClearEffects(188,5881
+screenBlob_t *idPlayerView::GetScreenBlob(idPlayerView::GetScreenBlob207,6263
+void idPlayerView::DamageImpulse(226,6698
+void idPlayerView::AddBloodSpray(312,9098
+void idPlayerView::WeaponFireFeedback(358,10309
+void idPlayerView::CalculateShake(378,10822
+idMat3 idPlayerView::ShakeAxis(398,11526
+idAngles idPlayerView::AngleOffset(409,11731
+void idPlayerView::SingleView(435,12203
+void idPlayerView::DoubleVision(546,15686
+void idPlayerView::BerserkVision(584,16808
+void idPlayerView::Flash(601,17300
+void idPlayerView::Fade(614,17538
+void idPlayerView::ScreenFade(643,18058
+void idPlayerView::InfluenceVision(674,18714
+void idPlayerView::RenderPlayerView(704,19774
+
+neo/game/Projectile.cpp,3006
+static const int BFG_DAMAGE_FREQUENCY	50,1912
+static const float BOUNCE_SOUND_MIN_VELOCITY	51,1959
+static const float BOUNCE_SOUND_MAX_VELOCITY	52,2014
+CLASS_DECLARATION(59,2300
+void idProjectile::Spawn(100,3342
+void idProjectile::Save(114,3664
+void idProjectile::Restore(148,4490
+idEntity *idProjectile::GetOwner(idProjectile::GetOwner191,5634
+void idProjectile::Create(200,5774
+idProjectile::~idProjectile(260,7193
+void idProjectile::FreeLightDef(270,7352
+void idProjectile::Launch(282,7568
+void idProjectile::Think(437,11966
+bool idProjectile::Collide(488,13576
+void idProjectile::DefaultDamageEffect(614,17365
+void idProjectile::AddDefaultDamageEffect(654,18583
+void idProjectile::Killed(688,19621
+void idProjectile::Fizzle(710,20214
+void idProjectile::Event_RadiusDamage(754,21199
+void idProjectile::Event_GetProjectileState(766,21565
+void idProjectile::Explode(775,21715
+idVec3 idProjectile::GetVelocity(952,27401
+idVec3 idProjectile::GetGravity(964,27626
+void idProjectile::Event_Explode(976,27856
+void idProjectile::Event_Fizzle(993,28301
+void idProjectile::Event_Touch(1002,28423
+bool idProjectile::ClientPredictionCollide(1026,28990
+void idProjectile::ClientPredictionThink(1071,30397
+void idProjectile::WriteToSnapshot(1083,30575
+void idProjectile::ReadFromSnapshot(1110,31435
+bool idProjectile::ClientReceiveEvent(1194,33529
+CLASS_DECLARATION(1228,34614
+idGuidedProjectile::~idGuidedProjectile(1256,35134
+void idGuidedProjectile::Spawn(1264,35253
+void idGuidedProjectile::Save(1272,35362
+void idGuidedProjectile::Restore(1292,35911
+void idGuidedProjectile::GetSeekPos(1313,36456
+void idGuidedProjectile::Think(1332,36912
+void idGuidedProjectile::Launch(1409,38544
+CLASS_DECLARATION(1451,40315
+idSoulCubeMissile::~idSoulCubeMissile(1475,40748
+void idSoulCubeMissile::Save(1483,40857
+void idSoulCubeMissile::Restore(1502,41390
+void idSoulCubeMissile::KillTarget(1521,41915
+void idSoulCubeMissile::Think(1553,43075
+void idSoulCubeMissile::GetSeekPos(1599,44387
+void idSoulCubeMissile::ReturnToOwner(1618,44817
+void idSoulCubeMissile::Launch(1631,45008
+CLASS_DECLARATION(1672,46497
+idBFGProjectile::~idBFGProjectile(1693,46913
+void idBFGProjectile::Spawn(1707,47158
+void idBFGProjectile::Save(1731,47876
+void idBFGProjectile::Restore(1752,48429
+void idBFGProjectile::FreeBeams(1782,49248
+void idBFGProjectile::Think(1801,49675
+void idBFGProjectile::Launch(1868,52339
+void idBFGProjectile::Event_RemoveBeams(1962,56109
+void idBFGProjectile::Explode(1972,56250
+CLASS_DECLARATION(2056,58531
+void idDebris::Create(2077,58873
+idDebris::idDebris(2094,59228
+idDebris::~idDebris(2106,59393
+void idDebris::Save(2114,59483
+void idDebris::Restore(2129,59786
+void idDebris::Launch(2145,60119
+void idDebris::Think(2270,63775
+void idDebris::Killed(2288,64133
+bool idDebris::Collide(2301,64397
+void idDebris::Fizzle(2315,64667
+void idDebris::Explode(2351,65507
+void idDebris::Event_Explode(2385,66394
+void idDebris::Event_Fizzle(2394,66511
+
+neo/game/Pvs.cpp,2330
+#define MAX_BOUNDS_AREAS	36,1586
+typedef struct pvsPassage_s 38,1615
+	byte *				canSee;pvsPassage_s::canSee39,1645
+} pvsPassage_t;40,1730
+typedef struct pvsPortal_s 43,1748
+	int					areaNum;pvsPortal_s::areaNum44,1777
+	idWinding *			w;pvsPortal_s::w45,1824
+	idBounds			bounds;pvsPortal_s::bounds46,1920
+	idPlane				plane;pvsPortal_s::plane47,1959
+	pvsPassage_t *		passages;pvsPortal_s::passages48,2049
+	bool				done;pvsPortal_s::done49,2132
+	byte *				vis;pvsPortal_s::vis50,2193
+	byte *				mightSee;pvsPortal_s::mightSee51,2233
+} pvsPortal_t;52,2282
+typedef struct pvsArea_s 55,2299
+	int					numPortals;pvsArea_s::numPortals56,2326
+	idBounds			bounds;pvsArea_s::bounds57,2381
+	pvsPortal_t **		portals;pvsArea_s::portals58,2430
+} pvsArea_t;59,2507
+typedef struct pvsStack_s 62,2522
+	struct pvsStack_s *	next;pvsStack_s::next63,2550
+	byte *				mightSee;pvsStack_s::mightSee64,2598
+} pvsStack_t;65,2702
+idPVS::idPVS(73,2771
+idPVS::~idPVS(98,3128
+int idPVS::GetPortalCount(107,3230
+void idPVS::CreatePVSData(123,3490
+void idPVS::DestroyPVSData(181,4821
+void idPVS::FloodFrontPortalPVS_r(212,5314
+void idPVS::FrontPortalPVS(242,6030
+pvsStack_t *idPVS::FloodPassagePVS_r(idPVS::FloodPassagePVS_r327,8343
+void idPVS::PassagePVS(415,10813
+void idPVS::AddPassageBoundaries(452,11688
+#define MAX_PASSAGE_BOUNDS	570,14514
+void idPVS::CreatePassages(572,14547
+void idPVS::DestroyPassages(695,17978
+void idPVS::CopyPortalPVSToMightSee(717,18386
+int idPVS::AreaPVSFromPortalPVS(732,18647
+void idPVS::Init(797,20175
+void idPVS::Shutdown(862,21625
+void idPVS::GetConnectedAreas(890,22117
+int idPVS::GetPVSArea(931,22944
+int idPVS::GetPVSAreas(940,23106
+pvsHandle_t idPVS::SetupCurrentPVS(949,23322
+pvsHandle_t idPVS::SetupCurrentPVS(962,23595
+pvsHandle_t idPVS::SetupCurrentPVS(975,23959
+pvsHandle_t idPVS::SetupCurrentPVS(1014,24874
+pvsHandle_t idPVS::MergeCurrentPVS(1076,26506
+pvsHandle_t idPVS::AllocCurrentPVS(1104,27279
+void idPVS::FreeCurrentPVS(1128,27732
+bool idPVS::InCurrentPVS(1140,28053
+bool idPVS::InCurrentPVS(1162,28570
+bool idPVS::InCurrentPVS(1185,29194
+bool idPVS::InCurrentPVS(1204,29663
+void idPVS::DrawPVS(1228,30240
+void idPVS::DrawPVS(1281,31327
+void idPVS::DrawCurrentPVS(1339,32512
+void idPVS::WritePVS(1394,33712
+void idPVS::ReadPVS(1403,33902
+
+neo/game/SecurityCamera.cpp,877
+CLASS_DECLARATION(53,2219
+void idSecurityCamera::Restore(94,3434
+void idSecurityCamera::Spawn(122,4155
+void idSecurityCamera::Event_AddLight(185,5907
+void idSecurityCamera::DrawFov(226,7018
+renderView_t *idSecurityCamera::GetRenderView(idSecurityCamera::GetRenderView271,8500
+bool idSecurityCamera::CanSeePlayer(285,8829
+void idSecurityCamera::SetAlertMode(339,9966
+void idSecurityCamera::Think(352,10232
+const idVec3 idSecurityCamera::GetAxis(423,11706
+float idSecurityCamera::SweepSpeed(432,11929
+void idSecurityCamera::StartSweep(441,12101
+void idSecurityCamera::Event_ContinueSweep(457,12461
+void idSecurityCamera::Event_Alert(476,12974
+void idSecurityCamera::Event_ReverseSweep(494,13413
+void idSecurityCamera::Event_Pause(505,13635
+void idSecurityCamera::Killed(520,13990
+bool idSecurityCamera::Pain(547,14877
+void idSecurityCamera::Present(563,15305
+
+neo/game/SmokeParticles.cpp,392
+static const char *smokeParticle_SnapshotName smokeParticle_SnapshotName35,1606
+idSmokeParticles::idSmokeParticles(42,1758
+void idSmokeParticles::Init(57,2079
+void idSmokeParticles::Shutdown(105,3359
+void idSmokeParticles::FreeSmokes(123,3810
+bool idSmokeParticles::EmitSmoke(166,4909
+bool idSmokeParticles::UpdateRenderEntity(289,8246
+bool idSmokeParticles::ModelCallback(415,11524
+
+neo/game/Sound.cpp,444
+CLASS_DECLARATION(46,1884
+void idSound::Save(75,2423
+void idSound::Restore(91,2825
+void idSound::Spawn(107,3217
+void idSound::Event_Trigger(140,4094
+void idSound::Event_Timer(172,4794
+void idSound::Think(182,4991
+void idSound::UpdateChangeableSpawnArgs(197,5253
+void idSound::SetSound(243,6624
+void idSound::DoSound(261,7167
+void idSound::Event_On(276,7507
+void idSound::Event_Off(289,7749
+void idSound::ShowEditingDialog(302,7947
+
+neo/game/Target.cpp,2097
+CLASS_DECLARATION(54,2039
+CLASS_DECLARATION(99,2933
+CLASS_DECLARATION(132,3562
+CLASS_DECLARATION(164,4288
+CLASS_DECLARATION(187,4868
+CLASS_DECLARATION(228,5840
+void idTarget_WaitForButton::Think(252,6347
+CLASS_DECLARATION(276,6945
+CLASS_DECLARATION(301,7626
+CLASS_DECLARATION(355,8949
+CLASS_DECLARATION(389,9767
+void idTarget_FadeEntity::Save(409,10140
+void idTarget_FadeEntity::Restore(420,10375
+void idTarget_FadeEntity::Event_Activate(431,10614
+void idTarget_FadeEntity::Think(461,11147
+CLASS_DECLARATION(498,11944
+CLASS_DECLARATION(541,12874
+CLASS_DECLARATION(584,13801
+void idTarget_Give::Event_Activate(604,14162
+CLASS_DECLARATION(639,15141
+void idTarget_GiveEmail::Event_Activate(656,15447
+CLASS_DECLARATION(675,15984
+void idTarget_SetModel::Event_Activate(701,16575
+CLASS_DECLARATION(724,17220
+void idTarget_SetInfluence::Save(751,17948
+void idTarget_SetInfluence::Restore(798,19114
+void idTarget_SetInfluence::Spawn(855,20366
+void idTarget_SetInfluence::Event_Flash(874,20874
+void idTarget_SetInfluence::Event_ClearFlash(894,21620
+void idTarget_SetInfluence::Event_GatherEntities(903,21863
+void idTarget_SetInfluence::Event_Activate(964,23749
+void idTarget_SetInfluence::Think(1121,28066
+void idTarget_SetInfluence::Event_RestoreInfluence(1142,28563
+CLASS_DECLARATION(1233,31095
+CLASS_DECLARATION(1285,32437
+void idTarget_SetFov::Restore(1308,32948
+void idTarget_SetFov::Event_Activate(1328,33426
+void idTarget_SetFov::Think(1342,33839
+CLASS_DECLARATION(1364,34394
+CLASS_DECLARATION(1388,35128
+CLASS_DECLARATION(1423,35952
+CLASS_DECLARATION(1470,37516
+CLASS_DECLARATION(1515,38757
+void idTarget_Tip::Spawn(1536,39161
+void idTarget_Tip::Save(1544,39258
+void idTarget_Tip::Restore(1553,39414
+void idTarget_Tip::Event_GetPlayerPos(1562,39576
+void idTarget_Tip::Event_Activate(1575,39847
+void idTarget_Tip::Event_TipOff(1592,40284
+CLASS_DECLARATION(1613,40751
+CLASS_DECLARATION(1638,41348
+CLASS_DECLARATION(1670,42220
+CLASS_DECLARATION(1697,42956
+CLASS_DECLARATION(1728,43811
+void idTarget_FadeSoundClass::Event_RestoreVolume(1757,44707
+
+neo/game/Trigger.cpp,2375
+CLASS_DECLARATION(46,1870
+void idTrigger::Enable(121,4568
+void idTrigger::Disable(131,4740
+void idTrigger::CallScript(142,4989
+const function_t *idTrigger::GetScriptFunction(idTrigger::GetScriptFunction156,5224
+void idTrigger::Save(165,5370
+void idTrigger::Restore(178,5605
+void idTrigger::Event_Enable(196,6099
+void idTrigger::Event_Disable(205,6217
+idTrigger::idTrigger(214,6333
+void idTrigger::Spawn(223,6442
+CLASS_DECLARATION(248,7143
+void idTrigger_Multi::Save(278,7754
+void idTrigger_Multi::Restore(297,8279
+void idTrigger_Multi::Spawn(323,9121
+bool idTrigger_Multi::CheckFacing(372,10617
+void idTrigger_Multi::TriggerAction(393,11141
+void idTrigger_Multi::Event_TriggerAction(412,11675
+void idTrigger_Multi::Event_Trigger(426,12090
+void idTrigger_Multi::Event_Touch(463,12924
+CLASS_DECLARATION(516,14094
+void idTrigger_EntityName::Save(541,14663
+void idTrigger_EntityName::Restore(556,15051
+void idTrigger_EntityName::Spawn(571,15430
+void idTrigger_EntityName::TriggerAction(606,16611
+void idTrigger_EntityName::Event_TriggerAction(625,17130
+void idTrigger_EntityName::Event_Trigger(639,17555
+void idTrigger_EntityName::Event_Touch(671,18295
+CLASS_DECLARATION(705,19109
+void idTrigger_Timer::Save(727,19508
+void idTrigger_Timer::Restore(741,19828
+void idTrigger_Timer::Spawn(758,20205
+void idTrigger_Timer::Enable(781,20820
+void idTrigger_Timer::Disable(794,21016
+void idTrigger_Timer::Event_Timer(807,21210
+void idTrigger_Timer::Event_Use(821,21487
+CLASS_DECLARATION(847,22055
+void idTrigger_Count::Save(868,22452
+void idTrigger_Count::Restore(879,22670
+void idTrigger_Count::Spawn(890,22883
+void idTrigger_Count::Event_Trigger(901,23092
+void idTrigger_Count::Event_TriggerAction(921,23483
+CLASS_DECLARATION(937,23841
+void idTrigger_Hurt::Save(959,24221
+void idTrigger_Hurt::Restore(970,24439
+void idTrigger_Hurt::Spawn(984,24707
+void idTrigger_Hurt::Event_Touch(996,24937
+void idTrigger_Hurt::Event_Toggle(1015,25392
+CLASS_DECLARATION(1028,25652
+CLASS_DECLARATION(1059,26434
+void idTrigger_Touch::Spawn(1078,26750
+void idTrigger_Touch::Save(1095,27111
+void idTrigger_Touch::Restore(1104,27272
+void idTrigger_Touch::TouchEntities(1113,27444
+void idTrigger_Touch::Think(1156,28450
+void idTrigger_Touch::Event_Trigger(1168,28636
+void idTrigger_Touch::Enable(1181,28867
+void idTrigger_Touch::Disable(1190,29001
+
+neo/game/Weapon.cpp,4452
+CLASS_DECLARATION(82,3628
+idWeapon::~idWeapon(166,6824
+void idWeapon::Spawn(177,6950
+void idWeapon::SetOwner(196,7399
+bool idWeapon::ShouldConstructScriptObjectAtSpawn(214,7907
+void idWeapon::CacheWeapon(223,8053
+void idWeapon::Save(260,9025
+void idWeapon::Restore(386,12564
+void idWeapon::Clear(545,17366
+void idWeapon::InitWorldModel(719,21395
+void idWeapon::GetWeaponDef(765,22850
+const char *idWeapon::Icon(idWeapon::Icon1030,32414
+void idWeapon::UpdateGUI(1039,32534
+void idWeapon::UpdateFlashPosition(1094,34425
+void idWeapon::MuzzleFlashLight(1115,35249
+bool idWeapon::UpdateSkin(1151,36377
+void idWeapon::SetModel(1176,36928
+bool idWeapon::GetGlobalJointTransform(1205,37691
+void idWeapon::SetPushVelocity(1231,38554
+void idWeapon::Think(1247,38894
+void idWeapon::Raise(1256,39067
+void idWeapon::PutAway(1267,39210
+void idWeapon::Reload(1280,39451
+void idWeapon::LowerWeapon(1291,39594
+void idWeapon::RaiseWeapon(1309,39967
+void idWeapon::HideWeapon(1329,40349
+void idWeapon::ShowWeapon(1342,40549
+void idWeapon::HideWorldModel(1357,40775
+void idWeapon::ShowWorldModel(1368,40953
+void idWeapon::OwnerDied(1379,41126
+void idWeapon::BeginAttack(1400,41554
+void idWeapon::EndAttack(1422,41870
+bool idWeapon::IsReady(1439,42154
+bool idWeapon::IsReloading(1448,42375
+bool idWeapon::IsHolstered(1457,42516
+bool idWeapon::ShowCrosshair(1466,42662
+bool idWeapon::CanDrop(1475,42887
+void idWeapon::WeaponStolen(1491,43188
+idEntity * idWeapon::DropItem(1512,43559
+void idWeapon::SetState(1540,44390
+void idWeapon::UpdateNozzleFx(1576,45168
+bool idWeapon::BloodSplat(1632,46699
+void idWeapon::MuzzleRise(1697,48349
+idThread *idWeapon::ConstructScriptObject(idWeapon::ConstructScriptObject1732,49088
+void idWeapon::DeconstructScriptObject(1760,49824
+void idWeapon::UpdateScript(1792,50482
+void idWeapon::AlertMonsters(1825,51124
+void idWeapon::PresentWeapon(1871,52885
+void idWeapon::EnterCinematic(2011,57273
+void idWeapon::ExitCinematic(2037,57733
+void idWeapon::NetCatchup(2053,57950
+int	idWeapon::GetZoomFov(2065,58124
+void idWeapon::GetWeaponAngleOffsets(2074,58251
+void idWeapon::GetWeaponTimeOffsets(2085,58509
+ammo_t idWeapon::GetAmmoNumForName(2102,58859
+const char *idWeapon::GetAmmoNameForNum(idWeapon::GetAmmoNameForNum2133,59556
+const char *idWeapon::GetAmmoPickupNameForNum(idWeapon::GetAmmoPickupNameForNum2163,60153
+int idWeapon::AmmoAvailable(2194,60794
+int idWeapon::AmmoInClip(2207,61004
+void idWeapon::ResetAmmoClip(2216,61130
+ammo_t idWeapon::GetAmmoType(2225,61250
+int	idWeapon::ClipSize(2234,61375
+int	idWeapon::LowAmmo(2243,61493
+int	idWeapon::AmmoRequired(2252,61608
+void idWeapon::WriteToSnapshot(2261,61742
+void idWeapon::ReadFromSnapshot(2273,62045
+bool idWeapon::ClientReceiveEvent(2305,62886
+void idWeapon::Event_Clear(2350,63998
+void idWeapon::Event_GetOwner(2359,64111
+void idWeapon::Event_WeaponState(2368,64254
+void idWeapon::Event_WeaponReady(2394,64786
+void idWeapon::Event_WeaponOutOfAmmo(2410,65059
+void idWeapon::Event_WeaponReloading(2422,65255
+void idWeapon::Event_WeaponHolstered(2431,65396
+void idWeapon::Event_WeaponRising(2443,65589
+void idWeapon::Event_WeaponLowering(2456,65810
+void idWeapon::Event_UseAmmo(2469,66030
+void idWeapon::Event_AddToClip(2488,66421
+void idWeapon::Event_AmmoInClip(2511,66797
+void idWeapon::Event_AmmoAvailable(2521,66968
+void idWeapon::Event_TotalAmmoCount(2531,67191
+void idWeapon::Event_ClipSize(2541,67398
+void idWeapon::Event_AutoReload(2550,67542
+void idWeapon::Event_NetReload(2564,67840
+void idWeapon::Event_NetEndReload(2576,68053
+void idWeapon::Event_PlayAnim(2588,68268
+void idWeapon::Event_PlayCycle(2618,69191
+void idWeapon::Event_AnimDone(2646,70093
+void idWeapon::Event_SetBlendFrames(2659,70372
+void idWeapon::Event_GetBlendFrames(2668,70546
+void idWeapon::Event_Next(2677,70704
+void idWeapon::Event_SetSkin(2687,70874
+void idWeapon::Event_Flashlight(2718,71580
+void idWeapon::Event_GetLightParm(2733,71811
+void idWeapon::Event_SetLightParm(2746,72137
+void idWeapon::Event_SetLightParms(2761,72529
+void idWeapon::Event_CreateProjectile(2780,73172
+void idWeapon::Event_LaunchProjectiles(2800,73663
+void idWeapon::Event_Melee(2982,80089
+void idWeapon::Event_GetWorldModel(3101,83738
+void idWeapon::Event_AllowDrop(3110,83913
+void idWeapon::Event_EjectBrass(3125,84162
+void idWeapon::Event_IsInvisible(3166,85346
+void idWeapon::ClientPredictionThink(3179,85594
+
+neo/game/WorldSpawn.cpp,178
+CLASS_DECLARATION(45,1820
+void idWorldspawn::Save(104,3323
+void idWorldspawn::Restore(112,3443
+idWorldspawn::~idWorldspawn(128,3806
+void idWorldspawn::Event_Remove(139,3971
