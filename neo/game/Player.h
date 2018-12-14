@@ -595,6 +595,7 @@ public:
 	int ChangeWeapon (int new_weapon); // gaius
 	int reload_weapon(void); // Matt
 	int get_health(void); // Matt
+	int stepUp(int vertVel, int dist); // Matt
 	void SetSkinColor (int choice);  // gaius
 
 private:

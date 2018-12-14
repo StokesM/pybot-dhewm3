@@ -536,3 +536,9 @@ class bot:
     #              < 0 if error for some reason.
     def get_health(self):
         return self._cache.get_health()
+
+    # Matthew Stokes
+    # step_up - Jump or crouch depeding on
+    #           vertical velocity
+    def step_up(self, vertVel, dist):
+        return self._cache.step_up(vertVel, dist)

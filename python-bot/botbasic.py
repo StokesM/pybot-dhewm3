@@ -558,3 +558,17 @@ class basic:
 
     def allobj (self):
         return range (1, self.maxobj () + 1)
+
+
+    # Matthew Stokes
+    # step_up - Use for jump or crouch
+    #          depending on pos or nev vel.
+    def step_up(self, vertVel, dist):
+        String = "step_up %d %d\n" % (vertVel, dist)
+        if debug_protocol:
+            print "requsting", String
+        self.s.send(String)
+        string = self.getLine()
+        if debug_protocol:
+            print "doom returned", string
+        return int(string)

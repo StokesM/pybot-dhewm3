@@ -124,6 +124,7 @@ class item
   int stepForward (int vel, int dist);
   int stepRight (int vel, int dist);
   int stepVec (int velforward, int velright, int dist);
+  int step_up(int velVert, int dist); // Matt
   int start_firing (void);
   int stop_firing (void);
   int ammo (void);
@@ -145,6 +146,20 @@ class item
   char name[MAX_NAME];
   int instanceId;
 };
+
+
+/*
+ * Matthew Stokes
+ * item::step_up
+ */
+int item::step_up(int velVert, int dist) {
+    switch (kind)
+    {
+    case item_player:
+      return idplayer->stepUp(velVert, dist);
+    }
+  return 0;
+}
 
 
 item::item (void)
@@ -507,6 +522,7 @@ class dict
   int stepForward (int id, int vel, int units);
   int stepRight (int id, int vel, int dist);
   int stepVec (int id, int velforward, int velright, int dist);
+  int step_up(int id, int velVert, int dist);
   int start_firing (int id);
   int stop_firing (int id);
   int reload_weapon (int id);
@@ -523,6 +539,14 @@ class dict
   item *entry[MAX_ENTRY];
   int high;
 };
+
+/*
+ * Matthew Stokes
+ * dict::step_up
+ */
+int dict::step_up(int id, int velVert, int dist) {
+  return entry[id]->step_up(velVert, dist);
+}
 
 
 dict::dict (void)
@@ -1663,6 +1687,8 @@ void pyBotClass::interpretRemoteProcedureCall (char *data)
     rpcForward (&data[8]);
   else if (idStr::Cmpn (data, "stepvec ", 8) == 0)
     rpcStepVec (&data[8]);
+  else if (idStr::Cmpn(data, "step_up ", 8) == 0) // Matthew Stokes
+    rpcStepUp(&data[8]);
   else if (strcmp (data, "start_firing") == 0)
     rpcStartFiring ();
   else if (strcmp (data, "stop_firing") == 0)
@@ -1820,6 +1846,37 @@ void pyBotClass::rpcStep (char *data)
   buffer.pyput (buf);
   state = toWrite;
 }
+
+/*
+ * Matthew Stokes
+ * rpcStepUp - either jump or crouch depending on vel.
+ */
+  void pyBotClass::rpcStepUp(char* data) {
+  char buf[1024];
+  int velVert;
+  int dist;
+
+  if (protocol_debugging)
+  gameLocal.Printf ("rpcStepUp (%s) call by python\n", data);
+
+  if (rpcId > 0)
+    {
+      velVert = atoi (data);
+      char *p = index (data, ' ');
+      if ((p == NULL) || ((*p) == '\0'))
+	      dist = 0;
+      else
+	    {
+	      dist = atoi (p);
+	    }
+    dist = dictionary->step_up (rpcId, velVert, dist);
+    }
+  idStr::snPrintf (buf, sizeof (buf), "%d\n", dist);
+  buffer.pyput (buf);
+  state = toWrite;
+}
+
+
 
 
 /*

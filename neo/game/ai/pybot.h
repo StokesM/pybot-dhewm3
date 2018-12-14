@@ -112,6 +112,7 @@ class pyBotClass
   void rpcMaxObj (void);
   void rpcStep (char *data);
   void rpcRight (char *data);
+  void rpcStepUp(char* data);
   void rpcForward (char *data);
   void rpcStepVec (char *data);
   void rpcAim (char *data);

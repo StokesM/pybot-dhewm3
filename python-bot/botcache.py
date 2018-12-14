@@ -312,3 +312,10 @@ class cache:
     #              return health < 0 if error.
     def get_health(self):
         return self._basic.health()
+
+    # Matthew Stokes
+    # step_up - Jump or crouch depending on
+    #           Vertical velocity.
+    def step_up(self, vertVel, dist):
+        self.delpos(self.me())
+        return self._basic.step_up(vertVel, dist)

@@ -1232,6 +1232,29 @@ int idPlayer::setVec (int velforward, int velright, int dist)
 }
 
 
+// Matthew Stokes
+
+/*
+===============
+idPlayer::stepUp
+=================
+for crouching and jumping depending on vel.
+*/
+int idPlayer::stepUp(int velVert, int dist) {
+	int old = (int) usercmd.upmove;
+
+	usercmd.upmove = (signed char) velVert;
+	usercmd.forwardmove = 0;
+	usercmd.rightmove = 0;
+	buttonMask = 0;
+	buttonMask |= BUTTON_RUN;
+	pulseCount.set_run (dist);
+	usercmd.buttons |= BUTTON_RUN;
+	gameLocal.usercmds[entityNumber] = usercmd;
+	return old;
+}
+
+
 // gaius
 
 void idPlayer::select (int bitmask)
@@ -6405,9 +6428,11 @@ void idPlayer::Think( void ) {
 		    buttonMask &= (~ BUTTON_RUN);
 		    usercmd.rightmove = 0;
 		    usercmd.forwardmove = 0;
+			usercmd.upmove = 0; // Matthew Stokes
 		    gameLocal.usercmds[entityNumber].rightmove = 0;
 		    gameLocal.usercmds[entityNumber].forwardmove = 0;
 		    gameLocal.usercmds[entityNumber].buttons = 0;
+			gameLocal.usercmds[entityNumber].upmove = 0; // Matthew Stokes
 		  }
 	      }
 	    pulseCount.inc_angle (this);

@@ -155,12 +155,22 @@ def botMain (b):
     while True:
         #moveTowards (you)
         #b.face (you)
-        b.change_weapon(3)
+        #b.change_weapon(3)
         #b.fire ()
-        time.sleep (3)
+        #ime.sleep (3)
         #b.fire()
-        print "My Health is", b.get_health()
-        reload (b)
+        #print "My Health is", b.get_health()
+        #reload (b)
+        b.step_up(-200, 4*12)
+        b.select(['move'])
+        b.step_up(200, 4*12)
+        b.select(['move'])
+        b.face(you)
+        b.fire()
+        b.select(['fire'])
+        ammo = b.reload_weapon ()
+        reload(b)
+
 
 
 
