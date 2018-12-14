@@ -454,6 +454,14 @@ class aas:
                 pass
 
 
+    # Matthew Stokes
+    # Dealing with HEIGHT
+    def heightDesc(self):
+        self.expect('HEIGHT')
+        if self.integer():
+            pass # Hopefully this works because nav shouldnt care about height
+
+
     #
     #  status := "STATUS" ( [ 'OPEN' | 'CLOSED' | 'SECRET' ] ) =:
     #
@@ -486,7 +494,7 @@ class aas:
 
     def integer (self):
         i = self.peek ()
-        if i.isdigit ():
+        if i.isdigit () or (i[0] == '-'):
             self._curInteger = self.get ()
             return True
         return False
@@ -703,9 +711,11 @@ class aas:
                 self._curRoom = newRoom (self._curRoomNo)
                 if self._verbose:
                     print "roomDesc", curRoomNo
-                while self.expecting (['DOOR', 'WALL', 'TREASURE', 'AMMO', 'WEAPON', 'LIGHT', 'MONSTER', 'SPAWN', 'INSIDE', 'DEFAULT']):
+                while self.expecting (['DOOR', 'HEIGHT', 'WALL', 'TREASURE', 'AMMO', 'WEAPON', 'LIGHT', 'MONSTER', 'SPAWN', 'INSIDE', 'DEFAULT']):
                     if self.expecting (['DOOR']):
                         self.doorDesc ()
+                    elif self.expecting(['HEIGHT']):
+                        self.heightDesc()
                     elif self.expecting (['WALL']):
                         self.wallDesc ()
                     elif self.expecting (['TREASURE']):
