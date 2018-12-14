@@ -1,0 +1,19 @@
+TODO:
+
+Check reload works. [x]
+Implement Fire and get it working. [x]
+Implement change weapon. [x]
+Implement get health. [x]
+Implement jump. [x]
+Try to implement crouch. [x]
+Get current Weapons in inventory. []
+Maybe heal. []
+
+Re do auto lighting in chisel. [x]
+    Check that works. [x]
+
+Then Try to re implement level definitions. [x]
+    If it breaks it, ignore it. [x] FIXED [X]
+
+
+Maybe go back to the bot stuff and getting ammo if time []
