@@ -9223,3 +9223,20 @@ int idPlayer::reload_weapon(void) {
   }
   return -1;
 }
+
+// Matthew Stokes
+
+/*
+==================
+idPlayer::health
+=================
+*/
+int idPlayer::get_health(void) {
+		if (gameLocal.isClient) {
+		return -1;
+	}
+	if (spectating || gameLocal.inCinematic || influenceActive) {
+		return -1;
+	}
+    return health;
+}

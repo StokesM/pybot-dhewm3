@@ -306,3 +306,9 @@ class cache:
     def change_weapon(self, weapon_no):
         self.delammo()
         return self._basic.change_weapon(weapon_no)
+
+    # Matthew Stokes
+    # get_health - Get the health of the bot
+    #              return health < 0 if error.
+    def get_health(self):
+        return self._basic.health()
