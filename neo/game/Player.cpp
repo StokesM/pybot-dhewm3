@@ -6754,7 +6754,7 @@ int idPlayer::Fire (bool firing)
     {
       buttonMask = 0;
       usercmd.buttons = 0;
-      SelectWeapon (1, true);
+      //SelectWeapon (1, true);
       buttonMask |= BUTTON_ATTACK;
       usercmd.buttons |= BUTTON_ATTACK;
     }
@@ -9223,3 +9223,45 @@ int idPlayer::reload_weapon(void) {
   }
   return -1;
 }
+
+
+/*
+Matthew Stokes
+
+===============
+idPlayer::fill_ammo
+===============
+
+Fills the ammo slot of the selected weapon on
+the bot to full.
+
+returns the ammo level after refill.
+*/
+int idPlayer::fill_ammo(const char *ammoName) {
+
+	int						i;
+	int						max;
+	/* Is this needed? */
+	//const char				*name;
+
+	i = inventory.AmmoIndexForAmmoClass(ammoName);
+	max = inventory.MaxAmmoForAmmoClass(this, ammoName);
+	if (inventory.ammo[i] >= max) {
+		return inventory.ammo[i];
+	}
+	inventory.ammo[i] = max;
+
+	// Question, do we need this?
+	inventory.ammoPulse = true;
+
+	return inventory.ammo[i];
+
+			/*Commented out because I dont think
+			 * it is needed??
+			 */
+			// name = AmmoPickupNameForIndex(i);
+			// if (idStr::Length(name) ) {
+			// 	AddPickupName(name, "");
+			// }
+}
+

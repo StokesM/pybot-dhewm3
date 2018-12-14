@@ -1,9 +1,10 @@
 #!/usr/bin/env python
 
-import botbasic, time, sys
 import botlib
 from chvec import *
 import math
+import time, sys
+import botbasic
 
 debugTowards = False
 
@@ -125,6 +126,7 @@ def clock (b):
 doommarine = -2
 
 def execBot (b, useExceptions = True):
+    print "got 1"
     if useExceptions:
         try:
             botMain (b)
@@ -143,6 +145,7 @@ def reload (b):
     print ammo, "Ammo left"
 
 def botMain (b):
+    print "got 2"
     global me
     print "success!  python doom marine is alive"
 
@@ -152,14 +155,19 @@ def botMain (b):
     print "the python marine id is", me
     you = findYou (b)
 
+    b.fill_ammo("ammo_clip")
+    b.fill_ammo("ammo_belt")
+    b.fill_ammo("ammo_shells")
+    b.fill_ammo("ammo_bullets")
+    print "got 3"
+    time.sleep(5)
+
     while True:
         #moveTowards (you)
         #b.face (you)
         b.change_weapon(3)
-        #b.fire ()
-        time.sleep (3)
-        #b.fire()
-        time.sleep(5)
+        time.sleep (7)
+        b.fire()
         reload (b)
 
 

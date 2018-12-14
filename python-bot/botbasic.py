@@ -417,6 +417,31 @@ class basic:
             print "doom returned", l
         return int (l)
 
+    # Matthew Stokes
+    # fill_ammo - fill the ammo of the selected class
+    #             Returns ammo left after fill.
+    # Possible classes are:
+	# "ammo_shells"
+	# "ammo_bullets"
+	# "ammo_rockets"
+	# "ammo_cells"	
+	# "ammo_grenades"
+	# "ammo_souls"
+	# "ammo_bfg"
+	# "ammo_clip"
+	# "ammo_belt"
+
+    def fill_ammo(self, ammoClass):
+        if debug_protocol:
+            print "requesting to fill ammo of", ammoClass
+        sendString = "fill_ammo" + ammoClass
+        self.s.send (sendString)
+        l = self.getLine ()
+        if debug_protocol:
+            print "doom returned", l
+        return int (l)
+    
+
     #
     #  changeWeapon - change to weapon, n.
     #                 Attempt to change to weapon, n.

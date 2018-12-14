@@ -34,7 +34,7 @@ from botcache import cache
 from chvec import *
 from math import atan2, sqrt
 
-debugging = False
+debugging = True
 
 pen2doom3units = 48   # inches per ascii square
 angle_offset = 0
@@ -203,6 +203,25 @@ class bot:
     def fire(self):
         self._cache.start_firing()
         return self._cache.stop_firing()
+
+    # Matthew Stokes
+    #
+    # fill_ammo - fill up the ammo of this class
+    #             returns the ammo amount after fill
+    # Possible ammo types:
+	# "ammo_shells"
+	# "ammo_bullets"
+	# "ammo_rockets"
+	# "ammo_cells"
+	# "ammo_grenades"
+	# "ammo_souls"
+	# "ammo_bfg"
+	# "ammo_clip"
+	# "ammo_belt"
+
+    def fill_ammo(self, ammoClass):
+        return self._cache.fill_ammo(ammoClass)
+
 
     #
     #  sync - wait for any event to occur.

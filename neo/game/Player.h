@@ -588,12 +588,13 @@ public:
 	bool isVisible (idEntity *enemy);  // gaius
 	int Fire (bool firing);   // gaius
 	int Ammo (void);  // gaius
-        int Turn (int angle, int angle_vel);   // gaius
+    int Turn (int angle, int angle_vel);   // gaius
 	int GetYaw (void);  // gaius
 	void doTurn (int angle);	// gaius
 	void select (int bitmask);  // gaius
 	int ChangeWeapon (int new_weapon); // gaius
 	int reload_weapon(void); // Matt
+	int fill_ammo(const char *statname); // Matt
 	void SetSkinColor (int choice);  // gaius
 
 private:

@@ -179,8 +179,18 @@ class cache:
     #                  It returns the amout of ammo left.
 
     def reload_weapon (self):
+        self.delammo()
         return self._basic.reload_weapon ()
 
+
+    # Matthew Stokes
+    #
+    # fill_ammo - Fill the ammo for the selected ammo class.
+    #            Returns ammo after refill.
+
+    def fill_ammo(self, ammoClass):
+        self.delammo()
+        return self._basic.fill_ammo(ammoClass)
 
     #
     #  sync - wait for any event to occur.
@@ -225,6 +235,7 @@ class cache:
     #
 
     def reload_weapon (self):
+        self.delammo()
         return self._basic.reload_weapon ()
 
     #

@@ -131,6 +131,7 @@ class item
   int health (void);
   int angle (void);
   int reload_weapon (void);
+  int fill_ammo(char* ammoClass);
   bool aim (idEntity *enemy);
   int turn (int angle, int angle_vel);
   idEntity *getIdEntity (void);
@@ -390,6 +391,24 @@ int item::stop_firing (void)
   return 0;
 }
 
+// Matthew Stokes
+
+/*
+ * fill_ammo - Fill the ammo type to full.
+ *             Returns the ammo level after fill.
+ */
+int item::fill_ammo(char* ammoClass) {
+    switch (kind)
+    {
+    case item_monster:
+      assert(false);
+    case item_player:
+      return idplayer->fill_ammo(ammoClass);
+    }
+  assert (false);
+  return 0;
+}
+
 
 /*
  */
@@ -519,6 +538,7 @@ class dict
   int getHigh (void);
   int weapon (int id, int new_weapon);
   int determineInstanceId (const char *name);
+  int fill_ammo (int id, char* ammoClass);
  private:
   item *entry[MAX_ENTRY];
   int high;
@@ -763,6 +783,18 @@ int dict::getHigh (void)
 
 int dict::reload_weapon (int id) {
   return entry[id]->reload_weapon();
+}
+
+
+// Matthew Stokes
+
+/*
+ * fill_ammo - fills the selected ammo type.
+ *             Returns the new ammo level.
+ */
+
+int dict::fill_ammo(int id, char* ammoClass) {
+  return entry[id]->fill_ammo(ammoClass);
 }
 
 
@@ -1689,6 +1721,8 @@ void pyBotClass::interpretRemoteProcedureCall (char *data)
     rpcGetEntityPos (&data[15]);
   else if (idStr::Cmpn (data, "change_weapon ", 14) == 0)
     rpcChangeWeapon (&data[14]);
+  else if (idStr::Cmpn(data, "fill_ammo ", 10) == 0)
+    rpcFillAmmo(&data[10]);
   else
     {
       gameLocal.Printf ("data = \"%s\", len (data) = %d\n", data, (int) strlen (data));
@@ -2125,7 +2159,7 @@ void pyBotClass::rpcReloadWeapon (void)
     gameLocal.Printf ("rpcReloadWeapon call by python\n");
 
   if (rpcId > 0)
-    ammo = dictionary->reload_weapon(rpcId); 
+    ammo = dictionary->reload_weapon(rpcId);
   else
     ammo = 0;
 
@@ -2235,6 +2269,29 @@ void pyBotClass::rpcChangeWeapon (char *data)
   buffer.pyput (buf);
   state = toWrite;
 }
+
+
+/*
+ * Matthew Stokes
+ * rpcFillAmmo - Attempt to refill the ammo of
+ *                 selected type.
+ */
+void pyBotClass::rpcFillAmmo(char *data) {
+  if (protocol_debugging)
+    gameLocal.Printf ("rpcAmmoRefill (%s) call by python\n", data);
+
+  char buf[1024];
+  char* ammoClass = data;
+  int ammo = -1;
+
+  ammo = dictionary->fill_ammo (rpcId, ammoClass);
+  idStr::snPrintf (buf, sizeof (buf), "%d\n", ammo);
+  if (protocol_debugging)
+    gameLocal.Printf ("rpcAmmoRefill responding with: %s\n", buf);
+  buffer.pyput (buf);
+  state = toWrite;
+}
+
 
 
 /*
