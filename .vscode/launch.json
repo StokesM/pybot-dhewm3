@@ -5,7 +5,26 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Python bot",
+            "name": "(gdb) Launch",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "/home/matthew/Sandpit/git-doom3/build/dhewm3",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "/home/matthew/Sandpit/git-doom3",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ]
+        },
+        {
+            "name": "Python: Current File (Integrated Terminal)",
             "type": "python",
             "request": "launch",
             "program": "${file}",
