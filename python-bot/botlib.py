@@ -530,3 +530,9 @@ class bot:
     #               - return <= 0, else remaining ammo.
     def change_weapon(self, weapon_no):
         return self._cache.change_weapon(weapon_no)
+
+    # Matthew Stokes
+    # get_health - Get the health of the bot
+    #              < 0 if error for some reason.
+    def get_health(self):
+        return self._cache.get_health()

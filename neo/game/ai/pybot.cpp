@@ -128,7 +128,7 @@ class item
   int stop_firing (void);
   int ammo (void);
   int weapon (int new_weapon);
-  int health (void);
+  int get_health (void);
   int angle (void);
   int reload_weapon (void);
   bool aim (idEntity *enemy);
@@ -404,7 +404,7 @@ int item::ammo (void)
  *  health -
  */
 
-int item::health (void)
+int item::get_health (void)
 {
   switch (kind)
     {
@@ -413,7 +413,7 @@ int item::health (void)
       return 0;  // ignore
       break;
     case item_player:
-      return idplayer->health;
+      return idplayer->get_health();
     }
   assert (false);
   return 0;
@@ -511,7 +511,7 @@ class dict
   int stop_firing (int id);
   int reload_weapon (int id);
   int ammo (int id);
-  int health (int id);
+  int get_health (int id);
   int angle (int id);
   bool aim (int id, int enemy);
   int turn (int id, int angle, int angle_vel);
@@ -685,9 +685,9 @@ int dict::ammo (int id)
  *  health - return the health for the bot.
  */
 
-int dict::health (int id)
+int dict::get_health (int id)
 {
-  return entry[id]->health ();
+  return entry[id]->get_health();
 }
 
 
@@ -1771,7 +1771,7 @@ void pyBotClass::rpcHealth (void)
 
   if (protocol_debugging)
     gameLocal.Printf ("rpcHealth called by python\n");
-  idStr::snPrintf (buf, sizeof (buf), "%d\n", dictionary->health (rpcId));
+  idStr::snPrintf (buf, sizeof (buf), "%d\n", dictionary->get_health (rpcId));
   if (protocol_debugging)
     gameLocal.Printf ("rpcHealth responding with: %s\n", buf);
   buffer.pyput (buf);
