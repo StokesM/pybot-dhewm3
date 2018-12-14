@@ -159,7 +159,7 @@ def botMain (b):
         #b.fire ()
         time.sleep (3)
         #b.fire()
-        b.get_health()
+        print "My Health is", b.get_health()
         reload (b)
 
 
